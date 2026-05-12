@@ -8,8 +8,8 @@
   --border: rgba(120, 140, 180, 0.14);
   --border-strong: rgba(160, 190, 255, 0.22);
   --text: #f0f3fa;
-  --text-muted: #8b95ab;
-  --text-dim: #5c667e;
+  --text-muted: #9aa6c0;
+  --text-dim: #6a758e;
   --accent: #7eb4ff;
   --accent-deep: #3d7fd4;
   --accent-glow: rgba(126, 180, 255, 0.45);
@@ -195,18 +195,17 @@ body:hover .cursor-glow {
 .site-header .inner {
   max-width: var(--max-w-wide);
   margin: 0 auto;
-  padding: 0.85rem clamp(1.25rem, 4vw, 2rem);
-  min-height: 3.5rem;
+  padding: 0.65rem clamp(1rem, 3.5vw, 1.75rem);
+  min-height: unset;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem 1rem;
 }
 @media (min-width: 900px) {
   .site-header .inner {
-    min-height: 3.75rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
   }
 }
 
@@ -225,21 +224,27 @@ body:hover .cursor-glow {
   border-radius: 10px;
 }
 
-/* Logo w headerze: wyraźnie widoczne (nie „ikona 16px”); kwadrat mobile, pasek desktop */
+/*
+ * Logo w headerze — wyraźny rozmiar (wcześniejsze ~3rem było „kropką” obok nawigacji).
+ * Jeśli nadal wygląda mało: plik PNG ma często dużo pustego paddingu — wtedy przytnij grafikę lub użyj SVG.
+ */
 .logo__square {
   display: block;
-  width: clamp(2.85rem, 10vw, 4rem);
-  height: clamp(2.85rem, 10vw, 4rem);
+  width: clamp(6.5rem, 22vw, 10.5rem);
+  height: clamp(6.5rem, 22vw, 10.5rem);
   object-fit: contain;
   object-position: center;
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.35)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
 }
 .logo__wide {
   display: none;
-  height: clamp(2.1rem, 4.5vw, 2.85rem);
   width: auto;
-  max-width: min(70vw, 20rem);
+  height: clamp(5.25rem, 14vw, 9rem);
+  max-height: 9rem;
+  max-width: min(88vw, 44rem);
   object-fit: contain;
   object-position: left center;
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.3)) drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
 }
 @media (min-width: 900px) {
   .logo__square {
@@ -247,8 +252,22 @@ body:hover .cursor-glow {
   }
   .logo__wide {
     display: block;
-    height: clamp(2.5rem, 3.6vw, 3.35rem);
-    max-width: min(52vw, 24rem);
+    height: clamp(5rem, 12vw, 8.5rem);
+    max-height: 8.5rem;
+    max-width: min(58vw, 38rem);
+  }
+}
+@media (min-width: 900px) and (max-width: 1100px) {
+  .logo__wide {
+    height: clamp(4.25rem, 11vw, 6.75rem);
+    max-height: 6.75rem;
+    max-width: min(48vw, 26rem);
+  }
+  .nav-desktop {
+    gap: 1.1rem;
+  }
+  .nav-desktop a {
+    font-size: 0.8125rem;
   }
 }
 
@@ -279,21 +298,29 @@ body:hover .cursor-glow {
 .nav-desktop a {
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
   transition: color 0.25s var(--ease-soft);
 }
 .nav-desktop a:hover {
   color: var(--text);
 }
 
-.nav-mobile-cta {
-  display: inline-flex;
+/* CTA w nav: .nav-desktop a ma wyższą specyficzność od samego .btn-primary — wymuszamy ciemny tekst */
+.nav-desktop a.btn.btn-primary,
+.nav-desktop a.btn.btn-primary:hover,
+.nav-mobile-cta.btn.btn-primary,
+.nav-mobile-cta.btn.btn-primary:hover {
+  color: #030712;
 }
-@media (min-width: 900px) {
+
+.nav-mobile-cta {
+  display: none;
+}
+@media (max-width: 899px) {
   .nav-mobile-cta {
-    display: none;
+    display: inline-flex;
   }
 }
 
@@ -325,11 +352,12 @@ body:hover .cursor-glow {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #c5ddff 0%, var(--accent) 45%, var(--accent-deep) 100%);
-  color: #050810;
+  background: linear-gradient(135deg, #a8c8f5 0%, #6ea6f0 38%, var(--accent-deep) 100%);
+  color: #030712;
   box-shadow: 0 0 0 0 transparent;
 }
 .btn-primary:hover {
+  color: #020510;
   box-shadow: 0 0 48px rgba(126, 180, 255, 0.35);
   transform: translateY(-2px);
 }
@@ -354,7 +382,13 @@ body:hover .cursor-glow {
 
 /* ——— Cinematic Hero ——— */
 main {
-  padding-top: 4.25rem;
+  /* Odsunięcie od fixed headera — rośnie wraz z wysokością logo */
+  padding-top: clamp(8.25rem, 20vw + 4rem, 13.5rem);
+}
+@media (min-width: 900px) {
+  main {
+    padding-top: clamp(7.5rem, 12vw + 3.25rem, 11.75rem);
+  }
 }
 
 .hero-cinematic {
@@ -2734,6 +2768,9 @@ section.portfolio-exhibition {
   font-size: clamp(1rem, 2vw, 1.15rem);
   color: var(--text-muted);
   line-height: 1.45;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
 }
 .why-statements li strong {
   display: block;
@@ -2811,7 +2848,7 @@ section.portfolio-exhibition {
     content: "";
     position: absolute;
     left: -2.5rem;
-    top: 1.85rem;
+    top: 2.5rem;
     width: 9px;
     height: 9px;
     border-radius: 50%;
@@ -3508,4 +3545,77 @@ section.portfolio-exhibition {
 a.logo:focus-visible {
   outline: 2px solid var(--pcb-cyan);
   outline-offset: 3px;
+}
+
+/* ——— Ikony / mini-ilustracje przy sekcjach tekstowych ——— */
+.section-illu-wrap {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(126, 180, 255, 0.22);
+  background: linear-gradient(145deg, rgba(70, 232, 255, 0.08), rgba(20, 40, 70, 0.35));
+  color: rgba(120, 200, 255, 0.92);
+  flex-shrink: 0;
+}
+.section-illu-wrap--soft {
+  border-color: rgba(61, 127, 212, 0.18);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.5), rgba(230, 238, 252, 0.55));
+  color: var(--accent-deep);
+}
+.section-illu-wrap--navy {
+  border-color: rgba(160, 200, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(180, 215, 255, 0.88);
+}
+.section-illu {
+  width: 1.35rem;
+  height: 1.35rem;
+  display: block;
+}
+.problem-pcb-card .section-illu-wrap {
+  margin-bottom: 0.65rem;
+}
+.solution-pcb article .section-illu-wrap {
+  margin-bottom: 0.6rem;
+}
+.service-card .section-illu-wrap {
+  margin-bottom: 0.7rem;
+}
+.process-step__top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+.process-step__top .section-illu-wrap {
+  margin-bottom: 0;
+}
+.process-step__top .num {
+  margin-bottom: 0;
+}
+.why-statements li .section-illu-wrap {
+  margin-bottom: 0;
+  margin-top: 0.15rem;
+}
+.why-statements li .why-statements__body {
+  flex: 1;
+  min-width: 0;
+}
+.local-visual {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+.local-visual .section-illu-wrap {
+  margin-bottom: 0;
+}
+.local-visual__pins {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
 }
