@@ -18,6 +18,7 @@
       content="Strony i landing page dla firm: przejrzysty przekaz, dobry wygląd na telefonie, szybkie ładowanie i porządek pod Google. Spokojna współpraca, jasny proces."
     />
     <meta property="og:url" content="https://www.example.com/" />
+    <meta property="og:image" content="https://www.example.com/assets/logo-wide.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Cyber Plus — strony dla firm, które chcą wyglądać wiarygodnie online" />
@@ -27,6 +28,8 @@
     />
 
     <meta name="theme-color" content="#030508" />
+    <link rel="icon" href="assets/logo-square.png" type="image/png" sizes="any" />
+    <link rel="apple-touch-icon" href="assets/logo-square.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -134,7 +137,22 @@
     <header class="site-header">
       <div class="inner">
         <a class="logo" href="#top" aria-label="Cyber Plus — strona główna">
-          Cyber Plus<span class="mono">studio</span>
+          <img
+            class="logo__square"
+            src="assets/logo-square.png"
+            width="80"
+            height="80"
+            alt=""
+            decoding="async"
+          />
+          <img
+            class="logo__wide"
+            src="assets/logo-wide.png"
+            width="240"
+            height="80"
+            alt=""
+            decoding="async"
+          />
         </a>
         <nav class="nav-desktop" aria-label="Nawigacja główna">
           <a href="#problem">Dlaczego strona</a>
@@ -663,17 +681,43 @@
               <h3>Kto za tym stoi</h3>
               <div class="founder-row">
                 <div class="founder">
-                  <strong>Adam Bartkowski</strong>
-                  W projekcie pilnuje, żeby strona była czytelna dla człowieka, żeby dało się ją sensownie rozwijać i żeby
-                  technicznie trzymała poziom — ma doświadczenie z dużych wdrożeń tożsamości i integracji (m.in. SailPoint,
-                  Java).
-                  <div class="stack">Architektura treści · jakość wdrożenia · bezpieczny rozwój strony</div>
+                  <figure class="founder__photo-wrap">
+                    <img
+                      class="founder__photo"
+                      src="assets/owner2.jpg"
+                      width="480"
+                      height="600"
+                      alt="Adam Bartkowski"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </figure>
+                  <div class="founder__body">
+                    <strong>Adam Bartkowski</strong>
+                    W projekcie pilnuje, żeby strona była czytelna dla człowieka, żeby dało się ją sensownie rozwijać i żeby
+                    technicznie trzymała poziom — ma doświadczenie z dużych wdrożeń tożsamości i integracji (m.in. SailPoint,
+                    Java).
+                    <div class="stack">Architektura treści · jakość wdrożenia · bezpieczny rozwój strony</div>
+                  </div>
                 </div>
                 <div class="founder">
-                  <strong>Karol Januszczak</strong>
-                  Odpowiada za stabilne wdrożenie: porządek w kodzie, wydajność i przewidywalne terminy — tak, żebyś
-                  wiedział, co jest zrobione, a nie żył w „kiedyś to się ogarnie”.
-                  <div class="stack">.NET · Angular · TypeScript</div>
+                  <figure class="founder__photo-wrap">
+                    <img
+                      class="founder__photo"
+                      src="assets/owner1.jpg"
+                      width="480"
+                      height="600"
+                      alt="Karol Januszczak"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </figure>
+                  <div class="founder__body">
+                    <strong>Karol Januszczak</strong>
+                    Odpowiada za stabilne wdrożenie: porządek w kodzie, wydajność i przewidywalne terminy — tak, żebyś
+                    wiedział, co jest zrobione, a nie żył w „kiedyś to się ogarnie”.
+                    <div class="stack">.NET · Angular · TypeScript</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -954,7 +998,17 @@
         <div class="wrap">
         <div class="footer-grid">
           <div>
-            <p style="margin: 0 0 0.5rem; color: var(--text); font-family: var(--font-display); font-weight: 600">Cyber Plus</p>
+            <div class="footer-brand">
+              <img
+                class="footer-brand__img"
+                src="assets/logo-wide.png"
+                width="240"
+                height="80"
+                alt="Cyber Plus studio"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
             <p style="margin: 0; max-width: 28rem; line-height: 1.6">
               Strony i landing page dla firm z całej Polski: czytelny przekaz, dobry wygląd na telefonie, szybkie
               ładowanie i porządek pod Google. Prowadzone przez ludzi, którzy wiedzą, że strona musi być też łatwa w

@@ -194,22 +194,59 @@ body:hover .cursor-glow {
 }
 
 .logo {
-  display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  line-height: 0;
   text-decoration: none;
   color: var(--text);
-  font-weight: 600;
-  font-size: 1.05rem;
-  letter-spacing: -0.02em;
+  outline: none;
 }
-.logo span.mono {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 500;
-  color: var(--accent);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+.logo:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+  border-radius: 10px;
+}
+
+/* Kwadrat: ciasny pasek nawigacji (mobile); prostokąt: więcej miejsca (desktop) */
+.logo__square {
+  display: block;
+  width: 2.35rem;
+  height: 2.35rem;
+  object-fit: contain;
+  object-position: center;
+}
+.logo__wide {
+  display: none;
+  height: 1.65rem;
+  width: auto;
+  max-width: min(46vw, 11.5rem);
+  object-fit: contain;
+  object-position: left center;
+}
+@media (min-width: 900px) {
+  .logo__square {
+    display: none;
+  }
+  .logo__wide {
+    display: block;
+    height: 1.78rem;
+    max-width: 12.5rem;
+  }
+}
+
+.footer-brand {
+  margin: 0 0 1rem;
+  line-height: 0;
+}
+.footer-brand__img {
+  display: block;
+  height: auto;
+  width: auto;
+  max-width: min(14rem, 72vw);
+  max-height: 2.75rem;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .nav-desktop {
@@ -2584,9 +2621,48 @@ section.portfolio-exhibition {
   }
 }
 .founder {
+  display: grid;
+  gap: 1rem 1.15rem;
+  align-items: start;
   font-size: 0.875rem;
   color: var(--text-muted);
   line-height: 1.55;
+}
+@media (min-width: 700px) {
+  .founder {
+    grid-template-columns: minmax(0, 108px) minmax(0, 1fr);
+  }
+}
+@media (max-width: 699px) {
+  .founder {
+    justify-items: center;
+    text-align: center;
+  }
+  .founder__photo-wrap {
+    width: min(200px, 52vw);
+  }
+}
+.founder__photo-wrap {
+  margin: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.28);
+}
+.portfolio-founders-band .founder__photo-wrap {
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 40px rgba(15, 25, 45, 0.1);
+}
+.founder__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+.founder__body {
+  min-width: 0;
 }
 .founder strong {
   display: block;
