@@ -5,16 +5,16 @@
 
 /* Portfolio stub */
 .stub {
-  min-height: 60vh;
+  min-height: var(--page-stub-min-h);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 560px;
+  max-width: var(--page-stub-max);
   margin: 0 auto;
-  padding: 4rem 1.5rem;
+  padding: var(--page-pad-y) var(--page-pad-x);
 }
 .stub h1 {
-  font-size: 1.75rem;
+  font-size: var(--page-heading-size);
   margin: 0 0 1rem;
 }
 .stub p {
@@ -22,36 +22,14 @@
   margin: 0 0 1.5rem;
 }
 
-/* Polityka / regulamin */
-.legal {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 4rem 1.5rem 6rem;
-}
-.legal h1 {
-  font-size: 1.75rem;
-  margin: 0 0 1rem;
-}
-.legal p {
-  color: var(--text-muted);
-  line-height: 1.7;
-}
-
-/* Landingi lokalne (Szczecin, Rzeszów) */
+/* Landingi lokalne — treść wewnątrz .wrap (pionowy rytm daje sekcja .band) */
 .local-landing {
-  max-width: 42rem;
+  max-width: var(--page-local-max);
   margin: 0 auto;
-  padding: clamp(5rem, 12vw, 7rem) 1.5rem 5rem;
-}
-.local-landing h1 {
-  font-family: var(--font-display);
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
-  letter-spacing: -0.03em;
-  margin: 0 0 1rem;
-  line-height: 1.15;
+  padding: 0;
 }
 .local-landing p {
-  color: var(--text-muted);
+  color: var(--ink-muted);
   line-height: 1.65;
   margin: 0 0 1rem;
 }
@@ -60,4 +38,207 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+}
+
+/* ——— Wspólny layout podstron (klimat jak index) ——— */
+body.page-sub {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-sub-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-sub-main > section.band:first-child {
+  border-top: none;
+}
+
+.page-sub-hero__inner {
+  max-width: var(--page-local-max);
+  margin: 0 auto;
+}
+
+.page-sub-hero__inner h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4.2vw, 2.55rem);
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  margin: 0.35rem 0 0.85rem;
+  color: var(--ink);
+}
+
+.page-sub-hero__inner .section-lead {
+  max-width: 36rem;
+}
+
+.page-sub-hero__inner .actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.page-checklist {
+  list-style: none;
+  margin: 1.35rem 0 0;
+  padding: 0;
+}
+
+.page-checklist li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-bottom: 0.7rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+.page-checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.48em;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 2px;
+  background: linear-gradient(135deg, rgba(94, 225, 255, 0.95), rgba(120, 160, 255, 0.85));
+}
+
+.page-sub-ctafoot .btn-row {
+  justify-content: center;
+}
+
+.page-sub-ctafoot .section-lead {
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.page-sub-cta-links {
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.page-sub-ctafoot .section-label {
+  text-align: center;
+}
+
+.page-sub-ctafoot h2 {
+  text-align: center;
+}
+
+/* Portfolio — karty projektów */
+.page-portfolio-list {
+  max-width: 40rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-portfolio-list li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.page-portfolio-list li:last-child {
+  border-bottom: none;
+}
+
+.page-portfolio-list a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.page-portfolio-list a:hover {
+  color: #15406e;
+}
+
+.page-portfolio-list .meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+.page-portfolio-after {
+  margin-top: 2rem;
+  max-width: 36rem;
+}
+
+.page-portfolio-actions {
+  margin-top: 1.25rem;
+}
+
+/* Polityka / regulamin — układ dwupasmowy */
+.legal--hero {
+  max-width: var(--page-legal-max);
+  margin: 0 auto;
+}
+
+.legal--hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 3.5vw, 2.1rem);
+  letter-spacing: -0.03em;
+  margin: 0.35rem 0 0.75rem;
+  color: var(--ink);
+}
+
+.legal--body {
+  max-width: var(--page-legal-max);
+  margin: 0 auto;
+  padding-bottom: 0.5rem;
+}
+
+.legal--body h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 2rem 0 0.65rem;
+  color: var(--ink);
+}
+
+.legal--body h2:first-child {
+  margin-top: 0;
+}
+
+.legal--body p,
+.legal--body li {
+  color: var(--ink-muted);
+  line-height: 1.75;
+}
+
+.legal--body ul {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.2rem;
+}
+
+.legal--body a {
+  color: #15406e;
+  font-weight: 500;
+}
+
+.legal--body a:hover {
+  text-decoration: underline;
+}
+
+.legal-backlink {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  color: #15406e;
+  text-decoration: none;
+}
+
+.legal-backlink:hover {
+  text-decoration: underline;
 }

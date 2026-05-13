@@ -4,22 +4,37 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Polityka prywatności | Cyber Plus</title>
+    <meta
+      name="description"
+      content="Polityka prywatności serwisu Cyber Plus — szkieł do uzupełnienia po wdrożeniu cookies, analityki i formularzy (RODO)."
+    />
     <meta name="robots" content="noindex, follow" />
-    <meta name="theme-color" content="#07080b" />
+    <link rel="canonical" href="https://cyberplus.pl/polityka-prywatnosci.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:title" content="Polityka prywatności | Cyber Plus" />
+    <meta property="og:url" content="https://cyberplus.pl/polityka-prywatnosci.html" />
+    <meta property="og:image" content="https://cyberplus.pl/assets/logo-wide.png" />
+    <meta name="theme-color" content="#030508" />
     <link rel="icon" href="assets/logo-square.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="assets/logo-square.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="assets/logo-square.png" sizes="180x180" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Inter:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/pages.css" />
   </head>
-  <body>
+  <body class="page-sub">
+    <a class="skip-link" href="#main">Przejdź do treści</a>
     <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-glow" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="tech-rail" aria-hidden="true">Szczecin · Rzeszów · zdalnie w całej Polsce</div>
+
     <header class="site-header">
       <div class="inner">
         <a class="logo" href="index.html" aria-label="Cyber Plus — strona główna">
@@ -28,16 +43,162 @@
           </span>
           <img class="logo__wide" src="assets/logo-wide.png" width="480" height="80" alt="" decoding="async" />
         </a>
-        <a class="btn btn-ghost" href="index.html">Strona główna</a>
+        <nav class="nav-desktop" aria-label="Nawigacja główna">
+          <a href="index.html#problem">Problem</a>
+          <a href="index.html#rozwiazanie">Podejście</a>
+          <a href="index.html#uslugi">Usługi</a>
+          <a href="index.html#realizacje">Realizacje</a>
+          <a href="index.html#lokalnie">Szczecin / Rzeszów</a>
+          <a href="index.html#proces">Proces</a>
+          <a href="index.html#faq">FAQ</a>
+          <a class="btn btn-primary" href="index.html#kontakt">Kontakt</a>
+        </nav>
+        <div class="header-mobile-tools">
+          <button
+            type="button"
+            class="nav-menu-toggle"
+            id="nav-menu-toggle"
+            aria-expanded="false"
+            aria-controls="nav-mobile-panel"
+          >
+            <span class="visually-hidden">Menu — sekcje strony</span>
+            <span class="nav-menu-toggle__bars" aria-hidden="true">
+              <span class="nav-menu-toggle__bar"></span>
+              <span class="nav-menu-toggle__bar"></span>
+              <span class="nav-menu-toggle__bar"></span>
+            </span>
+          </button>
+          <a class="btn btn-primary nav-mobile-cta" href="index.html#kontakt">Kontakt</a>
+        </div>
       </div>
     </header>
-    <main class="legal wrap">
-      <h1>Polityka prywatności</h1>
-      <p>
-        Ten dokument jest szablonem technicznym. Uzupełnij go pod kątem przetwarzania danych (RODO), cookies, Google
-        Analytics / Tag Manager i formularzy kontaktowych po konsultacji prawnej.
-      </p>
-      <p><a href="index.html" style="color: var(--accent)">← Strona główna</a></p>
+
+    <div class="nav-mobile-backdrop" id="nav-mobile-backdrop" aria-hidden="true" tabindex="-1"></div>
+    <div
+      class="nav-mobile-panel"
+      id="nav-mobile-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="nav-mobile-title"
+      aria-hidden="true"
+    >
+      <div class="nav-mobile-panel__head">
+        <p id="nav-mobile-title" class="nav-mobile-panel__title">Menu</p>
+        <button type="button" class="nav-mobile-close" id="nav-mobile-close" aria-label="Zamknij menu">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <nav class="nav-mobile-panel__nav" aria-label="Nawigacja — sekcje">
+        <a href="index.html#problem">Problem</a>
+        <a href="index.html#rozwiazanie">Podejście</a>
+        <a href="index.html#uslugi">Usługi</a>
+        <a href="index.html#realizacje">Realizacje</a>
+        <a href="index.html#lokalnie">Szczecin / Rzeszów</a>
+        <a href="index.html#proces">Proces</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#dlaczego">Dlaczego my</a>
+      </nav>
+      <div class="nav-mobile-panel__foot">
+        <a class="btn btn-primary nav-mobile-panel__cta" href="index.html#kontakt">Porozmawiajmy o stronie</a>
+      </div>
+    </div>
+
+    <main id="main" class="page-sub-main">
+      <section class="band band--dawn reveal" aria-labelledby="pp-h1">
+        <div class="wrap legal--hero">
+          <p class="section-label">Dokument</p>
+          <h1 id="pp-h1">Polityka prywatności</h1>
+          <p class="section-lead section-lead--tight">
+            Poniżej szkielet techniczny do uzupełnienia po konsultacji prawnej: przetwarzanie danych (RODO), pliki
+            cookies, ewentualna analityka (np. GA4) oraz dane z formularza kontaktowego. Treść finalna powinna
+            odpowiadać realnemu sposobowi działania serwisu.
+          </p>
+        </div>
+      </section>
+
+      <section class="band band--silver reveal" aria-label="Treść polityki prywatności">
+        <div class="wrap legal--body">
+          <h2 id="pp-admin">Administrator i kontakt</h2>
+          <p>
+            Administratorem danych osobowych przetwarzanych w związku z korzystaniem z serwisu jest podmiot
+            wskazany we właściwej klauzuli informacyjnej (uzupełnij nazwę, adres i dane rejestrowe). W sprawach
+            dotyczących prywatności możesz napisać na
+            <a href="mailto:kontakt@cyberplus.pl">kontakt@cyberplus.pl</a> — po ustaleniu procedur odpowiemy w
+            uzasadnionym terminie.
+          </p>
+
+          <h2>Zakres i cele</h2>
+          <p>
+            Uzupełnij: jakie kategorie danych zbierasz (np. adres IP, logi serwera, dane z formularza), w jakich celach
+            i na jakiej podstawie prawnej (art. 6 RODO), jak długo je przechowujesz oraz komu mogą być powierzane
+            (hosting, poczta, narzędzia analityczne).
+          </p>
+
+          <h2>Cookies i narzędzia podobne</h2>
+          <p>
+            Opisz używane pliki cookies (własne / podmiotów trzecich), czas przechowywania oraz sposób wycofania zgody.
+            Jeśli planujesz baner zgody, opisz logikę zgód zgodnie z wytycznymi UODO i praktyką wybranego narzędzia.
+          </p>
+
+          <h2>Prawa osób, których dane dotyczą</h2>
+          <ul>
+            <li>dostęp do danych, sprostowanie, usunięcie lub ograniczenie przetwarzania,</li>
+            <li>sprzeciw wobec przetwarzania (gdy przysługuje),</li>
+            <li>przenoszenie danych (gdy przysługuje),</li>
+            <li>skarga do Prezesa UODO.</li>
+          </ul>
+
+          <h2>Bezpieczeństwo</h2>
+          <p>
+            Krótko: jakie środki techniczne i organizacyjne stosujesz (HTTPS, hosting, kopie zapasowe, dostępy). Nie
+            obiecuj więcej niż realnie wdrażasz.
+          </p>
+
+          <p>
+            <a class="legal-backlink" href="index.html">← Strona główna Cyber Plus</a>
+          </p>
+        </div>
+      </section>
+
+      <footer class="site-footer band band--void">
+        <div class="wrap">
+          <div class="footer-grid">
+            <div>
+              <div class="footer-brand">
+                <img
+                  class="footer-brand__img"
+                  src="assets/logo-wide.png"
+                  width="480"
+                  height="80"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="footer-tagline">
+                Strony i landing page dla firm w Polsce: zaufanie od pierwszego wejścia, wygodny telefon, sens pod Google.
+              </p>
+            </div>
+            <div class="footer-links">
+              <a href="portfolio.html">Portfolio</a>
+              <a href="strony-internetowe-szczecin.html">Szczecin</a>
+              <a href="strony-internetowe-rzeszow.html">Rzeszów</a>
+              <a href="polityka-prywatnosci.html" aria-current="page">Polityka prywatności</a>
+              <a href="regulamin.html">Regulamin</a>
+            </div>
+          </div>
+          <p class="footer-copy-meta">
+            © <span id="y"></span> Cyber Plus · analitykę i tagi (np. cookies) ustawiamy po wdrożeniu, zgodnie z przepisami.
+          </p>
+        </div>
+      </footer>
     </main>
+
+    <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
+      <a class="btn btn-primary" href="index.html#kontakt">Kontakt</a>
+      <a class="btn btn-ghost" href="index.html">Start</a>
+    </div>
+
+    <script src="js/main.js" defer></script>
   </body>
 </html>

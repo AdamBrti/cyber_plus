@@ -8,7 +8,8 @@
       name="description"
       content="Strony firmowe, landing page i redesigny — design, kod i podstawy SEO dla marek premium. Szczecin, Rzeszów, cała Polska. Spokojna estetyka, sensowny proces, realne realizacje."
     />
-    <link rel="canonical" href="https://www.example.com/" />
+    <link rel="canonical" href="https://cyberplus.pl/" />
+    <!-- Produkcja: jeśli domena lub skrzynka są inne, podmień cyberplus.pl oraz kontakt@cyberplus.pl w index, sitemap, robots i stronach lokalnych. -->
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pl_PL" />
@@ -17,8 +18,8 @@
       property="og:description"
       content="Strony dla firm, które mają dobrze wyglądać, szybko działać i ułatwiać kontakt — także na telefonie. Szczecin, Rzeszów, cała Polska."
     />
-    <meta property="og:url" content="https://www.example.com/" />
-    <meta property="og:image" content="https://www.example.com/assets/logo-wide.png" />
+    <meta property="og:url" content="https://cyberplus.pl/" />
+    <meta property="og:image" content="https://cyberplus.pl/assets/logo-wide.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Cyber Plus — strony internetowe Szczecin, Rzeszów i cała Polska" />
@@ -37,7 +38,7 @@
     <link rel="dns-prefetch" href="https://s0.wp.com" />
     <link rel="preconnect" href="https://s0.wp.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -51,9 +52,9 @@
         "@graph": [
           {
             "@type": "ProfessionalService",
-            "@id": "https://www.example.com/#organization",
+            "@id": "https://cyberplus.pl/#organization",
             "name": "Cyber Plus",
-            "url": "https://www.example.com/",
+            "url": "https://cyberplus.pl/",
             "description": "Strony internetowe, landing page i redesign dla firm usługowych. Szczecin, Rzeszów, cała Polska zdalnie. Dbamy o wygląd, działanie na telefonie i sens po publikacji.",
             "areaServed": [
               { "@type": "Country", "name": "Polska" },
@@ -70,10 +71,10 @@
           },
           {
             "@type": "WebSite",
-            "@id": "https://www.example.com/#website",
-            "url": "https://www.example.com/",
+            "@id": "https://cyberplus.pl/#website",
+            "url": "https://cyberplus.pl/",
             "name": "Cyber Plus",
-            "publisher": { "@id": "https://www.example.com/#organization" },
+            "publisher": { "@id": "https://cyberplus.pl/#organization" },
             "inLanguage": "pl-PL"
           },
           {
@@ -189,9 +190,60 @@
           <a href="#faq">FAQ</a>
           <a class="btn btn-primary" href="#kontakt">Kontakt</a>
         </nav>
-        <a class="btn btn-primary nav-mobile-cta" href="#kontakt">Kontakt</a>
+        <div class="header-mobile-tools">
+          <button
+            type="button"
+            class="nav-menu-toggle"
+            id="nav-menu-toggle"
+            aria-expanded="false"
+            aria-controls="nav-mobile-panel"
+          >
+            <span class="visually-hidden">Menu — sekcje strony</span>
+            <span class="nav-menu-toggle__bars" aria-hidden="true">
+              <span class="nav-menu-toggle__bar"></span>
+              <span class="nav-menu-toggle__bar"></span>
+              <span class="nav-menu-toggle__bar"></span>
+            </span>
+          </button>
+          <a class="btn btn-primary nav-mobile-cta" href="#kontakt">Kontakt</a>
+        </div>
       </div>
     </header>
+
+    <div
+      class="nav-mobile-backdrop"
+      id="nav-mobile-backdrop"
+      aria-hidden="true"
+      tabindex="-1"
+    ></div>
+    <div
+      class="nav-mobile-panel"
+      id="nav-mobile-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="nav-mobile-title"
+      aria-hidden="true"
+    >
+      <div class="nav-mobile-panel__head">
+        <p id="nav-mobile-title" class="nav-mobile-panel__title">Menu</p>
+        <button type="button" class="nav-mobile-close" id="nav-mobile-close" aria-label="Zamknij menu">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <nav class="nav-mobile-panel__nav" aria-label="Nawigacja — sekcje">
+        <a href="#problem">Problem</a>
+        <a href="#rozwiazanie">Podejście</a>
+        <a href="#uslugi">Usługi</a>
+        <a href="#realizacje">Realizacje</a>
+        <a href="#lokalnie">Szczecin / Rzeszów</a>
+        <a href="#proces">Proces</a>
+        <a href="#faq">FAQ</a>
+        <a href="#dlaczego">Dlaczego my</a>
+      </nav>
+      <div class="nav-mobile-panel__foot">
+        <a class="btn btn-primary nav-mobile-panel__cta" href="#kontakt">Porozmawiajmy o stronie</a>
+      </div>
+    </div>
 
     <main id="main">
       <div id="top"></div>
@@ -211,7 +263,7 @@
           <div class="hero-copy hero-copy--cinema">
             <p class="hero-kicker"><span class="hero-kicker-line"></span> Cyber Plus</p>
             <h1 id="hero-heading" class="hero-headline">
-              Strony internetowe, które robią wrażenie zanim klient zadzwoni.
+              Strony internetowe zaprojektowane z myślą o kliencie
             </h1>
             <p class="hero-lead">
               Strony firmowe, landing page i redesigny — od struktury i wyglądu po kod i podstawy SEO. Dla marek
@@ -230,6 +282,7 @@
           <div class="hero-stage">
             <div class="hero-scene">
               <div class="hero-scene__pcb" aria-hidden="true">
+              <!-- rx/ry w jednostkach viewBox (nie px UI); nie mapować na --radius-* z :root bez przeliczenia skali. -->
               <svg class="hero-pcb-svg" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="pcbGlow" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -274,7 +327,7 @@
                             width="390"
                             height="844"
                             alt="Podwiatr — podgląd strony na smartfonie"
-                            loading="eager"
+                            loading="lazy"
                             decoding="async"
                             fetchpriority="low"
                           />
@@ -333,7 +386,7 @@
                             width="390"
                             height="844"
                             alt="SłodkoTu — podgląd strony na smartfonie"
-                            loading="eager"
+                            loading="lazy"
                             decoding="async"
                             fetchpriority="low"
                           />
@@ -514,8 +567,8 @@
               </div>
               <p class="visually-hidden">
                 Jedna scena: symboliczny telefon z abstrakcyjnym interfejsem (bez prawdziwych stron klientów), minimalny
-                pasek przeglądarki, szklana karta, delikatny chip kontaktu oraz smugi światła — manifest jakości Cyber
-                Plus; pełne realizacje są niżej.
+                pasek przeglądarki, szklana karta i smugi światła — manifest jakości Cyber Plus; pełne realizacje są
+                niżej.
               </p>
             </div>
           </div>
@@ -605,6 +658,10 @@
               <li>Teksty &amp; wdrożenie</li>
             </ul>
             <a class="btn btn-primary story-services-bar__cta" href="#kontakt">Opisz projekt</a>
+            <p class="story-services-bar__note">
+              Nie zajmujemy się agresywnymi kampaniami reklamowymi ani „stroną w jeden dzień bez briefu”. Jeśli temat
+              jest poza zakresem lub nie pasujemy do siebie — powiemy to wprost, zanim zabierzemy Ci czas.
+            </p>
           </div>
         </div>
       </section>
@@ -616,7 +673,9 @@
             <h2 id="portfolio-heading">Historie za adresami w przeglądarce.</h2>
             <p class="section-lead section-lead--tight">
               Tu są pełne, żywe układy — dowód zamiast slajdu z obietnicami. Wyżej na stronie celowo nie powielamy
-              tych widoków: tam skracamy do jednej kinowej sceny, żeby portfolio miało pierwszeństwo.
+              tych widoków: tam skracamy do jednej kinowej sceny, żeby portfolio miało pierwszeństwo. Poniżej każdy
+              case idzie w tym samym rytmie: sytuacja → decyzja → efekt dla gościa lub firmy — to główna nagroda
+              przewijania strony.
             </p>
           </div>
         </div>
@@ -935,7 +994,8 @@
               <h3>Kto za tym stoi</h3>
               <p class="founders-tagline">
                 Projekt, kod i pilnowanie, żeby po publikacji było po prostu dobrze — bez przechodzenia przez kolejne
-                „ktoś inny to ogarnie”.
+                „ktoś inny to ogarnie”. Doświadczenie z większych systemów zamieniamy w spokojną stronę dla klienta:
+                porządek, bezpieczne wdrożenie i sensowne utrzymanie — bez szumu „panelu IT”.
               </p>
               <div class="founder-row">
                 <div class="founder">
@@ -952,8 +1012,9 @@
                   </figure>
                   <div class="founder__body">
                     <strong>Adam Bartkowski</strong>
-                    Doświadczenie z dużych systemów (IAM, SailPoint, Java) przekłada na porządek w strukturze, jakość
-                    wdrożenia i odpowiedzialność za to, co idzie na serwer.
+                    Dla stron studiów i marek lokalnych porządkuję strukturę, treść i techniczny szkielet wdrożenia —
+                    z praktyki większych systemów (IAM, SailPoint, Java), żeby w dniu publikacji nic nie „pękało” w
+                    tle i żebyś Ty mógł skupić się na kliencie, nie na hostingu.
                     <div class="stack">Architektura · jakość kodu · bezpieczny rozwój</div>
                   </div>
                 </div>
@@ -971,7 +1032,8 @@
                   </figure>
                   <div class="founder__body">
                     <strong>Karol Januszczak</strong>
-                    Wdrożenie: .NET, Angular, TypeScript — wydajność, stabilność i przewidywalne terminy.
+                    Buduję front i integracje tak, żeby strona była szybka i przewidywalna w rozwoju — .NET, Angular,
+                    TypeScript; mniej „magii”, więcej stabilnego kodu, który da się utrzymać po starcie.
                     <div class="stack">.NET · Angular · TypeScript</div>
                   </div>
                 </div>
@@ -1092,7 +1154,7 @@
           <p class="section-lead section-lead--tight">Krótko i na temat — brakuje czegoś, napisz maila.</p>
           <div class="faq-list">
             <div class="faq-item">
-              <button type="button" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
+              <button type="button" aria-expanded="false" aria-controls="faq-panel1" id="faq-q1">
                 Ile trwa stworzenie strony?
                 <span class="icon" aria-hidden="true">+</span>
               </button>
@@ -1106,7 +1168,7 @@
               </div>
             </div>
             <div class="faq-item">
-              <button type="button" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+              <button type="button" aria-expanded="false" aria-controls="faq-panel2" id="faq-q2">
                 Czy pomagacie z domeną i hostingiem?
                 <span class="icon" aria-hidden="true">+</span>
               </button>
@@ -1120,7 +1182,7 @@
               </div>
             </div>
             <div class="faq-item">
-              <button type="button" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+              <button type="button" aria-expanded="false" aria-controls="faq-panel3" id="faq-q3">
                 Czy strona będzie działała dobrze na telefonie?
                 <span class="icon" aria-hidden="true">+</span>
               </button>
@@ -1131,7 +1193,7 @@
               </div>
             </div>
             <div class="faq-item">
-              <button type="button" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+              <button type="button" aria-expanded="false" aria-controls="faq-panel4" id="faq-q4">
                 Czy robicie SEO?
                 <span class="icon" aria-hidden="true">+</span>
               </button>
@@ -1145,7 +1207,7 @@
               </div>
             </div>
             <div class="faq-item">
-              <button type="button" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
+              <button type="button" aria-expanded="false" aria-controls="faq-panel5" id="faq-q5">
                 Czy można zacząć od małej strony?
                 <span class="icon" aria-hidden="true">+</span>
               </button>
@@ -1156,7 +1218,7 @@
               </div>
             </div>
             <div class="faq-item">
-              <button type="button" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
+              <button type="button" aria-expanded="false" aria-controls="faq-panel6" id="faq-q6">
                 Czy działacie poza Szczecinem i Rzeszowem?
                 <span class="icon" aria-hidden="true">+</span>
               </button>
@@ -1170,7 +1232,7 @@
               </div>
             </div>
             <div class="faq-item">
-              <button type="button" aria-expanded="false" aria-controls="faq-a7" id="faq-q7">
+              <button type="button" aria-expanded="false" aria-controls="faq-panel7" id="faq-q7">
                 Czy pomagacie z tekstami?
                 <span class="icon" aria-hidden="true">+</span>
               </button>
@@ -1184,7 +1246,7 @@
               </div>
             </div>
             <div class="faq-item">
-              <button type="button" aria-expanded="false" aria-controls="faq-a8" id="faq-q8">
+              <button type="button" aria-expanded="false" aria-controls="faq-panel8" id="faq-q8">
                 Czy wykorzystujecie AI?
                 <span class="icon" aria-hidden="true">+</span>
               </button>
@@ -1209,10 +1271,21 @@
             czy możemy pomóc i od czego zacząć.
           </p>
           <div class="btn-row btn-row--stack">
-            <a class="btn btn-primary" href="mailto:kontakt@example.com?subject=Cyber%20Plus%20-%20wiadomo%C5%9B%C4%87">Napisz do nas</a>
-            <a class="btn btn-ghost" href="mailto:kontakt@example.com?subject=Konsultacja%20Cyber%20Plus">Umów krótką konsultację</a>
-            <a class="btn btn-ghost" href="mailto:kontakt@example.com?subject=Ocena%20obecnej%20strony">Wyślij stronę do oceny</a>
+            <a
+              class="btn btn-primary"
+              href="mailto:kontakt@cyberplus.pl?subject=Cyber%20Plus%20%E2%80%94%20porozmawiajmy%20o%20stronie"
+              >Porozmawiajmy o stronie</a
+            >
+            <a
+              class="btn btn-ghost"
+              href="mailto:kontakt@cyberplus.pl?subject=Cyber%20Plus%20%E2%80%94%20konsultacja%20lub%20ocena%20strony"
+              >Konsultacja lub ocena obecnej strony</a
+            >
           </div>
+          <p class="cta-mail-hint">
+            Jedna wiadomość wystarczy: napisz, czym się zajmujesz, podeślij link do strony (jeśli jest) i co chcesz
+            poprawić — odpowiemy wprost, czy możemy pomóc.
+          </p>
           <div class="cta-links">
             <a class="link-quiet" href="#uslugi">Usługi</a>
             <span class="cta-links__sep" aria-hidden="true">·</span>
@@ -1231,7 +1304,7 @@
                 src="assets/logo-wide.png"
                 width="480"
                 height="80"
-                alt="Cyber Plus studio"
+                alt=""
                 loading="lazy"
                 decoding="async"
               />

@@ -8,23 +8,43 @@
       name="description"
       content="Projektujemy i wdrażamy strony dla firm z Szczecina i okolic: szybkie ładowanie, mobile-first, SEO lokalne. Pracujemy też zdalnie w całej Polsce."
     />
-    <link rel="canonical" href="https://www.example.com/strony-internetowe-szczecin.html" />
-    <meta name="theme-color" content="#05080d" />
+    <link rel="canonical" href="https://cyberplus.pl/strony-internetowe-szczecin.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:title" content="Strony internetowe Szczecin | Cyber Plus" />
+    <meta
+      property="og:description"
+      content="Wizytówki, landing page i redesigny dla firm z Szczecina — design, kod i podstawy SEO bez pustych obietnic."
+    />
+    <meta property="og:url" content="https://cyberplus.pl/strony-internetowe-szczecin.html" />
+    <meta property="og:image" content="https://cyberplus.pl/assets/logo-wide.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Strony internetowe Szczecin | Cyber Plus" />
+    <meta
+      name="twitter:description"
+      content="Strony dla firm z Szczecina i okolic: mobile-first, czytelny przekaz, sens pod Google."
+    />
+    <meta name="theme-color" content="#030508" />
     <link rel="icon" href="assets/logo-square.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="assets/logo-square.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="assets/logo-square.png" sizes="180x180" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Syne:wght@600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/pages.css" />
   </head>
-  <body>
+  <body class="page-sub">
+    <a class="skip-link" href="#main">Przejdź do treści</a>
     <div class="bg-grid" aria-hidden="true"></div>
-    <header class="site-header is-scrolled">
+    <div class="bg-glow" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="tech-rail" aria-hidden="true">Szczecin · Rzeszów · zdalnie w całej Polsce</div>
+
+    <header class="site-header">
       <div class="inner">
         <a class="logo" href="index.html" aria-label="Cyber Plus — strona główna">
           <span class="logo__square-crop">
@@ -32,24 +52,168 @@
           </span>
           <img class="logo__wide" src="assets/logo-wide.png" width="480" height="80" alt="" decoding="async" />
         </a>
-        <a class="btn btn-primary" href="index.html#kontakt">Kontakt</a>
+        <nav class="nav-desktop" aria-label="Nawigacja główna">
+          <a href="index.html#problem">Problem</a>
+          <a href="index.html#rozwiazanie">Podejście</a>
+          <a href="index.html#uslugi">Usługi</a>
+          <a href="index.html#realizacje">Realizacje</a>
+          <a href="index.html#lokalnie">Szczecin / Rzeszów</a>
+          <a href="index.html#proces">Proces</a>
+          <a href="index.html#faq">FAQ</a>
+          <a class="btn btn-primary" href="index.html#kontakt">Kontakt</a>
+        </nav>
+        <div class="header-mobile-tools">
+          <button
+            type="button"
+            class="nav-menu-toggle"
+            id="nav-menu-toggle"
+            aria-expanded="false"
+            aria-controls="nav-mobile-panel"
+          >
+            <span class="visually-hidden">Menu — sekcje strony</span>
+            <span class="nav-menu-toggle__bars" aria-hidden="true">
+              <span class="nav-menu-toggle__bar"></span>
+              <span class="nav-menu-toggle__bar"></span>
+              <span class="nav-menu-toggle__bar"></span>
+            </span>
+          </button>
+          <a class="btn btn-primary nav-mobile-cta" href="index.html#kontakt">Kontakt</a>
+        </div>
       </div>
     </header>
-    <main class="local-landing wrap">
-      <h1>Strony internetowe dla firm z Szczecina</h1>
-      <p>
-        Szczecin to jeden z naszych rynków bazowych: rozumiemy lokalny kontekst usług i to, jak klienci szukają firm w
-        okolicy. Projektujemy strony wizytówki, landing page i przebudowy pod czytelny przekaz, telefon i sensowne
-        podstawy pod widoczność w Google — bez obietnic „gwarantowanego pierwszego miejsca”.
-      </p>
-      <p>
-        Spotkania możliwe lokalnie, reszta pracy zdalnie. Jeśli potrzebujesz strony, która buduje zaufanie od pierwszego
-        wejścia i dobrze działa na telefonie, napisz — odpowiemy konkretnie, czy to dobry moment i zakres.
-      </p>
-      <div class="actions">
-        <a class="btn btn-primary" href="index.html#kontakt">Porozmawiajmy o stronie</a>
-        <a class="btn btn-ghost" href="index.html#realizacje">Realizacje</a>
+
+    <div class="nav-mobile-backdrop" id="nav-mobile-backdrop" aria-hidden="true" tabindex="-1"></div>
+    <div
+      class="nav-mobile-panel"
+      id="nav-mobile-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="nav-mobile-title"
+      aria-hidden="true"
+    >
+      <div class="nav-mobile-panel__head">
+        <p id="nav-mobile-title" class="nav-mobile-panel__title">Menu</p>
+        <button type="button" class="nav-mobile-close" id="nav-mobile-close" aria-label="Zamknij menu">
+          <span aria-hidden="true">×</span>
+        </button>
       </div>
+      <nav class="nav-mobile-panel__nav" aria-label="Nawigacja — sekcje">
+        <a href="index.html#problem">Problem</a>
+        <a href="index.html#rozwiazanie">Podejście</a>
+        <a href="index.html#uslugi">Usługi</a>
+        <a href="index.html#realizacje">Realizacje</a>
+        <a href="index.html#lokalnie">Szczecin / Rzeszów</a>
+        <a href="index.html#proces">Proces</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#dlaczego">Dlaczego my</a>
+      </nav>
+      <div class="nav-mobile-panel__foot">
+        <a class="btn btn-primary nav-mobile-panel__cta" href="index.html#kontakt">Porozmawiajmy o stronie</a>
+      </div>
+    </div>
+
+    <main id="main" class="page-sub-main">
+      <section class="band band--dawn reveal" aria-labelledby="szczecin-h1">
+        <div class="wrap page-sub-hero__inner">
+          <p class="section-label">Cyber Plus · Szczecin</p>
+          <h1 id="szczecin-h1">Strony internetowe dla firm z Szczecina</h1>
+          <p class="section-lead section-lead--tight">
+            Jeden z naszych rynków bazowych: znamy lokalny kontekst usług i to, jak klienci szukają firm w okolicy.
+            Projektujemy wizytówki, landing page i przebudowy pod czytelny przekaz, telefon i sensowne podstawy pod
+            widoczność w Google — bez obietnic „gwarantowanego pierwszego miejsca”.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="index.html#kontakt">Porozmawiajmy o stronie</a>
+            <a class="btn btn-ghost" href="index.html#realizacje">Realizacje</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="band band--silver reveal" aria-labelledby="szczecin-more">
+        <div class="wrap local-landing">
+          <h2 id="szczecin-more" class="visually-hidden">Szczegóły współpracy</h2>
+          <p>
+            Spotkania możliwe lokalnie, reszta pracy zdalnie. Jeśli potrzebujesz strony, która buduje zaufanie od
+            pierwszego wejścia i dobrze działa na telefonie, napisz — odpowiemy konkretnie, czy to dobry moment i
+            zakres.
+          </p>
+          <p>
+            Dobieramy format do celu: kampania reklamowa potrzebuje innego wejścia niż wizytówka dla usługi lokalnej.
+            Tam, gdzie ma to sens, rozmawiamy o frazach lokalnych i obecności w Mapach — bez sztucznego napinania
+            „SEO pod każdą cenę”.
+          </p>
+          <ul class="page-checklist" aria-label="Co zwykle dostajesz">
+            <li>Struktura treści i hierarchia pod skanowanie wzrokiem — gość od razu wie, co robicie.</li>
+            <li>Projekt responsywny: duży ekran i telefon traktowane równorzędnie, nie jako „dopisek”.</li>
+            <li>Kod i publikacja z myślą o szybkim ładowaniu i podstawach technicznych pod indeksację.</li>
+            <li>Prosty, spójny ton wizualny z resztą marki — bez przypadkowego szablonu z katalogu.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="band band--finale page-sub-ctafoot reveal" aria-labelledby="szczecin-cta-h">
+        <div class="wrap">
+          <p class="section-label">Kontakt</p>
+          <h2 id="szczecin-cta-h">Napisz, czym się zajmujesz</h2>
+          <p class="section-lead section-lead--tight">
+            Wystarczy krótki opis firmy, link do obecnej strony (jeśli jest) i to, co chcesz poprawić — wrócimy z
+            propozycją kolejnego kroku.
+          </p>
+          <div class="btn-row btn-row--stack">
+            <a
+              class="btn btn-primary"
+              href="mailto:kontakt@cyberplus.pl?subject=Cyber%20Plus%20%E2%80%94%20Szczecin%20%2F%20strona"
+              >kontakt@cyberplus.pl</a
+            >
+            <a class="btn btn-ghost" href="index.html">Strona główna</a>
+          </div>
+          <div class="cta-links page-sub-cta-links">
+            <a class="link-quiet" href="index.html#proces">Proces</a>
+            <span class="cta-links__sep" aria-hidden="true">·</span>
+            <a class="link-quiet" href="index.html#faq">FAQ</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer band band--void">
+        <div class="wrap">
+          <div class="footer-grid">
+            <div>
+              <div class="footer-brand">
+                <img
+                  class="footer-brand__img"
+                  src="assets/logo-wide.png"
+                  width="480"
+                  height="80"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="footer-tagline">
+                Strony i landing page dla firm w Polsce: zaufanie od pierwszego wejścia, wygodny telefon, sens pod Google.
+              </p>
+            </div>
+            <div class="footer-links">
+              <a href="portfolio.html">Portfolio</a>
+              <a href="strony-internetowe-szczecin.html" aria-current="page">Szczecin</a>
+              <a href="strony-internetowe-rzeszow.html">Rzeszów</a>
+              <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+              <a href="regulamin.html">Regulamin</a>
+            </div>
+          </div>
+          <p class="footer-copy-meta">
+            © <span id="y"></span> Cyber Plus · analitykę i tagi (np. cookies) ustawiamy po wdrożeniu, zgodnie z przepisami.
+          </p>
+        </div>
+      </footer>
     </main>
+
+    <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
+      <a class="btn btn-primary" href="index.html#kontakt">Kontakt</a>
+      <a class="btn btn-ghost" href="index.html#realizacje">Realizacje</a>
+    </div>
+
+    <script src="js/main.js" defer></script>
   </body>
 </html>

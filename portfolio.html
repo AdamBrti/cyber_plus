@@ -4,23 +4,41 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Portfolio | Cyber Plus</title>
+    <meta
+      name="description"
+      content="Wybrane realizacje Cyber Plus: strony firmowe i landing page dla marek premium — Without Gravity, SłodkoTu, Podwiatr, Kontent-Projekt."
+    />
     <meta name="robots" content="noindex, follow" />
-    <meta name="theme-color" content="#07080b" />
+    <link rel="canonical" href="https://cyberplus.pl/portfolio.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:title" content="Portfolio | Cyber Plus" />
+    <meta
+      property="og:description"
+      content="Realizacje: design, kod i sensowny UX — od pierwszego wejścia po kontakt na telefonie."
+    />
+    <meta property="og:url" content="https://cyberplus.pl/portfolio.html" />
+    <meta property="og:image" content="https://cyberplus.pl/assets/logo-wide.png" />
+    <meta name="theme-color" content="#030508" />
     <link rel="icon" href="assets/logo-square.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="assets/logo-square.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="assets/logo-square.png" sizes="180x180" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/pages.css" />
   </head>
-  <body>
+  <body class="page-sub">
+    <a class="skip-link" href="#main">Przejdź do treści</a>
     <div class="bg-grid" aria-hidden="true"></div>
     <div class="bg-glow" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="tech-rail" aria-hidden="true">Szczecin · Rzeszów · zdalnie w całej Polsce</div>
+
     <header class="site-header">
       <div class="inner">
         <a class="logo" href="index.html" aria-label="Cyber Plus — strona główna">
@@ -29,18 +47,174 @@
           </span>
           <img class="logo__wide" src="assets/logo-wide.png" width="480" height="80" alt="" decoding="async" />
         </a>
-        <a class="btn btn-primary" href="index.html#kontakt">Kontakt</a>
+        <nav class="nav-desktop" aria-label="Nawigacja główna">
+          <a href="index.html#problem">Problem</a>
+          <a href="index.html#rozwiazanie">Podejście</a>
+          <a href="index.html#uslugi">Usługi</a>
+          <a href="index.html#realizacje">Realizacje</a>
+          <a href="index.html#lokalnie">Szczecin / Rzeszów</a>
+          <a href="index.html#proces">Proces</a>
+          <a href="index.html#faq">FAQ</a>
+          <a class="btn btn-primary" href="index.html#kontakt">Kontakt</a>
+        </nav>
+        <div class="header-mobile-tools">
+          <button
+            type="button"
+            class="nav-menu-toggle"
+            id="nav-menu-toggle"
+            aria-expanded="false"
+            aria-controls="nav-mobile-panel"
+          >
+            <span class="visually-hidden">Menu — sekcje strony</span>
+            <span class="nav-menu-toggle__bars" aria-hidden="true">
+              <span class="nav-menu-toggle__bar"></span>
+              <span class="nav-menu-toggle__bar"></span>
+              <span class="nav-menu-toggle__bar"></span>
+            </span>
+          </button>
+          <a class="btn btn-primary nav-mobile-cta" href="index.html#kontakt">Kontakt</a>
+        </div>
       </div>
     </header>
-    <main class="stub wrap">
-      <h1>Portfolio</h1>
-      <p>
-        Referencje są na stronie głównej w sekcji realizacje: Without Gravity, SłodkoTu, Podwiatr oraz
-        Kontent-Projekt (obecnie pod adresem preview na Cloudflare Workers — link jak na produkcji, tylko inna
-        domena). Jeśli potrzebujesz krótkiego opisu pod przetarg albo dodatkowych materiałów, napisz — adres mailowy
-        jest w sekcji kontakt na stronie głównej.
-      </p>
-      <p><a class="btn btn-primary" href="index.html#realizacje">Wróć do strony głównej</a></p>
+
+    <div class="nav-mobile-backdrop" id="nav-mobile-backdrop" aria-hidden="true" tabindex="-1"></div>
+    <div
+      class="nav-mobile-panel"
+      id="nav-mobile-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="nav-mobile-title"
+      aria-hidden="true"
+    >
+      <div class="nav-mobile-panel__head">
+        <p id="nav-mobile-title" class="nav-mobile-panel__title">Menu</p>
+        <button type="button" class="nav-mobile-close" id="nav-mobile-close" aria-label="Zamknij menu">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <nav class="nav-mobile-panel__nav" aria-label="Nawigacja — sekcje">
+        <a href="index.html#problem">Problem</a>
+        <a href="index.html#rozwiazanie">Podejście</a>
+        <a href="index.html#uslugi">Usługi</a>
+        <a href="index.html#realizacje">Realizacje</a>
+        <a href="index.html#lokalnie">Szczecin / Rzeszów</a>
+        <a href="index.html#proces">Proces</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="index.html#dlaczego">Dlaczego my</a>
+      </nav>
+      <div class="nav-mobile-panel__foot">
+        <a class="btn btn-primary nav-mobile-panel__cta" href="index.html#kontakt">Porozmawiajmy o stronie</a>
+      </div>
+    </div>
+
+    <main id="main" class="page-sub-main">
+      <section class="band band--dawn reveal" aria-labelledby="portfolio-h1">
+        <div class="wrap page-sub-hero__inner">
+          <p class="section-label">Realizacje</p>
+          <h1 id="portfolio-h1">Portfolio</h1>
+          <p class="section-lead section-lead--tight">
+            Krótka lista projektów, które pokazują, jak pracujemy: struktura pod klienta, estetyka premium i kod, który
+            nie gubi telefonu. Pełniejsze opisy i zrzuty są na stronie głównej w sekcji realizacje.
+          </p>
+        </div>
+      </section>
+
+      <section class="band band--silver reveal" aria-labelledby="portfolio-list-heading">
+        <div class="wrap">
+          <h2 id="portfolio-list-heading" class="visually-hidden">Lista projektów</h2>
+          <ul class="page-portfolio-list">
+            <li>
+              <a href="https://without-gravity.szczecin.pl/" rel="noopener noreferrer" target="_blank">
+                <span>Without Gravity</span>
+                <span class="meta">wizytówka · Szczecin</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://slodkotu.pl/" rel="noopener noreferrer" target="_blank">
+                <span>SłodkoTu</span>
+                <span class="meta">e-commerce / marka</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://podwiatr.net.pl/" rel="noopener noreferrer" target="_blank">
+                <span>Podwiatr</span>
+                <span class="meta">stolarka premium</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://kontentprojekt.adam-bartkowskiap.workers.dev/" rel="noopener noreferrer" target="_blank">
+                <span>Kontent-Projekt</span>
+                <span class="meta">preview (Workers)</span>
+              </a>
+            </li>
+          </ul>
+          <p class="section-lead section-lead--tight page-portfolio-after">
+            Potrzebujesz PDF pod przetarg, listę referencji albo opis zakresu? Napisz — ustalimy format i termin.
+          </p>
+          <div class="btn-row page-portfolio-actions">
+            <a class="btn btn-primary" href="index.html#kontakt">Napisz do nas</a>
+            <a class="btn btn-ghost" href="index.html#realizacje">Sekcja realizacje na start</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="band band--finale page-sub-ctafoot reveal" aria-labelledby="portfolio-cta-h">
+        <div class="wrap">
+          <p class="section-label">Kontakt</p>
+          <h2 id="portfolio-cta-h">Porozmawiajmy o Twojej stronie</h2>
+          <p class="section-lead section-lead--tight">
+            Jedna wiadomość wystarczy: czym się zajmujesz, link do obecnej strony (jeśli jest) i co chcesz poprawić.
+          </p>
+          <div class="btn-row btn-row--stack">
+            <a
+              class="btn btn-primary"
+              href="mailto:kontakt@cyberplus.pl?subject=Cyber%20Plus%20%E2%80%94%20portfolio%20%2F%20materia%C5%82y"
+              >kontakt@cyberplus.pl</a
+            >
+            <a class="btn btn-ghost" href="index.html">Wróć na stronę główną</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer band band--void">
+        <div class="wrap">
+          <div class="footer-grid">
+            <div>
+              <div class="footer-brand">
+                <img
+                  class="footer-brand__img"
+                  src="assets/logo-wide.png"
+                  width="480"
+                  height="80"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="footer-tagline">
+                Strony i landing page dla firm w Polsce: zaufanie od pierwszego wejścia, wygodny telefon, sens pod Google.
+              </p>
+            </div>
+            <div class="footer-links">
+              <a href="portfolio.html" aria-current="page">Portfolio</a>
+              <a href="strony-internetowe-szczecin.html">Szczecin</a>
+              <a href="strony-internetowe-rzeszow.html">Rzeszów</a>
+              <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+              <a href="regulamin.html">Regulamin</a>
+            </div>
+          </div>
+          <p class="footer-copy-meta">
+            © <span id="y"></span> Cyber Plus · analitykę i tagi (np. cookies) ustawiamy po wdrożeniu, zgodnie z przepisami.
+          </p>
+        </div>
+      </footer>
     </main>
+
+    <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
+      <a class="btn btn-primary" href="index.html#kontakt">Kontakt</a>
+      <a class="btn btn-ghost" href="index.html#realizacje">Realizacje</a>
+    </div>
+
+    <script src="js/main.js" defer></script>
   </body>
 </html>
