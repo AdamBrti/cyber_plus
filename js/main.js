@@ -190,4 +190,22 @@
     window.addEventListener("resize", reqShowcaseParallax, { passive: true });
     showcaseParallaxTick();
   }
+
+  var pillarsAtelier = document.querySelector("#rozwiazanie");
+  if (pillarsAtelier && "IntersectionObserver" in window) {
+    var railIo = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          document.body.classList.toggle("pillars-atelier-inview", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
+    );
+    railIo.observe(pillarsAtelier);
+  }
+
+  var yearEl = document.getElementById("y");
+  if (yearEl) {
+    yearEl.textContent = String(new Date().getFullYear());
+  }
 })();
