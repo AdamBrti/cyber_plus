@@ -66,6 +66,18 @@ Zaloguj się: [https://dash.cloudflare.com](https://dash.cloudflare.com).
 3. U góry wybierz zakładkę **Pages** (nie „Workers” same — chodzi o hosting stron).
 4. Kliknij **Create application** / **Create a project** (przycisk do utworzenia projektu Pages).
 
+### B1a. ⚠️ Workers ≠ Pages — jak odróżnić (częsty błąd)
+
+**Nie wchodź w kreator „Create a Worker” / Workera**, jeśli widzisz np.:
+
+- kroki w stylu **Create a Worker** albo **Set up your application** przy **Workerze**,
+- pole **Deploy command** z wartością **`npx wrangler deploy`**,
+- brak pól w stylu **Framework preset** / **Build output directory** typowych dla stron statycznych.
+
+To jest **Cloudflare Workers** (osobny produkt). Ten projekt (HTML + folder `functions/` z formularzem) ma być wdrożony jako **Cloudflare Pages**.
+
+**Co zrobić:** cofnij się (**Back**) albo zamknij kreator → w **Workers & Pages** kliknij zakładkę **Pages** → **Create a project** / **Connect to Git** **z sekcji Pages**, a nie „Create Worker”. W dobrym kreatorze Pages zobaczysz m.in. **Framework preset** (None), **Build output directory** (`/` lub `.`) — część opcji jest pod **Advanced settings**.
+
 ### B2. Sposób podłączenia kodu — wybierz **jedną** ścieżkę
 
 #### Ścieżka **1** — Git (zalecana, jeśli masz GitHub)
@@ -188,6 +200,12 @@ Potem możesz (opcjonalnie) ustawić `ALLOWED_ORIGINS` z dokładnym `https://cyb
 - **W repozytorium:** cały kod, w tym `functions/api/contact.js` — **bez** klucza Resend.
 - **Nigdy w Git:** klucz API, hasła — tylko w **Environment variables** w panelu Cloudflare.
 - Lokalny plik **`.dev.vars`** (opcjonalnie pod Wrangler) — jest w **`.gitignore`**.
+
+---
+
+## Nagłówki HTTP (`_headers`)
+
+W katalogu głównym repozytorium leży plik **`_headers`**. Cloudflare **Pages** automatycznie dodaje zawarte tam nagłówki do odpowiedzi (m.in. `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Strict-Transport-Security`, `Permissions-Policy`). **Nie trzeba** nic włączać w panelu — wystarczy, że plik trafia w deploy razem ze stroną.
 
 ---
 

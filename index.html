@@ -3,30 +3,35 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cyber Plus — strony internetowe Szczecin, Rzeszów i cała Polska</title>
+    <title>Cyber Plus — strony internetowe Szczecin, Rzeszów, Berlin i cała Polska</title>
     <meta
       name="description"
-      content="Strony firmowe, landing page i redesigny — design, kod i podstawy SEO dla marek premium. Szczecin, Rzeszów, cała Polska. Spokojna estetyka, sensowny proces, realne realizacje."
+      content="Strony firmowe, landing page i redesigny — design, kod i podstawy SEO dla marek premium. Szczecin, Rzeszów, cała Polska; klienci z Berlina i Niemiec po niemiecku (wersja /de/). Spokojna estetyka, sensowny proces."
     />
-    <link rel="canonical" href="https://cyberplus.pl/" />
-    <!-- Produkcja: jeśli domena lub skrzynka są inne, podmień cyberplus.pl oraz kontakt.cyberplus@outlook.com w index, sitemap, robots i stronach lokalnych. -->
+    <link rel="canonical" href="https://cyber-plus.pl/" />
+    <link rel="alternate" hreflang="pl" href="https://cyber-plus.pl/" />
+    <link rel="alternate" hreflang="en" href="https://cyber-plus.pl/en/" />
+    <link rel="alternate" hreflang="de" href="https://cyber-plus.pl/de/" />
+    <link rel="alternate" hreflang="x-default" href="https://cyber-plus.pl/" />
+    <!-- Produkcja: domena cyber-plus.pl; przy zmianie skrzynki zaktualizuj kontakt.cyberplus@outlook.com (mailto, JSON-LD email, MAIL_TO, dokumenty prawne). -->
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pl_PL" />
-    <meta property="og:title" content="Cyber Plus — strony internetowe Szczecin, Rzeszów i cała Polska" />
+    <meta property="og:title" content="Cyber Plus — strony internetowe Szczecin, Rzeszów, Berlin i cała Polska" />
     <meta
       property="og:description"
-      content="Strony dla firm, które mają dobrze wyglądać, szybko działać i ułatwiać kontakt — także na telefonie. Szczecin, Rzeszów, cała Polska."
+      content="Strony dla firm, które mają dobrze wyglądać, szybko działać i ułatwiać kontakt — także na telefonie. Polska zdalnie; Berlin i Niemcy — komunikacja po niemiecku."
     />
-    <meta property="og:url" content="https://cyberplus.pl/" />
-    <meta property="og:image" content="https://cyberplus.pl/assets/logo-wide.png" />
+    <meta property="og:url" content="https://cyber-plus.pl/" />
+    <meta property="og:image" content="https://cyber-plus.pl/assets/logo-wide.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Cyber Plus — strony internetowe Szczecin, Rzeszów i cała Polska" />
+    <meta name="twitter:title" content="Cyber Plus — strony internetowe Szczecin, Rzeszów, Berlin i cała Polska" />
     <meta
       name="twitter:description"
-      content="Strony, które dobrze wyglądają, szybko działają i ułatwiają kontakt — także na telefonie. Szczecin, Rzeszów, cała Polska."
+      content="Strony, które dobrze wyglądają, szybko działają i ułatwiają kontakt — także na telefonie. Polska; Berlin i Niemcy po niemiecku."
     />
+    <meta name="twitter:image" content="https://cyber-plus.pl/assets/logo-wide.png" />
 
     <meta name="theme-color" content="#030508" />
     <link rel="icon" href="assets/logo-square.png" type="image/png" sizes="48x48" />
@@ -52,15 +57,17 @@
         "@graph": [
           {
             "@type": "ProfessionalService",
-            "@id": "https://cyberplus.pl/#organization",
+            "@id": "https://cyber-plus.pl/#organization",
             "name": "Cyber Plus",
-            "url": "https://cyberplus.pl/",
+            "url": "https://cyber-plus.pl/",
             "email": "kontakt.cyberplus@outlook.com",
-            "description": "Strony internetowe, landing page i redesign dla firm usługowych. Szczecin, Rzeszów, cała Polska zdalnie. Dbamy o wygląd, działanie na telefonie i sens po publikacji.",
+            "description": "Strony internetowe, landing page i redesign dla firm usługowych. Szczecin, Rzeszów, cała Polska zdalnie; klienci z Berlina i Niemiec — projekty i komunikacja po niemiecku (cyber-plus.pl/de/). Dbamy o wygląd, telefon i sens po publikacji.",
             "areaServed": [
               { "@type": "Country", "name": "Polska" },
               { "@type": "City", "name": "Szczecin" },
-              { "@type": "City", "name": "Rzeszów" }
+              { "@type": "City", "name": "Rzeszów" },
+              { "@type": "Country", "name": "Niemcy" },
+              { "@type": "City", "name": "Berlin" }
             ],
             "serviceType": [
               "Strony internetowe",
@@ -72,10 +79,10 @@
           },
           {
             "@type": "WebSite",
-            "@id": "https://cyberplus.pl/#website",
-            "url": "https://cyberplus.pl/",
+            "@id": "https://cyber-plus.pl/#website",
+            "url": "https://cyber-plus.pl/",
             "name": "Cyber Plus",
-            "publisher": { "@id": "https://cyberplus.pl/#organization" },
+            "publisher": { "@id": "https://cyber-plus.pl/#organization" },
             "inLanguage": "pl-PL"
           },
           {
@@ -157,7 +164,7 @@
     <div class="bg-grid" aria-hidden="true"></div>
     <div class="bg-glow" aria-hidden="true"></div>
     <div class="cursor-glow" aria-hidden="true"></div>
-    <div class="tech-rail" aria-hidden="true">Szczecin · Rzeszów · zdalnie w całej Polsce</div>
+    <div class="tech-rail" aria-hidden="true">Szczecin · Rzeszów · Berlin &amp; okolice · zdalnie PL / DE / EN</div>
 
     <header class="site-header">
       <div class="inner">
@@ -189,6 +196,13 @@
           <a href="#lokalnie">Szczecin / Rzeszów</a>
           <a href="#proces">Proces</a>
           <a href="#faq">FAQ</a>
+          <span class="lang-switch" aria-label="Wersja językowa">
+            <span class="lang-switch__link lang-switch__link--current">PL</span>
+            <span class="lang-switch__sep" aria-hidden="true">/</span>
+            <a class="lang-switch__link" href="/en/" hreflang="en">EN</a>
+            <span class="lang-switch__sep" aria-hidden="true">/</span>
+            <a class="lang-switch__link" href="/de/" hreflang="de">DE</a>
+          </span>
           <a class="btn btn-primary" href="#kontakt">Kontakt</a>
         </nav>
         <div class="header-mobile-tools">
@@ -240,6 +254,13 @@
         <a href="#proces">Proces</a>
         <a href="#faq">FAQ</a>
         <a href="#dlaczego">Dlaczego my</a>
+        <div class="lang-switch lang-switch--mobile" aria-label="Wersja językowa">
+          <span class="lang-switch__link lang-switch__link--current">PL</span>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <a class="lang-switch__link" href="/en/" hreflang="en">EN</a>
+          <span class="lang-switch__sep" aria-hidden="true">/</span>
+          <a class="lang-switch__link" href="/de/" hreflang="de">DE</a>
+        </div>
       </nav>
       <div class="nav-mobile-panel__foot">
         <a class="btn btn-primary nav-mobile-panel__cta" href="#kontakt">Porozmawiajmy o stronie</a>
@@ -268,14 +289,15 @@
             </h1>
             <p class="hero-lead">
               Strony firmowe, landing page i redesigny — od struktury i wyglądu po kod i podstawy SEO. Dla marek
-              premium, które chcą wyglądać nowocześnie i nie gubić klienta na telefonie.
+              premium, które chcą wyglądać nowocześnie i nie gubić klienta na telefonie. Klienci z Berlina i okolic —
+              blisko ze Szczecina, komunikacja po niemiecku: <a href="/de/">wersja strony po niemiecku</a>.
             </p>
             <div class="btn-row hero-cta-row">
               <a class="btn btn-primary" href="#kontakt">Porozmawiajmy o stronie</a>
               <a class="btn btn-ghost btn--glass" href="#realizacje">Zobacz realizacje</a>
             </div>
             <p class="hero-micro" aria-label="Zasięg i oferta">
-              <span class="hero-micro__line">Szczecin · Rzeszów · zdalnie w całej Polsce</span>
+              <span class="hero-micro__line">Szczecin · Rzeszów · Berlin &amp; okolice · zdalnie PL / DE / EN</span>
               <span class="hero-micro__tags">Strony firmowe · landing page · redesign · SEO lokalne</span>
             </p>
           </div>
@@ -562,7 +584,7 @@
                   <div class="pillars-phone__reflection"></div>
                 </figure>
 
-                <p class="pillars-scene__local">Szczecin · Rzeszów · zdalnie w całej Polsce</p>
+                <p class="pillars-scene__local">Szczecin · Rzeszów · Berlin &amp; okolice · zdalnie PL / DE / EN</p>
 
                 <div class="pillars-scene__vignette"></div>
               </div>
@@ -896,86 +918,6 @@
                           width="390"
                           height="844"
                           alt="Podgląd mobilny strony Podwiatr — ten sam adres co na komputerze, wąski ekran telefonu"
-                          loading="lazy"
-                          decoding="async"
-                          fetchpriority="low"
-                        />
-                      </div>
-                    </div>
-                  </figure>
-                </div>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <article
-          class="showcase-case showcase-case--kontent showcase-case--narrative band band--case-editorial reveal"
-          aria-labelledby="case-kontent-heading"
-        >
-          <div class="wrap wrap--wide showcase-case__grid showcase-case__grid--editorial showcase-case__grid--flip">
-            <header class="showcase-case__copy">
-              <p class="showcase-eyebrow">04 · Meble na wymiar · Szczecin</p>
-              <h3 id="case-kontent-heading" class="showcase-title">Kontent-Projekt</h3>
-              <p class="showcase-story">
-                Strona dla pracowni mebli na wymiar — od kuchni po szafy i zabudowy wnęk. Ważna była spokojna,
-                „stolarska” estetyka, czytelne wejście w realizacje i jasny opis procesu pod klientów premium lokalnie
-                w Szczecinie.
-              </p>
-              <p class="showcase-effect">
-                Sekcje pod realizacje, pomieszczenia i usługi — gość szybko rozumie zakres, a ścieżka do rozmowy jest
-                krótka; front lekki, bez szumu katalogowych szablonów.
-              </p>
-              <p class="showcase-domain">kontentprojekt.adam-bartkowskiap.workers.dev</p>
-              <p class="showcase-preview-note">
-                Adres preview (Cloudflare Workers) — po uruchomieniu produkcyjnej domeny podmienimy link na stały.
-              </p>
-              <div class="showcase-actions">
-                <a
-                  class="btn btn-primary"
-                  href="https://kontentprojekt.adam-bartkowskiap.workers.dev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >Wejdź na stronę</a
-                >
-              </div>
-            </header>
-            <div class="showcase-case__stage" data-showcase-parallax>
-              <a
-                class="showcase-hit"
-                href="https://kontentprojekt.adam-bartkowskiap.workers.dev/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Kontent-Projekt — otwórz stronę w nowej karcie"
-              >
-                <div class="showcase-devices showcase-devices--editorial">
-                  <figure class="device-laptop device-laptop--magazine">
-                    <div class="device-laptop__chrome">
-                      <span class="device-dots" aria-hidden="true"></span>
-                      <span class="device-url">kontentprojekt…workers.dev</span>
-                    </div>
-                    <div class="device-laptop__screen">
-                      <img
-                        src="https://s0.wp.com/mshots/v1/https%3A%2F%2Fkontentprojekt.adam-bartkowskiap.workers.dev%2F?w=1600"
-                        width="1600"
-                        height="1000"
-                        alt="Podgląd strony Kontent-Projekt — meble na wymiar Szczecin"
-                        loading="lazy"
-                        decoding="async"
-                        fetchpriority="low"
-                      />
-                    </div>
-                  </figure>
-                  <figure class="device-phone device-phone--editorial">
-                    <div class="device-phone__frame device-phone__frame--iphone">
-                      <div class="device-phone__screen">
-                        <img
-                          src="https://s0.wp.com/mshots/v1/https%3A%2F%2Fkontentprojekt.adam-bartkowskiap.workers.dev%2F?w=390&vpw=390&vph=844"
-                          srcset="https://s0.wp.com/mshots/v1/https%3A%2F%2Fkontentprojekt.adam-bartkowskiap.workers.dev%2F?w=780&vpw=390&vph=844 2x"
-                          sizes="(min-width: 960px) 228px, (min-width: 640px) 28vw, 44vw"
-                          width="390"
-                          height="844"
-                          alt="Podgląd mobilny strony Kontent-Projekt"
                           loading="lazy"
                           decoding="async"
                           fetchpriority="low"
@@ -1362,8 +1304,13 @@
             <a href="regulamin.html">Regulamin</a>
           </div>
         </div>
+        <div class="footer-legal">
+          <p><strong>Cyber Plus Adam Bartkowski</strong> · jednoosobowa działalność gospodarcza</p>
+          <p>ul. Santocka 19 lok. 143, 71-113 Szczecin</p>
+          <p>NIP: 8522724913 · REGON: 542812830 · <a href="mailto:kontakt.cyberplus@outlook.com">kontakt.cyberplus@outlook.com</a></p>
+        </div>
         <p class="footer-copy-meta">
-          © <span id="y"></span> Cyber Plus · analitykę i tagi (np. cookies) ustawiamy po wdrożeniu, zgodnie z przepisami.
+          © <span id="y"></span> Cyber Plus · <a href="polityka-prywatnosci.html#pp-cookies">Cookies i prywatność</a>
         </p>
         </div>
       </footer>

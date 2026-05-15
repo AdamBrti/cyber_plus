@@ -8,20 +8,22 @@ Strona **wizytówka agencji / freelancera** oferującego strony firmowe, landing
 
 ## Strony w repozytorium
 
-1. **`index.html`** — strona główna, najbogatsza strukturalnie (hero „cinematic”, sekcje oferty, FAQ, JSON-LD z FAQ i organizacją).
-2. **`portfolio.html`** — realizacje.
-3. **`strony-internetowe-szczecin.html`** / **`strony-internetowe-rzeszow.html`** — landingi pod frazy lokalne; przy duplikacji treści pilnuj **unikalnych** opisów i `canonical` pod każdy URL.
-4. **`polityka-prywatnosci.html`**, **`regulamin.html`** — dokumenty prawne; wąska typografia, treść prawnicza — nie „upraszczaj” bez prośby właściciela.
+1. **`index.html`** — strona główna (PL), najbogatsza strukturalnie (hero „cinematic”, sekcje oferty, FAQ, JSON-LD z FAQ i organizacją).
+2. **`en/index.html`**, **`de/index.html`** — skrócone strony wejściowe w języku angielskim i niemieckim (ten sam formularz `/api/contact`, `hreflang` skrzyżowany z PL).
+3. **`portfolio.html`** — realizacje.
+4. **`strony-internetowe-szczecin.html`** / **`strony-internetowe-rzeszow.html`** — landingi pod frazy lokalne; przy duplikacji treści pilnuj **unikalnych** opisów i `canonical` pod każdy URL.
+5. **`polityka-prywatnosci.html`**, **`regulamin.html`** — dokumenty prawne; wąska typografia, treść prawnicza — nie „upraszczaj” bez prośby właściciela. **Na produkcję marketingową:** treść to nadal **szkielet** — przed kampaniami warto konsultację z prawnikiem i uzupełnienie danych administratora.
 
 ## Spójność marki i SEO
 
-- Domena produkcyjna przyjęta w projekcie: **`https://cyberplus.pl/`** (sprawdź `canonical`, `og:url`, `ld+json`, `sitemap.xml`).
+- Domena produkcyjna w kodzie: **`https://cyber-plus.pl/`** (sprawdź `canonical`, `og:url`, `ld+json`, `sitemap.xml`, `robots.txt`).
 - Adres e-mail kontaktowy (produkcja): **`kontakt.cyberplus@outlook.com`**. Przy zmianie domeny lub skrzynki zaktualizuj wszystkie wystąpienia w HTML (w tym `mailto:`), pole `email` w JSON-LD na `index.html` oraz dokumenty prawne (`polityka-prywatnosci.html`, `regulamin.html`).
 - **`robots.txt`** i **`sitemap.xml`** muszą odzwierciedlać faktycznie publikowane URL-e.
 
 ## Komunikacja (logika kontaktu na stronie)
 
 - **Strona główna (`index.html`):** w sekcji **`#kontakt`** jest **formularz** wysyłający `POST` na **`/api/contact`**. Po wdrożeniu na **Cloudflare Pages** obsługuje go **Pages Function** (`functions/api/contact.js`), która wysyła wiadomość przez **Resend** na adres z zmiennej `MAIL_TO` (np. Outlook); adres klienta jest w **`Reply-To`**. Szczegóły i zmienne środowiskowe: **`docs/CLOUDFLARE_PAGES_CONTACT.md`**.
+- **Wersje EN/DE:** `en/index.html`, `de/index.html` — ten sam endpoint **`/api/contact`**; komunikaty JS zależą od atrybutu `lang` na `<html>`.
 - **Fallback:** linki **`mailto:kontakt.cyberplus@outlook.com`** (wstępnie ustawiony `subject` na części linków) — gdy ktoś woli własną pocztę lub gdy endpoint formularza nie jest dostępny (np. lokalny plik `index.html` bez serwera).
 - **Podstrony:** nadal kierują do **`index.html#kontakt`** lub mają własne `mailto:` — bez formularza w kodzie podstron.
 - **JSON-LD:** pole **`email`** na `index.html` — spójne z adresem kontaktowym (SEO).

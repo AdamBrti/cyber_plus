@@ -12,14 +12,16 @@ Short, actionable context for edits in this repo. Language of the **site content
 
 | Area | Path |
 |------|------|
-| Home | `index.html` |
+| Home (PL) | `index.html` |
+| Home EN / DE | `en/index.html`, `de/index.html` |
 | Portfolio | `portfolio.html` |
 | Local SEO landing pages | `strony-internetowe-szczecin.html`, `strony-internetowe-rzeszow.html` |
 | Legal | `polityka-prywatnosci.html`, `regulamin.html` |
 | Global layout + home visuals | `css/main.css` (large; design tokens in `:root`) |
 | Subpage-specific layout stubs | `css/pages.css` |
 | All interactivity | `js/main.js` (single IIFE, `"use strict"`) |
-| SEO / crawlers | `sitemap.xml`, `robots.txt` |
+| SEO / crawlers | `sitemap.xml`, `robots.txt`, `_headers` (nagłówki bezpieczeństwa na Cloudflare Pages) |
+| Strona błędu 404 | `404.html` (nie indeksowana; Cloudflare Pages serwuje ją automatycznie) |
 | Formularz kontaktu (Pages + Resend) | `functions/api/contact.js`, sekcja `#kontakt` w `index.html`, obsługa w `js/main.js` |
 | Brand assets | `assets/` (e.g. logos referenced in meta and header) |
 
@@ -33,7 +35,7 @@ Short, actionable context for edits in this repo. Language of the **site content
 ### HTML
 
 - Keep **semantic structure**, **ARIA** where patterns already exist (FAQ buttons, mobile nav, sticky CTA).
-- **Canonical / OG / Twitter** and **`application/ld+json`** blocks: when changing domain, email, or URLs, align **all** HTML files plus `sitemap.xml` and comments that mention production (see `index.html` head comment).
+- **Canonical / OG / Twitter** and **`application/ld+json`** blocks: domena produkcyjna w repo to **`https://cyber-plus.pl/`** — przy zmianie domeny lub e-maila wyrównaj **wszystkie** pliki HTML plus `sitemap.xml`, `robots.txt` i komentarz w `index.html`.
 - **GA4 / GTM**: commented placeholder in `<head>` — do not inject tracking keys into the repo unless the owner asks.
 
 ### CSS

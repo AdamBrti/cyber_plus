@@ -15,7 +15,7 @@
   var STICKY_CTA_HIDE_FRACTION = 0.45;
   var STICKY_CTA_MAX_WIDTH_PX = 700;
   var CONTACT_POST_URL = "/api/contact";
-  var REVEAL_IO_ROOT_MARGIN = "0px 0px -2% 0px";
+  var REVEAL_IO_ROOT_MARGIN = "0px 0px 10% 0px";
   var REVEAL_IO_THRESHOLD = 0.06;
   var SHOWCASE_PARALLAX_X = -12;
   var SHOWCASE_PARALLAX_Y = -8;
@@ -121,6 +121,33 @@
 
   revealObserve(".reveal", "is-inview");
   revealObserve(".reveal-stagger", "is-inview");
+
+  /* Płynny scroll tylko po kliknięciu w kotwicę #id (html ma scroll-behavior: auto — lepsze odczucie kółka/touch) */
+  if (!reduceMotion) {
+    document.addEventListener(
+      "click",
+      function (e) {
+        var t = e.target;
+        if (!t || !t.closest) return;
+        var a = t.closest("a[href^='#']");
+        if (!a) return;
+        var href = a.getAttribute("href");
+        if (!href || href === "#" || href.length < 2) return;
+        if (a.target && a.target !== "_self") return;
+        var id = href.slice(1);
+        var el = document.getElementById(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (history.replaceState) {
+          try {
+            history.replaceState(null, "", href);
+          } catch (hashErr) {}
+        }
+      },
+      false
+    );
+  }
 
   /* Sticky mobile CTA */
   var sticky = document.getElementById("sticky-cta");
@@ -293,6 +320,46 @@
   var contactStatus = document.getElementById("contact-form-status");
   var contactSubmit = document.getElementById("contact-submit");
   if (contactForm && contactStatus) {
+    var htmlLang = (document.documentElement.getAttribute("lang") || "pl").toLowerCase();
+    var contactLang = htmlLang.slice(0, 2) === "de" ? "de" : htmlLang.slice(0, 2) === "en" ? "en" : "pl";
+    var CONTACT_MSG = {
+      pl: {
+        fieldsRequired: "Uzupełnij imię, e-mail i treść wiadomości.",
+        sending: "Wysyłamy…",
+        ok: "Dziękujemy — wiadomość wysłana. Odezwiemy się na podany e-mail.",
+        validation: "Sprawdź poprawność adresu e-mail i długość pól.",
+        forbidden: "Żądanie odrzucone (konfiguracja domeny). Napisz zwykłą pocztą poniżej.",
+        serverMisconfigured:
+          "Formularz nie jest jeszcze skonfigurowany po stronie serwera. Napisz na adres poniżej lub spróbuj później.",
+        sendFailed: "Nie udało się wysłać. Spróbuj ponownie za chwilę albo skorzystaj z przycisków poczty poniżej.",
+        network:
+          "Brak połączenia z serwerem. Sprawdź internet lub wyślij wiadomość z własnej poczty (przyciski poniżej).",
+      },
+      en: {
+        fieldsRequired: "Please fill in your name, email address and message.",
+        sending: "Sending…",
+        ok: "Thank you — your message was sent. We will reply to the email you provided.",
+        validation: "Please check the email address and field lengths.",
+        forbidden: "Request blocked (site configuration). Use email below.",
+        serverMisconfigured:
+          "The contact form is not configured on the server yet. Use email below or try again later.",
+        sendFailed: "Could not send. Retry in a moment or use the email buttons below.",
+        network: "No connection to the server. Check your network or use your own email app (buttons below).",
+      },
+      de: {
+        fieldsRequired: "Bitte Name, E-Mail und Nachricht ausfüllen.",
+        sending: "Wird gesendet…",
+        ok: "Danke — Ihre Nachricht wurde gesendet. Wir melden uns an die angegebene E-Mail.",
+        validation: "Bitte E-Mail-Adresse und Feldlängen prüfen.",
+        forbidden: "Anfrage abgelehnt (Konfiguration). Bitte nutzen Sie die E-Mail unten.",
+        serverMisconfigured:
+          "Das Kontaktformular ist serverseitig noch nicht eingerichtet. Nutzen Sie die E-Mail unten oder später erneut.",
+        sendFailed: "Senden fehlgeschlagen. Bitte erneut versuchen oder die Buttons unten nutzen.",
+        network: "Keine Verbindung zum Server. Netzwerk prüfen oder eigene E-Mail-App nutzen (Buttons unten).",
+      },
+    };
+    var CM = CONTACT_MSG[contactLang] || CONTACT_MSG.pl;
+
     function setContactStatus(msg, kind) {
       contactStatus.textContent = msg || "";
       contactStatus.classList.remove("is-error", "is-ok");
@@ -314,12 +381,12 @@
       var hp = hpEl ? String(hpEl.value || "").trim() : "";
 
       if (!name || !email || !message) {
-        setContactStatus("Uzupełnij imię, e-mail i treść wiadomości.", "error");
+        setContactStatus(CM.fieldsRequired, "error");
         return;
       }
 
       if (contactSubmit) contactSubmit.disabled = true;
-      setContactStatus("Wysyłamy…", null);
+      setContactStatus(CM.sending, null);
 
       var payload = {
         name: name,
@@ -334,34 +401,113 @@
         body: JSON.stringify(payload),
       })
         .then(function (res) {
-          return res.json().then(function (data) {
+          return res.text().then(function (text) {
+            var data = {};
+            if (text) {
+              try {
+                data = JSON.parse(text);
+              } catch (parseErr) {
+                data = { ok: false, error: "bad_response" };
+              }
+            }
             return { ok: res.ok, status: res.status, data: data };
           });
         })
         .then(function (r) {
           if (r.ok && r.data && r.data.ok) {
-            setContactStatus("Dziękujemy — wiadomość wysłana. Odezwiemy się na podany e-mail.", "ok");
+            setContactStatus(CM.ok, "ok");
             contactForm.reset();
           } else if (r.data && r.data.error === "validation") {
-            setContactStatus("Sprawdź poprawność adresu e-mail i długość pól.", "error");
+            setContactStatus(CM.validation, "error");
           } else if (r.data && r.data.error === "forbidden") {
-            setContactStatus("Żądanie odrzucone (konfiguracja domeny). Napisz zwykłą pocztą poniżej.", "error");
+            setContactStatus(CM.forbidden, "error");
+          } else if (r.data && r.data.error === "server_misconfigured") {
+            setContactStatus(CM.serverMisconfigured, "error");
           } else {
-            setContactStatus(
-              "Nie udało się wysłać. Spróbuj ponownie za chwilę albo skorzystaj z przycisków poczty poniżej.",
-              "error"
-            );
+            setContactStatus(CM.sendFailed, "error");
           }
         })
         .catch(function () {
-          setContactStatus(
-            "Brak połączenia z serwerem. Sprawdź internet lub wyślij wiadomość z własnej poczty (przyciski poniżej).",
-            "error"
-          );
+          setContactStatus(CM.network, "error");
         })
         .finally(function () {
           if (contactSubmit) contactSubmit.disabled = false;
         });
     });
+  }
+
+  /* Baner informacyjny o plikach cookies (localStorage — opis w polityce § pp-cookies) */
+  var COOKIE_LS = "cyberplus_cookie_ack_v1";
+  var COOKIE_LS_LEGACY = "cyberplus_cookie_info_v1";
+  try {
+    if (window.localStorage.getItem(COOKIE_LS_LEGACY) && !window.localStorage.getItem(COOKIE_LS)) {
+      window.localStorage.setItem(COOKIE_LS, "1");
+    }
+  } catch (legacyErr) {}
+
+  if ("localStorage" in window && !window.localStorage.getItem(COOKIE_LS)) {
+    var htmlLangBanner = (document.documentElement.getAttribute("lang") || "pl").toLowerCase();
+    var bannerLang = htmlLangBanner.slice(0, 2) === "de" ? "de" : htmlLangBanner.slice(0, 2) === "en" ? "en" : "pl";
+    var COOKIE_UI = {
+      pl: {
+        aria: "Informacja o plikach cookies",
+        before: "Używamy niezbędnych mechanizmów serwera i — po kliknięciu „Rozumię” — zapisu w przeglądarce, aby nie pokazywać tego komunikatu wielokrotnie. Szczegóły: ",
+        link: "Polityka prywatności (rozdział o cookies)",
+        after: ".",
+        btn: "Rozumię",
+      },
+      en: {
+        aria: "Information about cookies",
+        before:
+          "We use essential server mechanisms and, after you click “Understood”, a value in your browser so we do not show this notice again. Details (Polish): ",
+        link: "Privacy policy — cookies section",
+        after: ".",
+        btn: "Understood",
+      },
+      de: {
+        aria: "Hinweis zu Cookies",
+        before:
+          "Wir nutzen notwendige Servermechanismen und — nach Klick auf „Verstanden“ — einen Speicherwert im Browser, damit dieser Hinweis nicht wiederholt erscheint. Details (Polnisch): ",
+        link: "Datenschutzerklärung — Abschnitt Cookies",
+        after: ".",
+        btn: "Verstanden",
+      },
+    };
+    var CU = COOKIE_UI[bannerLang] || COOKIE_UI.pl;
+
+    var ban = document.createElement("aside");
+    ban.className = "cookie-banner";
+    ban.setAttribute("role", "dialog");
+    ban.setAttribute("aria-label", CU.aria);
+    var inner = document.createElement("div");
+    inner.className = "cookie-banner__inner";
+    var p = document.createElement("p");
+    p.className = "cookie-banner__text";
+    var a = document.createElement("a");
+    a.href = "/polityka-prywatnosci.html#pp-cookies";
+    a.textContent = CU.link;
+    p.appendChild(document.createTextNode(CU.before));
+    p.appendChild(a);
+    p.appendChild(document.createTextNode(CU.after));
+    var actions = document.createElement("div");
+    actions.className = "cookie-banner__actions";
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "btn btn-primary";
+    btn.textContent = CU.btn;
+    btn.addEventListener("click", function () {
+      try {
+        window.localStorage.setItem(COOKIE_LS, "1");
+      } catch (e) {}
+      ban.classList.add("is-dismissed");
+      window.setTimeout(function () {
+        if (ban.parentNode) ban.parentNode.removeChild(ban);
+      }, 400);
+    });
+    actions.appendChild(btn);
+    inner.appendChild(p);
+    inner.appendChild(actions);
+    ban.appendChild(inner);
+    document.body.appendChild(ban);
   }
 })();
