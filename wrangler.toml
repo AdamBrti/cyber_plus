@@ -1,0 +1,7 @@
+# Cloudflare Pages — projekt statyczny z Functions w /functions
+# Po połączeniu repo z Pages w panelu CF nazwa projektu ustawiana jest w UI;
+# ten plik jest podglądowy dla `wrangler pages dev` i dokumentacji.
+
+name = "cyber-plus"
+compatibility_date = "2025-01-15"
+pages_build_output_dir = "."

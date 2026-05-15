@@ -14,6 +14,7 @@
   var STICKY_CTA_SHOW_VH = 0.12;
   var STICKY_CTA_HIDE_FRACTION = 0.45;
   var STICKY_CTA_MAX_WIDTH_PX = 700;
+  var CONTACT_POST_URL = "/api/contact";
   var REVEAL_IO_ROOT_MARGIN = "0px 0px -2% 0px";
   var REVEAL_IO_THRESHOLD = 0.06;
   var SHOWCASE_PARALLAX_X = -12;
@@ -285,5 +286,82 @@
       },
       { passive: true }
     );
+  }
+
+  /* Formularz kontaktu → POST /api/contact (Cloudflare Pages Function + Resend) */
+  var contactForm = document.getElementById("contact-form");
+  var contactStatus = document.getElementById("contact-form-status");
+  var contactSubmit = document.getElementById("contact-submit");
+  if (contactForm && contactStatus) {
+    function setContactStatus(msg, kind) {
+      contactStatus.textContent = msg || "";
+      contactStatus.classList.remove("is-error", "is-ok");
+      if (kind === "error") contactStatus.classList.add("is-error");
+      else if (kind === "ok") contactStatus.classList.add("is-ok");
+    }
+
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var nameEl = document.getElementById("contact-name");
+      var emailEl = document.getElementById("contact-email");
+      var msgEl = document.getElementById("contact-message");
+      var hpEl = document.getElementById("contact-company");
+      if (!nameEl || !emailEl || !msgEl) return;
+
+      var name = String(nameEl.value || "").trim();
+      var email = String(emailEl.value || "").trim();
+      var message = String(msgEl.value || "").trim();
+      var hp = hpEl ? String(hpEl.value || "").trim() : "";
+
+      if (!name || !email || !message) {
+        setContactStatus("Uzupełnij imię, e-mail i treść wiadomości.", "error");
+        return;
+      }
+
+      if (contactSubmit) contactSubmit.disabled = true;
+      setContactStatus("Wysyłamy…", null);
+
+      var payload = {
+        name: name,
+        email: email,
+        message: message,
+        _company: hp,
+      };
+
+      fetch(CONTACT_POST_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+        .then(function (res) {
+          return res.json().then(function (data) {
+            return { ok: res.ok, status: res.status, data: data };
+          });
+        })
+        .then(function (r) {
+          if (r.ok && r.data && r.data.ok) {
+            setContactStatus("Dziękujemy — wiadomość wysłana. Odezwiemy się na podany e-mail.", "ok");
+            contactForm.reset();
+          } else if (r.data && r.data.error === "validation") {
+            setContactStatus("Sprawdź poprawność adresu e-mail i długość pól.", "error");
+          } else if (r.data && r.data.error === "forbidden") {
+            setContactStatus("Żądanie odrzucone (konfiguracja domeny). Napisz zwykłą pocztą poniżej.", "error");
+          } else {
+            setContactStatus(
+              "Nie udało się wysłać. Spróbuj ponownie za chwilę albo skorzystaj z przycisków poczty poniżej.",
+              "error"
+            );
+          }
+        })
+        .catch(function () {
+          setContactStatus(
+            "Brak połączenia z serwerem. Sprawdź internet lub wyślij wiadomość z własnej poczty (przyciski poniżej).",
+            "error"
+          );
+        })
+        .finally(function () {
+          if (contactSubmit) contactSubmit.disabled = false;
+        });
+    });
   }
 })();
