@@ -451,10 +451,11 @@
     var COOKIE_UI = {
       pl: {
         aria: "Informacja o plikach cookies",
-        before: "Używamy niezbędnych mechanizmów serwera i — po kliknięciu „Rozumię” — zapisu w przeglądarce, aby nie pokazywać tego komunikatu wielokrotnie. Szczegóły: ",
+        before: "Używamy niezbędnych mechanizmów serwera i — po kliknięciu „Rozumiem” — zapisu w przeglądarce, aby nie pokazywać tego komunikatu wielokrotnie. Szczegóły: ",
         link: "Polityka prywatności (rozdział o cookies)",
         after: ".",
-        btn: "Rozumię",
+        btn: "Rozumiem",
+        prefsLink: "Pokaż komunikat ponownie (czyści zapis)",
       },
       en: {
         aria: "Information about cookies",
@@ -463,6 +464,7 @@
         link: "Privacy policy — cookies section",
         after: ".",
         btn: "Understood",
+        prefsLink: "Show this notice again (clears saved choice)",
       },
       de: {
         aria: "Hinweis zu Cookies",
@@ -471,6 +473,7 @@
         link: "Datenschutzerklärung — Abschnitt Cookies",
         after: ".",
         btn: "Verstanden",
+        prefsLink: "Hinweis erneut anzeigen (Speicher löschen)",
       },
     };
     var CU = COOKIE_UI[bannerLang] || COOKIE_UI.pl;
@@ -504,10 +507,33 @@
         if (ban.parentNode) ban.parentNode.removeChild(ban);
       }, 400);
     });
+    var prefsBtn = document.createElement("button");
+    prefsBtn.type = "button";
+    prefsBtn.className = "cookie-banner__prefs";
+    prefsBtn.textContent = CU.prefsLink;
+    prefsBtn.addEventListener("click", function () {
+      try {
+        window.localStorage.removeItem(COOKIE_LS);
+        window.localStorage.removeItem(COOKIE_LS_LEGACY);
+      } catch (e) {}
+      window.location.reload();
+    });
     actions.appendChild(btn);
+    actions.appendChild(prefsBtn);
     inner.appendChild(p);
     inner.appendChild(actions);
     ban.appendChild(inner);
     document.body.appendChild(ban);
+  }
+
+  var resetCookieBtn = document.getElementById("pp-reset-cookie-banner");
+  if (resetCookieBtn) {
+    resetCookieBtn.addEventListener("click", function () {
+      try {
+        window.localStorage.removeItem(COOKIE_LS);
+        window.localStorage.removeItem(COOKIE_LS_LEGACY);
+      } catch (e) {}
+      window.location.reload();
+    });
   }
 })();

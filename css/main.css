@@ -3727,8 +3727,25 @@ section.portfolio-exhibition {
 }
 .cookie-banner__actions {
   display: flex;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem 0.75rem;
   flex-shrink: 0;
+}
+.cookie-banner__prefs {
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  border: 0;
+  padding: 0.25rem 0.35rem;
+  background: transparent;
+  color: rgba(170, 190, 220, 0.88);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+.cookie-banner__prefs:hover {
+  color: var(--accent);
 }
 .cookie-banner .btn {
   padding: 0.55rem 1.1rem;

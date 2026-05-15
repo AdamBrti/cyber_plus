@@ -18,7 +18,9 @@ Strona **wizytówka agencji / freelancera** oferującego strony firmowe, landing
 
 - Domena produkcyjna w kodzie: **`https://cyber-plus.pl/`** (sprawdź `canonical`, `og:url`, `ld+json`, `sitemap.xml`, `robots.txt`).
 - Adres e-mail kontaktowy (produkcja): **`kontakt.cyberplus@outlook.com`**. Przy zmianie domeny lub skrzynki zaktualizuj wszystkie wystąpienia w HTML (w tym `mailto:`), pole `email` w JSON-LD na `index.html` oraz dokumenty prawne (`polityka-prywatnosci.html`, `regulamin.html`).
-- **`robots.txt`** i **`sitemap.xml`** muszą odzwierciedlać faktycznie publikowane URL-e.
+- **`robots.txt`** i **`sitemap.xml`** muszą odzwierciedlać faktycznie publikowane URL-e; przy wdrożeniach aktualizuj **`lastmod`** w `sitemap.xml` dla zmienionych URL-i (komentarz w pliku).
+- Obraz pod udostępnienia (**Open Graph / Twitter**): **`assets/og-social-default.png`** (1200×630), adres w meta jako `https://cyber-plus.pl/assets/og-social-default.png`.
+- Checklist po starcie (GSC, wizytówka Google, CWV itd.): **`docs/SEO_POSTLAUNCH.md`**.
 
 ## Komunikacja (logika kontaktu na stronie)
 
