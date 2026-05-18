@@ -78,8 +78,6 @@
   --header-logo-slot-max: min(36vw, 11.75rem);
   --header-logo-slot-max-lg: min(32vw, 13.25rem);
   --logo-square-pad-scale: 1.06;
-  --hero-parallax-x: 0px;
-  --hero-parallax-y: 0px;
 }
 
 *,
@@ -183,15 +181,16 @@ body {
 
 .cursor-glow {
   position: fixed;
+  left: 0;
+  top: 0;
   width: 480px;
   height: 480px;
   border-radius: var(--radius-round);
   pointer-events: none;
   z-index: 1;
   background: radial-gradient(circle, rgba(126, 180, 255, 0.07) 0%, transparent 70%);
-  transform: translate(-50%, -50%);
-  left: var(--cursor-x, 50%);
-  top: var(--cursor-y, 40%);
+  transform: translate3d(50vw, 40vh, 0) translate(-50%, -50%);
+  will-change: transform;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -733,6 +732,8 @@ main {
 }
 
 .hero-cinematic {
+  --hero-parallax-x: 0px;
+  --hero-parallax-y: 0px;
   position: relative;
   min-height: min(92vh, 900px);
   padding: clamp(2rem, 6vw, 4rem) 0 clamp(4rem, 10vw, 6rem);
@@ -798,8 +799,7 @@ main {
     radial-gradient(ellipse 55% 40% at 50% 110%, rgba(126, 180, 255, 0.14) 0%, transparent 55%),
     radial-gradient(ellipse 45% 35% at 15% 20%, rgba(255, 255, 255, 0.06) 0%, transparent 50%);
   opacity: 0.85;
-  transform: translate(calc(var(--hero-parallax-x) * 0.08), calc(var(--hero-parallax-y) * 0.08));
-  transition: transform 0.75s var(--ease-soft);
+  transform: translate3d(calc(var(--hero-parallax-x) * 0.08), calc(var(--hero-parallax-y) * 0.08), 0);
   pointer-events: none;
 }
 
@@ -874,8 +874,7 @@ main {
     radial-gradient(ellipse 80% 50% at 20% 0%, rgba(40, 80, 160, 0.25) 0%, transparent 50%),
     radial-gradient(ellipse 60% 45% at 85% 100%, rgba(126, 180, 255, 0.08) 0%, transparent 45%),
     linear-gradient(180deg, transparent 0%, rgba(3, 5, 8, 0.4) 100%);
-  transform: translate(calc(var(--hero-parallax-x) * 0.5), calc(var(--hero-parallax-y) * 0.5));
-  transition: transform 0.6s var(--ease-soft);
+  transform: translate3d(calc(var(--hero-parallax-x) * 0.5), calc(var(--hero-parallax-y) * 0.5), 0);
 }
 
 .hero-aurora {
@@ -1026,7 +1025,6 @@ main {
   justify-content: center;
   transform-style: preserve-3d;
   transform: translate3d(calc(var(--hero-parallax-x) * -0.06), calc(var(--hero-parallax-y) * -0.045), 0);
-  transition: transform 0.65s var(--ease-soft);
 }
 
 .hero-scene__bloom {

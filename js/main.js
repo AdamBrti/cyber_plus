@@ -27,7 +27,6 @@
   var NAV_OPEN_FOCUS_MS = 60;
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var root = document.documentElement;
   var hero = document.querySelector(".hero-cinematic");
 
   /* Header scroll state */
@@ -38,47 +37,85 @@
     else header.classList.remove("is-scrolled");
   }
 
-  /* Hero parallax (pointer + light scroll) */
+  /* Hero parallax + cursor glow — jeden RAF, bez layoutu (transform), zmienne tylko na .hero-cinematic */
+  var cursorGlow = document.querySelector(".cursor-glow");
   var targetX = 0;
   var targetY = 0;
   var curX = 0;
   var curY = 0;
+  var pointerX = 0;
+  var pointerY = 0;
+  var pointerDirty = false;
   var rafId = null;
 
-  function setHeroParallax(nx, ny) {
-    root.style.setProperty("--hero-parallax-x", nx.toFixed(2) + "px");
-    root.style.setProperty("--hero-parallax-y", ny.toFixed(2) + "px");
+  function heroPointerActive() {
+    if (!hero) return false;
+    var r = hero.getBoundingClientRect();
+    return r.bottom > 0 && r.top < window.innerHeight;
   }
 
-  function tickParallax() {
-    curX += (targetX - curX) * PARALLAX_LERP;
-    curY += (targetY - curY) * PARALLAX_LERP;
-    if (Math.abs(targetX - curX) < PARALLAX_STOP_EPS && Math.abs(targetY - curY) < PARALLAX_STOP_EPS) {
-      curX = targetX;
-      curY = targetY;
+  function setHeroParallax(nx, ny) {
+    if (!hero) return;
+    hero.style.setProperty("--hero-parallax-x", nx.toFixed(2) + "px");
+    hero.style.setProperty("--hero-parallax-y", ny.toFixed(2) + "px");
+  }
+
+  function setCursorGlow(x, y) {
+    if (!cursorGlow) return;
+    cursorGlow.style.transform = "translate3d(" + x + "px," + y + "px,0) translate(-50%,-50%)";
+  }
+
+  function tickPointerEffects() {
+    var parallaxActive = hero && heroPointerActive();
+    if (parallaxActive) {
+      var cx = window.innerWidth / 2;
+      var cy = window.innerHeight / 2;
+      targetX = (pointerX - cx) * PARALLAX_POINTER_X;
+      targetY = (pointerY - cy) * PARALLAX_POINTER_Y;
+      curX += (targetX - curX) * PARALLAX_LERP;
+      curY += (targetY - curY) * PARALLAX_LERP;
+      if (Math.abs(targetX - curX) < PARALLAX_STOP_EPS && Math.abs(targetY - curY) < PARALLAX_STOP_EPS) {
+        curX = targetX;
+        curY = targetY;
+      }
+      setHeroParallax(curX, curY);
+    } else if (Math.abs(curX) > PARALLAX_STOP_EPS || Math.abs(curY) > PARALLAX_STOP_EPS) {
+      targetX = 0;
+      targetY = 0;
+      curX += (targetX - curX) * PARALLAX_LERP;
+      curY += (targetY - curY) * PARALLAX_LERP;
+      setHeroParallax(curX, curY);
+    }
+
+    if (pointerDirty) {
+      setCursorGlow(pointerX, pointerY);
+      pointerDirty = false;
+    }
+
+    var needsParallax =
+      (parallaxActive &&
+        (Math.abs(targetX - curX) >= PARALLAX_STOP_EPS || Math.abs(targetY - curY) >= PARALLAX_STOP_EPS)) ||
+      (!parallaxActive && (Math.abs(curX) >= PARALLAX_STOP_EPS || Math.abs(curY) >= PARALLAX_STOP_EPS));
+    if (!needsParallax && !pointerDirty) {
       rafId = null;
     } else {
-      rafId = requestAnimationFrame(tickParallax);
+      rafId = requestAnimationFrame(tickPointerEffects);
     }
-    setHeroParallax(curX, curY);
   }
 
-  function requestParallax() {
-    if (reduceMotion || !hero) return;
-    if (rafId == null) rafId = requestAnimationFrame(tickParallax);
+  function requestPointerEffects() {
+    if (reduceMotion) return;
+    if (rafId == null) rafId = requestAnimationFrame(tickPointerEffects);
   }
 
-  if (!reduceMotion && hero && window.matchMedia("(min-width: " + NAV_BREAKPOINT_MIN + "px)").matches) {
+  if (!reduceMotion && window.matchMedia("(min-width: " + NAV_BREAKPOINT_MIN + "px)").matches) {
     window.addEventListener(
       "mousemove",
       function (e) {
-        var cx = window.innerWidth / 2;
-        var cy = window.innerHeight / 2;
-        targetX = (e.clientX - cx) * PARALLAX_POINTER_X;
-        targetY = (e.clientY - cy) * PARALLAX_POINTER_Y;
-        root.style.setProperty("--cursor-x", e.clientX + "px");
-        root.style.setProperty("--cursor-y", e.clientY + "px");
-        requestParallax();
+        pointerX = e.clientX;
+        pointerY = e.clientY;
+        pointerDirty = true;
+        requestPointerEffects();
       },
       { passive: true }
     );
