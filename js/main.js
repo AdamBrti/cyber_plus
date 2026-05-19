@@ -4,6 +4,10 @@
 (function () {
   "use strict";
 
+  /* Test lokalny — oba false wyłącza parallax hero (mysz) i showcase (scroll); glow kursora zostaje */
+  var ENABLE_HERO_PARALLAX = false;
+  var ENABLE_SHOWCASE_PARALLAX = false;
+
   /* Stałe interakcji — jedno miejsce, bez magii liczb w handlerach */
   var HEADER_SCROLL_THRESHOLD_PX = 24;
   var NAV_BREAKPOINT_MIN = 900;
@@ -66,25 +70,32 @@
   }
 
   function tickPointerEffects() {
-    var parallaxActive = hero && heroPointerActive();
-    if (parallaxActive) {
-      var cx = window.innerWidth / 2;
-      var cy = window.innerHeight / 2;
-      targetX = (pointerX - cx) * PARALLAX_POINTER_X;
-      targetY = (pointerY - cy) * PARALLAX_POINTER_Y;
-      curX += (targetX - curX) * PARALLAX_LERP;
-      curY += (targetY - curY) * PARALLAX_LERP;
-      if (Math.abs(targetX - curX) < PARALLAX_STOP_EPS && Math.abs(targetY - curY) < PARALLAX_STOP_EPS) {
-        curX = targetX;
-        curY = targetY;
+    var needsParallax = false;
+    if (ENABLE_HERO_PARALLAX) {
+      var parallaxActive = hero && heroPointerActive();
+      if (parallaxActive) {
+        var cx = window.innerWidth / 2;
+        var cy = window.innerHeight / 2;
+        targetX = (pointerX - cx) * PARALLAX_POINTER_X;
+        targetY = (pointerY - cy) * PARALLAX_POINTER_Y;
+        curX += (targetX - curX) * PARALLAX_LERP;
+        curY += (targetY - curY) * PARALLAX_LERP;
+        if (Math.abs(targetX - curX) < PARALLAX_STOP_EPS && Math.abs(targetY - curY) < PARALLAX_STOP_EPS) {
+          curX = targetX;
+          curY = targetY;
+        }
+        setHeroParallax(curX, curY);
+      } else if (Math.abs(curX) > PARALLAX_STOP_EPS || Math.abs(curY) > PARALLAX_STOP_EPS) {
+        targetX = 0;
+        targetY = 0;
+        curX += (targetX - curX) * PARALLAX_LERP;
+        curY += (targetY - curY) * PARALLAX_LERP;
+        setHeroParallax(curX, curY);
       }
-      setHeroParallax(curX, curY);
-    } else if (Math.abs(curX) > PARALLAX_STOP_EPS || Math.abs(curY) > PARALLAX_STOP_EPS) {
-      targetX = 0;
-      targetY = 0;
-      curX += (targetX - curX) * PARALLAX_LERP;
-      curY += (targetY - curY) * PARALLAX_LERP;
-      setHeroParallax(curX, curY);
+      needsParallax =
+        (parallaxActive &&
+          (Math.abs(targetX - curX) >= PARALLAX_STOP_EPS || Math.abs(targetY - curY) >= PARALLAX_STOP_EPS)) ||
+        (!parallaxActive && (Math.abs(curX) >= PARALLAX_STOP_EPS || Math.abs(curY) >= PARALLAX_STOP_EPS));
     }
 
     if (pointerDirty) {
@@ -92,10 +103,6 @@
       pointerDirty = false;
     }
 
-    var needsParallax =
-      (parallaxActive &&
-        (Math.abs(targetX - curX) >= PARALLAX_STOP_EPS || Math.abs(targetY - curY) >= PARALLAX_STOP_EPS)) ||
-      (!parallaxActive && (Math.abs(curX) >= PARALLAX_STOP_EPS || Math.abs(curY) >= PARALLAX_STOP_EPS));
     if (!needsParallax && !pointerDirty) {
       rafId = null;
     } else {
@@ -247,8 +254,13 @@
     });
   });
 
+  if (!ENABLE_HERO_PARALLAX && hero) {
+    hero.style.setProperty("--hero-parallax-x", "0px");
+    hero.style.setProperty("--hero-parallax-y", "0px");
+  }
+
   var parallaxStages = document.querySelectorAll("[data-showcase-parallax]");
-  if (parallaxStages.length && !reduceMotion) {
+  if (ENABLE_SHOWCASE_PARALLAX && parallaxStages.length && !reduceMotion) {
     var rafSp = null;
     function showcaseParallaxTick() {
       rafSp = null;
