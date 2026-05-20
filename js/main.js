@@ -363,6 +363,360 @@
     railIo.observe(pillarsAtelier);
   }
 
+  /* Usługi — scroll-driven spatial experience */
+  var servicesBand = document.getElementById("uslugi");
+  var servicesTrack = document.querySelector(".services-scrolly__track");
+  var servicesRail = servicesBand && servicesBand.querySelector(".services-rail");
+  var SERVICES_SCROLL_MIN_W = 1100;
+  var SERVICES_SCROLL_MIN_H = 740;
+  var SERVICES_ATMO_LERP = 0.052;
+  var SERVICES_PROG_LERP = 0.11;
+  var servicesProgSmoothed = 0;
+  var SERVICES_FOCUS_DEFAULT = { x: 24, y: 34 };
+  var SERVICES_DOM_FOCUS = {
+    hero: SERVICES_FOCUS_DEFAULT,
+    landing: { x: 76, y: 26 },
+    redesign: { x: 22, y: 58 },
+    local: { x: 72, y: 72 },
+    statement: { x: 42, y: 18 },
+    cta: { x: 50, y: 82 },
+    offer: { x: 38, y: 48 },
+  };
+  var servicesScrollyActive = false;
+  var servicesScrollyRaf = null;
+  var servicesFocusCur = { x: SERVICES_FOCUS_DEFAULT.x, y: SERVICES_FOCUS_DEFAULT.y };
+  var servicesFocusTarget = { x: SERVICES_FOCUS_DEFAULT.x, y: SERVICES_FOCUS_DEFAULT.y };
+  var servicesPointerFocus = false;
+
+  function svcClamp(min, max, v) {
+    return Math.min(max, Math.max(min, v));
+  }
+
+  function svcSmooth(edge0, edge1, x) {
+    var t = svcClamp(0, 1, (x - edge0) / (edge1 - edge0));
+    return t * t * (3 - 2 * t);
+  }
+
+  /* Płynniejsza krzywa (mniejsze „szarpnięcie” na wejściu/wyjściu faz) */
+  function svcSmooth5(edge0, edge1, x) {
+    var t = svcClamp(0, 1, (x - edge0) / (edge1 - edge0));
+    return t * t * t * (t * (t * 6 - 15) + 10);
+  }
+
+  function svcCrossfade(in0, in1, out0, out1, x) {
+    return svcSmooth5(in0, in1, x) * (1 - svcSmooth5(out0, out1, x));
+  }
+
+  var SERVICES_FOCUS_KEYS = [
+    { p: 0.12, x: 24, y: 34 },
+    { p: 0.38, x: 76, y: 26 },
+    { p: 0.46, x: 22, y: 58 },
+    { p: 0.54, x: 72, y: 72 },
+    { p: 0.62, x: 38, y: 48 },
+    { p: 0.72, x: 42, y: 18 },
+    { p: 0.86, x: 50, y: 82 },
+  ];
+
+  function servicesFocusAt(p) {
+    var keys = SERVICES_FOCUS_KEYS;
+    if (p <= keys[0].p) return { x: keys[0].x, y: keys[0].y };
+    if (p >= keys[keys.length - 1].p) {
+      var last = keys[keys.length - 1];
+      return { x: last.x, y: last.y };
+    }
+    for (var i = 0; i < keys.length - 1; i++) {
+      var a = keys[i];
+      var b = keys[i + 1];
+      if (p >= a.p && p <= b.p) {
+        var t = svcSmooth5(a.p, b.p, p);
+        return {
+          x: a.x + (b.x - a.x) * t,
+          y: a.y + (b.y - a.y) * t,
+        };
+      }
+    }
+    return { x: SERVICES_FOCUS_DEFAULT.x, y: SERVICES_FOCUS_DEFAULT.y };
+  }
+
+  function servicesParseFocus(el) {
+    var raw = el.getAttribute("data-service-focus") || "";
+    var parts = raw.split(",");
+    var x = parseFloat(parts[0]);
+    var y = parseFloat(parts[1]);
+    if (!isFinite(x)) x = SERVICES_FOCUS_DEFAULT.x;
+    if (!isFinite(y)) y = SERVICES_FOCUS_DEFAULT.y;
+    return { x: x, y: y };
+  }
+
+  function servicesScrollProgress() {
+    if (!servicesTrack) return 0;
+    var rect = servicesTrack.getBoundingClientRect();
+    var scrollRange = servicesTrack.offsetHeight - window.innerHeight;
+    if (scrollRange <= 0) return 0;
+    return svcClamp(0, 1, -rect.top / scrollRange);
+  }
+
+  function servicesDomFromProgress(p, panelsEnv, stmtVis, ctaVis, cardsLock) {
+    if (stmtVis > 0.1) return "statement";
+    if (ctaVis > 0.1 && stmtVis < 0.06) return "cta";
+    if (cardsLock > 0.58) return "offer";
+    if (p < 0.37) return "hero";
+    if (p < 0.45 && panelsEnv > 0.2) return "landing";
+    if (p < 0.53 && panelsEnv > 0.2) return "redesign";
+    if (p < 0.61 && panelsEnv > 0.2) return "local";
+    return "hero";
+  }
+
+  function servicesApplyScrollVars(p) {
+    if (!servicesBand) return;
+    servicesBand.style.setProperty("--svc-p", String(p));
+
+    /* 1 · Intro */
+    servicesBand.style.setProperty("--svc-intro", String(1 - svcSmooth5(0.05, 0.21, p)));
+
+    /* 2 · Karta 01 — fade-in, jedno zejście layoutu (bez skoków max/hard-cut) */
+    var heroIn = svcSmooth5(0.05, 0.3, p);
+    var heroLayout = svcSmooth5(0.31, 0.54, p);
+    var cardsLock = svcSmooth5(0.47, 0.65, p);
+    var heroVis = 0.04 + heroIn * 0.96;
+    var heroLift = svcSmooth5(0.46, 0.6, p) * (1 - heroIn) * 0.06;
+    heroVis = Math.min(1, heroVis + heroLift);
+    var heroFocus = 1 - svcSmooth5(0.33, 0.52, p) * 0.32 * (1 - cardsLock * 0.85);
+    servicesBand.style.setProperty("--svc-hero", String(heroVis));
+    servicesBand.style.setProperty("--svc-hero-layout", String(heroLayout));
+    servicesBand.style.setProperty("--svc-hero-focus", String(heroFocus));
+    servicesBand.style.setProperty("--svc-cards-lock", String(cardsLock));
+
+    /* 3 · Panele — sekwencja z nakładaniem, potem plateau */
+    var panelsEnv = svcSmooth5(0.24, 0.4, p);
+    var s1 = svcSmooth5(0.27, 0.43, p);
+    var s2 = svcSmooth5(0.33, 0.49, p);
+    var s3 = svcSmooth5(0.39, 0.55, p);
+    var panelsFloor = svcSmooth5(0.48, 0.62, p);
+    s1 = s1 + (1 - s1) * panelsFloor * 0.35;
+    s2 = s2 + (1 - s2) * panelsFloor * 0.35;
+    s3 = s3 + (1 - s3) * panelsFloor * 0.35;
+    panelsEnv = panelsEnv + (1 - panelsEnv) * panelsFloor * 0.25;
+    servicesBand.style.setProperty("--svc-panels", String(Math.min(1, panelsEnv)));
+    servicesBand.style.setProperty("--svc-s1", String(Math.min(1, s1)));
+    servicesBand.style.setProperty("--svc-s2", String(Math.min(1, s2)));
+    servicesBand.style.setProperty("--svc-s3", String(Math.min(1, s3)));
+
+    /* 4 · Statement — crossfade z plateau */
+    var stmtVis = svcCrossfade(0.57, 0.73, 0.77, 0.93, p);
+    servicesBand.style.setProperty("--svc-statement", String(stmtVis));
+
+    /* 5 · CTA — zachodzi na koniec statement */
+    var ctaVis = svcSmooth5(0.75, 0.94, p);
+    servicesBand.style.setProperty("--svc-cta", String(ctaVis));
+
+    var cardsDim = Math.min(0.38, stmtVis * 0.22 + ctaVis * 0.16);
+    servicesBand.style.setProperty("--svc-cards-dim", String(cardsDim));
+
+    servicesBand.style.setProperty("--svc-bg-y", (p * -20).toFixed(2) + "px");
+    servicesBand.style.setProperty("--svc-head-y", (p * -6.2).toFixed(2) + "vh");
+
+    servicesBand.classList.toggle(
+      "is-svc-phase-hero",
+      (p >= 0.04 && p < 0.42) || (heroVis > 0.45 && panelsEnv < 0.28 && stmtVis < 0.06)
+    );
+    servicesBand.classList.toggle(
+      "is-svc-phase-panels",
+      panelsEnv > 0.08 && cardsLock < 0.92 && stmtVis < 0.1
+    );
+    servicesBand.classList.toggle("is-svc-cards-locked", cardsLock > 0.58);
+    servicesBand.classList.toggle("is-svc-phase-statement", stmtVis > 0.06);
+    servicesBand.classList.toggle("is-svc-phase-cta", ctaVis > 0.1 && stmtVis < 0.06);
+
+    var dom = servicesDomFromProgress(p, panelsEnv, stmtVis, ctaVis, cardsLock);
+    servicesBand.setAttribute("data-svc-dom", dom);
+
+    if (!servicesPointerFocus) {
+      var f = servicesFocusAt(p);
+      servicesFocusTarget.x = f.x;
+      servicesFocusTarget.y = f.y;
+      servicesBand.classList.toggle("is-atmo-focus", p > 0.06 && p < 0.95);
+    }
+  }
+
+  function servicesScrollyTick() {
+    servicesScrollyRaf = null;
+    if (!servicesScrollyActive || !servicesBand) return;
+
+    var pRaw = servicesScrollProgress();
+    if (Math.abs(pRaw - servicesProgSmoothed) > 0.22) {
+      servicesProgSmoothed = pRaw;
+    } else {
+      servicesProgSmoothed += (pRaw - servicesProgSmoothed) * SERVICES_PROG_LERP;
+    }
+    servicesApplyScrollVars(servicesProgSmoothed);
+
+    servicesFocusCur.x += (servicesFocusTarget.x - servicesFocusCur.x) * SERVICES_ATMO_LERP;
+    servicesFocusCur.y += (servicesFocusTarget.y - servicesFocusCur.y) * SERVICES_ATMO_LERP;
+    servicesBand.style.setProperty("--focus-x", servicesFocusCur.x.toFixed(2) + "%");
+    servicesBand.style.setProperty("--focus-y", servicesFocusCur.y.toFixed(2) + "%");
+
+    if (servicesRail) {
+      var p = servicesProgSmoothed;
+      var drift = (p - 0.5) * 8;
+      servicesRail.style.opacity = String(0.22 + svcSmooth5(0, 0.5, p) * 0.2);
+      servicesRail.style.transform = "translate3d(0, calc(-50% + " + drift.toFixed(2) + "px), 0)";
+    }
+
+    servicesScrollyRaf = window.requestAnimationFrame(servicesScrollyTick);
+  }
+
+  function reqServicesScrolly() {
+    if (servicesScrollyRaf == null) servicesScrollyRaf = window.requestAnimationFrame(servicesScrollyTick);
+  }
+
+  function servicesSetPointerFocus(el, on) {
+    if (!servicesBand || !el) return;
+    servicesPointerFocus = on;
+    if (on) {
+      var f = servicesParseFocus(el);
+      servicesFocusTarget.x = f.x;
+      servicesFocusTarget.y = f.y;
+      servicesBand.classList.add("is-atmo-focus");
+    } else {
+      servicesPointerFocus = false;
+      var p = servicesScrollProgress();
+      var dom = servicesDomFromProgress(p);
+      var f2 = SERVICES_DOM_FOCUS[dom] || SERVICES_FOCUS_DEFAULT;
+      servicesFocusTarget.x = f2.x;
+      servicesFocusTarget.y = f2.y;
+      servicesBand.classList.toggle("is-atmo-focus", p > 0.08);
+    }
+    reqServicesScrolly();
+  }
+
+  if (servicesBand && servicesTrack) {
+    var servicesFocusEls = servicesBand.querySelectorAll("[data-service-focus]");
+
+    servicesFocusEls.forEach(function (el) {
+      el.addEventListener("mouseenter", function () {
+        servicesSetPointerFocus(el, true);
+      });
+      el.addEventListener("focusin", function () {
+        servicesSetPointerFocus(el, true);
+      });
+      el.addEventListener("mouseleave", function () {
+        servicesSetPointerFocus(null, false);
+      });
+      el.addEventListener("focusout", function () {
+        if (!servicesBand.contains(document.activeElement)) servicesSetPointerFocus(null, false);
+      });
+    });
+
+    function servicesScrollyEnabled() {
+      return (
+        !reduceMotion &&
+        window.innerWidth >= SERVICES_SCROLL_MIN_W &&
+        window.innerHeight >= SERVICES_SCROLL_MIN_H
+      );
+    }
+
+    function servicesResetVars() {
+      servicesProgSmoothed = 0;
+      servicesBand.removeAttribute("data-svc-dom");
+      servicesBand.classList.remove(
+        "is-atmo-focus",
+        "is-rail-active",
+        "is-scrolly-wow",
+        "is-svc-phase-hero",
+        "is-svc-phase-panels",
+        "is-svc-phase-statement",
+        "is-svc-phase-cta",
+        "is-svc-cards-locked"
+      );
+      document.body.classList.remove("services-inview");
+      [
+        "--svc-p",
+        "--svc-intro",
+        "--svc-hero",
+        "--svc-s1",
+        "--svc-s2",
+        "--svc-s3",
+        "--svc-statement",
+        "--svc-cta",
+        "--svc-bg-y",
+        "--svc-head-y",
+        "--svc-panels",
+        "--svc-hero-layout",
+        "--svc-hero-focus",
+        "--svc-cards-lock",
+        "--svc-cards-dim",
+        "--focus-x",
+        "--focus-y",
+      ].forEach(function (key) {
+        servicesBand.style.removeProperty(key);
+      });
+      if (servicesRail) {
+        servicesRail.style.opacity = "";
+        servicesRail.style.transform = "";
+      }
+    }
+
+    function servicesStartScrolly() {
+      if (!servicesScrollyEnabled()) {
+        servicesScrollyActive = false;
+        servicesBand.classList.add("is-scrolly-static");
+        servicesBand.classList.remove("is-scrolly-wow");
+        servicesResetVars();
+        servicesBand.classList.add("is-rail-active");
+        return;
+      }
+      servicesBand.classList.remove("is-scrolly-static");
+      servicesBand.classList.add("is-scrolly-wow");
+      servicesScrollyActive = true;
+      reqServicesScrolly();
+    }
+
+    if ("IntersectionObserver" in window) {
+      var servicesScrollyIo = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              document.body.classList.add("services-inview");
+              servicesBand.classList.add("is-rail-active");
+              servicesStartScrolly();
+            } else {
+              servicesScrollyActive = false;
+              if (servicesScrollyRaf) {
+                window.cancelAnimationFrame(servicesScrollyRaf);
+                servicesScrollyRaf = null;
+              }
+              servicesResetVars();
+            }
+          });
+        },
+        { threshold: 0.02, rootMargin: "0px 0px 0px 0px" }
+      );
+      servicesScrollyIo.observe(servicesTrack);
+    }
+
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (servicesScrollyActive) reqServicesScrolly();
+      },
+      { passive: true }
+    );
+    window.addEventListener(
+      "resize",
+      function () {
+        servicesStartScrolly();
+        if (servicesScrollyActive) reqServicesScrolly();
+      },
+      { passive: true }
+    );
+
+    if (!servicesScrollyEnabled()) {
+      servicesBand.classList.add("is-scrolly-static");
+      servicesBand.classList.add("is-rail-active");
+    }
+  }
+
   var yearEl = document.getElementById("y");
   if (yearEl) {
     yearEl.textContent = String(new Date().getFullYear());
@@ -481,12 +835,14 @@
       e.preventDefault();
       var nameEl = document.getElementById("contact-name");
       var emailEl = document.getElementById("contact-email");
+      var phoneEl = document.getElementById("contact-phone");
       var msgEl = document.getElementById("contact-message");
       var hpEl = document.getElementById("contact-company");
       if (!nameEl || !emailEl || !msgEl) return;
 
       var name = String(nameEl.value || "").trim();
       var email = String(emailEl.value || "").trim();
+      var phone = phoneEl ? String(phoneEl.value || "").trim() : "";
       var message = String(msgEl.value || "").trim();
       var hp = hpEl ? String(hpEl.value || "").trim() : "";
 
@@ -501,6 +857,7 @@
       var payload = {
         name: name,
         email: email,
+        phone: phone,
         message: message,
         _company: hp,
       };
