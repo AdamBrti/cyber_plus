@@ -31,6 +31,20 @@
   var NAV_OPEN_FOCUS_MS = 60;
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var lenis = null;
+
+  if (!reduceMotion && window.Lenis) {
+    lenis = new window.Lenis({
+      autoRaf: true,
+      smoothWheel: true,
+      anchors: false,
+      prevent: function (node) {
+        return !!(node.closest && node.closest(".nav-mobile-panel, .cookie-banner"));
+      }
+    });
+    window.cyberPlusLenis = lenis;
+  }
+
   var hero = document.querySelector(".hero-cinematic");
 
   /* Header scroll state */
@@ -182,7 +196,11 @@
         var el = document.getElementById(id);
         if (!el) return;
         e.preventDefault();
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (lenis) {
+          lenis.scrollTo(el, { offset: 0, duration: 1.05 });
+        } else {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
         if (history.replaceState) {
           try {
             history.replaceState(null, "", href);
