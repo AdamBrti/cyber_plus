@@ -31,9 +31,55 @@
   var NAV_OPEN_FOCUS_MS = 60;
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var smoothScrollAllowed = window.matchMedia("(min-width: 900px) and (pointer: fine)").matches;
   var lenis = null;
 
-  if (!reduceMotion && window.Lenis) {
+  var introLoader = document.getElementById("intro-loader");
+  var introLoaderDone = false;
+  var introLoaderStartedAt = Date.now();
+  var INTRO_LOADER_MIN_MS = reduceMotion ? 0 : 2000;
+  var INTRO_LOADER_FADE_MS = reduceMotion ? 0 : 1250;
+  var INTRO_LOADER_MAX_MS = 2400;
+  function hideIntroLoader() {
+    if (!introLoader || introLoaderDone) return;
+    introLoaderDone = true;
+    var elapsed = Date.now() - introLoaderStartedAt;
+    var wait = Math.max(0, INTRO_LOADER_MIN_MS - elapsed);
+    window.setTimeout(function () {
+      introLoader.classList.add("is-hidden");
+      document.body.classList.remove("intro-loading");
+      window.setTimeout(function () {
+        if (introLoader.parentNode) introLoader.parentNode.removeChild(introLoader);
+      }, INTRO_LOADER_FADE_MS);
+    }, wait);
+  }
+
+  if (introLoader) {
+    if (document.readyState === "complete") {
+      hideIntroLoader();
+    } else {
+      window.addEventListener("load", function () {
+        hideIntroLoader();
+      });
+      window.setTimeout(hideIntroLoader, INTRO_LOADER_MAX_MS);
+    }
+  }
+
+  document.querySelectorAll(".hero-device__screen img, .device-laptop__screen img, .device-phone__screen img").forEach(function (img) {
+    var screen = img.parentElement;
+    if (!screen) return;
+    function markLoaded() {
+      screen.classList.add("is-loaded");
+    }
+    if (img.complete && img.naturalWidth > 0) {
+      markLoaded();
+    } else {
+      img.addEventListener("load", markLoaded, { once: true });
+      img.addEventListener("error", markLoaded, { once: true });
+    }
+  });
+
+  if (!reduceMotion && smoothScrollAllowed && window.Lenis) {
     lenis = new window.Lenis({
       autoRaf: true,
       smoothWheel: true,
@@ -142,14 +188,24 @@
     );
   }
 
-  window.addEventListener(
-    "scroll",
-    function () {
-      onScrollHeader();
-    },
-    { passive: true }
-  );
-  onScrollHeader();
+  var scrollRaf = null;
+  function runScrollEffects() {
+    scrollRaf = null;
+    onScrollHeader();
+    if (reduceMotion) {
+      if (sticky) {
+        sticky.classList.add("is-visible");
+        sticky.setAttribute("aria-hidden", "false");
+      }
+      return;
+    }
+    onScrollSticky();
+  }
+
+  function requestScrollEffects() {
+    if (scrollRaf != null) return;
+    scrollRaf = requestAnimationFrame(runScrollEffects);
+  }
 
   /* Scroll reveal */
   function revealObserve(selector, className) {
@@ -231,21 +287,8 @@
     }
   }
 
-  window.addEventListener(
-    "scroll",
-    function () {
-      if (reduceMotion) {
-        if (sticky) {
-          sticky.classList.add("is-visible");
-          sticky.setAttribute("aria-hidden", "false");
-        }
-        return;
-      }
-      onScrollSticky();
-    },
-    { passive: true }
-  );
-  onScrollSticky();
+  window.addEventListener("scroll", requestScrollEffects, { passive: true });
+  runScrollEffects();
 
   /* FAQ */
   var items = document.querySelectorAll(".faq-item");
