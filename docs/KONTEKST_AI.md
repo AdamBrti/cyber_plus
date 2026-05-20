@@ -24,7 +24,7 @@ Strona **wizytówka agencji / freelancera** oferującego strony firmowe, landing
 
 ## Komunikacja (logika kontaktu na stronie)
 
-- **Strona główna (`index.html`):** w sekcji **`#kontakt`** jest **formularz** wysyłający `POST` na **`/api/contact`**. Po wdrożeniu na **Cloudflare Pages** obsługuje go **Pages Function** (`functions/api/contact.js`), która wysyła wiadomość przez **Resend** na adres z zmiennej `MAIL_TO` (np. Outlook); adres klienta jest w **`Reply-To`**. Szczegóły i zmienne środowiskowe: **`docs/CLOUDFLARE_PAGES_CONTACT.md`**.
+- **Strona główna (`index.html`):** w sekcji **`#kontakt`** jest **formularz** wysyłający `POST` na **`/api/contact`**. Zbiera imię/firmę, e-mail, opcjonalny telefon i wiadomość. Po wdrożeniu na **Cloudflare Pages** obsługuje go **Pages Function** (`functions/api/contact.js`), która wysyła wiadomość przez **Resend** na adres z zmiennej `MAIL_TO` (np. Outlook); adres klienta jest w **`Reply-To`**. Szczegóły i zmienne środowiskowe: **`docs/CLOUDFLARE_PAGES_CONTACT.md`**.
 - **Wersje EN/DE:** `en/index.html`, `de/index.html` — ten sam endpoint **`/api/contact`**; komunikaty JS zależą od atrybutu `lang` na `<html>`.
 - **Fallback:** linki **`mailto:kontakt.cyberplus@outlook.com`** (wstępnie ustawiony `subject` na części linków) — gdy ktoś woli własną pocztę lub gdy endpoint formularza nie jest dostępny (np. lokalny plik `index.html` bez serwera).
 - **Podstrony:** nadal kierują do **`index.html#kontakt`** lub mają własne `mailto:` — bez formularza w kodzie podstron.

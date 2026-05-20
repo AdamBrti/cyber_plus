@@ -11,6 +11,7 @@
 var RESEND_URL = "https://api.resend.com/emails";
 var MAX_NAME = 120;
 var MAX_EMAIL = 200;
+var MAX_PHONE = 40;
 var MAX_MSG = 5000;
 
 function jsonBody(obj, status) {
@@ -61,12 +62,14 @@ export async function onRequestPost(context) {
 
   var name = String(data.name || "").trim();
   var email = String(data.email || "").trim();
+  var phone = String(data.phone || "").trim();
   var message = String(data.message || "").trim();
 
   if (!name || name.length > MAX_NAME) return jsonBody({ ok: false, error: "validation" }, 400);
   if (!email || email.length > MAX_EMAIL || !basicEmailOk(email)) {
     return jsonBody({ ok: false, error: "validation" }, 400);
   }
+  if (phone.length > MAX_PHONE) return jsonBody({ ok: false, error: "validation" }, 400);
   if (!message || message.length > MAX_MSG) return jsonBody({ ok: false, error: "validation" }, 400);
 
   if (env.ALLOWED_ORIGINS) {
@@ -90,12 +93,20 @@ export async function onRequestPost(context) {
     to: [env.MAIL_TO],
     reply_to: email,
     subject: "Cyber Plus — wiadomość od " + subName,
-    text: "Imię / firma: " + name + "\nE-mail zwrotny: " + email + "\n\n" + message,
+    text:
+      "Imię / firma: " +
+      name +
+      "\nE-mail zwrotny: " +
+      email +
+      (phone ? "\nTelefon: " + phone : "") +
+      "\n\n" +
+      message,
     html:
       "<p><strong>Imię / firma:</strong> " +
       escapeHtml(name) +
       "</p><p><strong>E-mail:</strong> " +
       escapeHtml(email) +
+      (phone ? "</p><p><strong>Telefon:</strong> " + escapeHtml(phone) : "") +
       '</p><pre style="font-family:system-ui;white-space:pre-wrap">' +
       escapeHtml(message) +
       "</pre>",
