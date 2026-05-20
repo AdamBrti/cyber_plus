@@ -186,8 +186,19 @@
       }
     </script>
   </head>
-  <body>
+  <body class="intro-loading">
     <a class="skip-link" href="#main">Przejdź do treści</a>
+
+    <div class="intro-loader" id="intro-loader" aria-hidden="true">
+      <div class="intro-loader__inner">
+        <p class="intro-loader__kicker">Cyber Plus</p>
+        <p class="intro-loader__line">
+          <span class="intro-loader__line-desktop">Strony, które od pierwszego wejścia budują zaufanie.</span>
+          <span class="intro-loader__line-mobile">Witamy w Cyber Plus. Zbudujmy stronę, która budzi zaufanie.</span>
+        </p>
+        <span class="intro-loader__bar" aria-hidden="true"></span>
+      </div>
+    </div>
 
     <div class="bg-grid" aria-hidden="true"></div>
     <div class="bg-glow" aria-hidden="true"></div>
@@ -378,9 +389,9 @@
                             width="390"
                             height="844"
                             alt="Podwiatr — podgląd strony na smartfonie"
-                            loading="lazy"
+                            loading="eager"
                             decoding="async"
-                            fetchpriority="low"
+                            fetchpriority="high"
                           />
                         </div>
                       </div>
@@ -437,9 +448,9 @@
                             width="390"
                             height="844"
                             alt="SłodkoTu — podgląd strony na smartfonie"
-                            loading="lazy"
+                            loading="eager"
                             decoding="async"
-                            fetchpriority="low"
+                            fetchpriority="high"
                           />
                         </div>
                       </div>
@@ -747,6 +758,7 @@
                           alt="Podgląd strony Without Gravity"
                           loading="lazy"
                           decoding="async"
+                          fetchpriority="low"
                         />
                       </div>
                     </figure>
@@ -1087,20 +1099,13 @@
               zdaniu.
             </p>
             <p>
-              Jeśli szukasz wykonawcy w okolicy - mamy osobne strony pod te miasta. Reszta oferty jest taka sama:
-              wizytówki, landing page, redesign.
+              Jeśli szukasz wykonawcy w okolicy, przygotowaliśmy osobne strony dla Szczecina i Rzeszowa. Reszta oferty
+              jest taka sama: strony firmowe, landing page i redesign istniejącej strony.
             </p>
             <nav class="local-links" aria-label="Strony lokalne Cyber Plus">
               <a class="btn btn-ghost" href="strony-internetowe-szczecin.html">Strony internetowe Szczecin</a>
               <a class="btn btn-ghost" href="strony-internetowe-rzeszow.html">Strony internetowe Rzeszów</a>
             </nav>
-            <p class="local-planned-label">Planowane podstrony SEO:</p>
-            <ul class="local-planned" role="list">
-              <li><span>/strony-internetowe-szczecin</span></li>
-              <li><span>/strony-internetowe-rzeszow</span></li>
-              <li><span>/landing-page-szczecin</span></li>
-              <li><span>/redesign-strony-internetowej</span></li>
-            </ul>
           </div>
         </div>
       </section>
