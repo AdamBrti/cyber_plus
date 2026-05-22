@@ -4205,9 +4205,14 @@ section.portfolio-exhibition {
 #lokalnie,
 #faq,
 #kontakt,
+.band--emotional-proof,
 .portfolio-founders-band {
   content-visibility: auto;
   contain-intrinsic-size: auto 720px;
+}
+
+.band--emotional-proof {
+  contain-intrinsic-size: auto 860px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -6155,8 +6160,7 @@ section.band--story-services {
 .services-atmo__light {
   position: absolute;
   border-radius: 50%;
-  filter: blur(72px);
-  will-change: transform, opacity;
+  filter: blur(48px);
 }
 .services-atmo__light--warm {
   width: min(52vw, 28rem);
@@ -6195,15 +6199,14 @@ section.band--story-services {
   margin: -11rem 0 0 -11rem;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(220, 228, 240, 0.09) 0%, transparent 62%);
-  filter: blur(56px);
+  filter: blur(34px);
   opacity: var(--focus-opacity);
   transform: translate3d(-50%, -50%, 0) scale(var(--focus-scale));
   transition:
-    left 2.2s var(--ease-inertia),
-    top 2.2s var(--ease-inertia),
+    left 1.4s var(--ease-inertia),
+    top 1.4s var(--ease-inertia),
     opacity 1.8s var(--ease-inertia),
     transform 2.4s var(--ease-inertia);
-  will-change: left, top, opacity, transform;
 }
 .band--services.is-atmo-focus {
   --focus-opacity: 0.85;
@@ -6768,7 +6771,6 @@ section.band--story-services {
       opacity 1.4s var(--ease-luxury),
       transform 1.4s var(--ease-luxury),
       color 1.4s var(--ease-luxury);
-    will-change: transform, opacity;
   }
   .band--services.is-rail-active .services-rail {
     color: rgba(170, 178, 198, 0.38);
@@ -6790,7 +6792,7 @@ section.band--story-services {
     padding-bottom: calc(var(--section-pad) * 1.12);
   }
   .services-atmo__light {
-    filter: blur(52px);
+    filter: blur(34px);
     opacity: 0.75;
   }
   .services-atmo__light--warm {
@@ -6809,7 +6811,7 @@ section.band--story-services {
     width: 55vw;
     height: 55vw;
     margin: -27vw 0 0 -27vw;
-    filter: blur(44px);
+    filter: blur(28px);
   }
   .band--services h2.services-heading {
     max-width: none;

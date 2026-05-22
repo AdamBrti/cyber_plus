@@ -682,7 +682,7 @@
 }
 
 /* —— Static: mobile, tablet, wąski desktop, niski viewport, reduced motion —— */
-@media (max-width: 1099px), (max-height: 739px), (prefers-reduced-motion: reduce) {
+@media (max-width: 1535px), (max-height: 859px), (prefers-reduced-motion: reduce) {
   .band--services-scrolly {
     padding-top: calc(var(--section-pad) * 1.08);
     padding-bottom: calc(var(--section-pad) * 1.1);

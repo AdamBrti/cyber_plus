@@ -368,10 +368,12 @@
   var servicesBand = document.getElementById("uslugi");
   var servicesTrack = document.querySelector(".services-scrolly__track");
   var servicesRail = servicesBand && servicesBand.querySelector(".services-rail");
-  var SERVICES_SCROLL_MIN_W = 1100;
-  var SERVICES_SCROLL_MIN_H = 740;
+  var SERVICES_SCROLL_MIN_W = 1536;
+  var SERVICES_SCROLL_MIN_H = 860;
   var SERVICES_ATMO_LERP = 0.052;
   var SERVICES_PROG_LERP = 0.11;
+  var SERVICES_SETTLE_EPS = 0.0015;
+  var SERVICES_FOCUS_SETTLE_EPS = 0.08;
   var servicesProgSmoothed = 0;
   var SERVICES_FOCUS_DEFAULT = { x: 24, y: 34 };
   var SERVICES_DOM_FOCUS = {
@@ -385,6 +387,7 @@
   };
   var servicesScrollyActive = false;
   var servicesScrollyRaf = null;
+  var servicesScrollyNeedsTick = false;
   var servicesFocusCur = { x: SERVICES_FOCUS_DEFAULT.x, y: SERVICES_FOCUS_DEFAULT.y };
   var servicesFocusTarget = { x: SERVICES_FOCUS_DEFAULT.x, y: SERVICES_FOCUS_DEFAULT.y };
   var servicesPointerFocus = false;
@@ -554,6 +557,8 @@
 
     servicesFocusCur.x += (servicesFocusTarget.x - servicesFocusCur.x) * SERVICES_ATMO_LERP;
     servicesFocusCur.y += (servicesFocusTarget.y - servicesFocusCur.y) * SERVICES_ATMO_LERP;
+    var focusDelta =
+      Math.abs(servicesFocusTarget.x - servicesFocusCur.x) + Math.abs(servicesFocusTarget.y - servicesFocusCur.y);
     servicesBand.style.setProperty("--focus-x", servicesFocusCur.x.toFixed(2) + "%");
     servicesBand.style.setProperty("--focus-y", servicesFocusCur.y.toFixed(2) + "%");
 
@@ -564,10 +569,18 @@
       servicesRail.style.transform = "translate3d(0, calc(-50% + " + drift.toFixed(2) + "px), 0)";
     }
 
-    servicesScrollyRaf = window.requestAnimationFrame(servicesScrollyTick);
+    if (
+      servicesScrollyNeedsTick ||
+      Math.abs(pRaw - servicesProgSmoothed) > SERVICES_SETTLE_EPS ||
+      focusDelta > SERVICES_FOCUS_SETTLE_EPS
+    ) {
+      servicesScrollyNeedsTick = false;
+      servicesScrollyRaf = window.requestAnimationFrame(servicesScrollyTick);
+    }
   }
 
   function reqServicesScrolly() {
+    servicesScrollyNeedsTick = true;
     if (servicesScrollyRaf == null) servicesScrollyRaf = window.requestAnimationFrame(servicesScrollyTick);
   }
 
@@ -612,8 +625,9 @@
     function servicesScrollyEnabled() {
       return (
         !reduceMotion &&
-        window.innerWidth >= SERVICES_SCROLL_MIN_W &&
-        window.innerHeight >= SERVICES_SCROLL_MIN_H
+        window.matchMedia(
+          "(min-width: " + SERVICES_SCROLL_MIN_W + "px) and (min-height: " + SERVICES_SCROLL_MIN_H + "px)"
+        ).matches
       );
     }
 
