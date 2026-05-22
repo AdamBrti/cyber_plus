@@ -18,6 +18,7 @@
   var STICKY_CTA_SHOW_VH = 0.12;
   var STICKY_CTA_HIDE_FRACTION = 0.45;
   var STICKY_CTA_MAX_WIDTH_PX = 700;
+  var PROCESS_ENHANCED_MIN_WIDTH = 960;
   var CONTACT_POST_URL = "/api/contact";
   var REVEAL_IO_ROOT_MARGIN = "0px 0px 10% 0px";
   var REVEAL_IO_THRESHOLD = 0.06;
@@ -367,10 +368,12 @@
   var servicesBand = document.getElementById("uslugi");
   var servicesTrack = document.querySelector(".services-scrolly__track");
   var servicesRail = servicesBand && servicesBand.querySelector(".services-rail");
-  var SERVICES_SCROLL_MIN_W = 1100;
-  var SERVICES_SCROLL_MIN_H = 740;
+  var SERVICES_SCROLL_MIN_W = 1536;
+  var SERVICES_SCROLL_MIN_H = 860;
   var SERVICES_ATMO_LERP = 0.052;
   var SERVICES_PROG_LERP = 0.11;
+  var SERVICES_SETTLE_EPS = 0.0015;
+  var SERVICES_FOCUS_SETTLE_EPS = 0.08;
   var servicesProgSmoothed = 0;
   var SERVICES_FOCUS_DEFAULT = { x: 24, y: 34 };
   var SERVICES_DOM_FOCUS = {
@@ -384,6 +387,7 @@
   };
   var servicesScrollyActive = false;
   var servicesScrollyRaf = null;
+  var servicesScrollyNeedsTick = false;
   var servicesFocusCur = { x: SERVICES_FOCUS_DEFAULT.x, y: SERVICES_FOCUS_DEFAULT.y };
   var servicesFocusTarget = { x: SERVICES_FOCUS_DEFAULT.x, y: SERVICES_FOCUS_DEFAULT.y };
   var servicesPointerFocus = false;
@@ -553,6 +557,8 @@
 
     servicesFocusCur.x += (servicesFocusTarget.x - servicesFocusCur.x) * SERVICES_ATMO_LERP;
     servicesFocusCur.y += (servicesFocusTarget.y - servicesFocusCur.y) * SERVICES_ATMO_LERP;
+    var focusDelta =
+      Math.abs(servicesFocusTarget.x - servicesFocusCur.x) + Math.abs(servicesFocusTarget.y - servicesFocusCur.y);
     servicesBand.style.setProperty("--focus-x", servicesFocusCur.x.toFixed(2) + "%");
     servicesBand.style.setProperty("--focus-y", servicesFocusCur.y.toFixed(2) + "%");
 
@@ -563,10 +569,18 @@
       servicesRail.style.transform = "translate3d(0, calc(-50% + " + drift.toFixed(2) + "px), 0)";
     }
 
-    servicesScrollyRaf = window.requestAnimationFrame(servicesScrollyTick);
+    if (
+      servicesScrollyNeedsTick ||
+      Math.abs(pRaw - servicesProgSmoothed) > SERVICES_SETTLE_EPS ||
+      focusDelta > SERVICES_FOCUS_SETTLE_EPS
+    ) {
+      servicesScrollyNeedsTick = false;
+      servicesScrollyRaf = window.requestAnimationFrame(servicesScrollyTick);
+    }
   }
 
   function reqServicesScrolly() {
+    servicesScrollyNeedsTick = true;
     if (servicesScrollyRaf == null) servicesScrollyRaf = window.requestAnimationFrame(servicesScrollyTick);
   }
 
@@ -611,8 +625,9 @@
     function servicesScrollyEnabled() {
       return (
         !reduceMotion &&
-        window.innerWidth >= SERVICES_SCROLL_MIN_W &&
-        window.innerHeight >= SERVICES_SCROLL_MIN_H
+        window.matchMedia(
+          "(min-width: " + SERVICES_SCROLL_MIN_W + "px) and (min-height: " + SERVICES_SCROLL_MIN_H + "px)"
+        ).matches
       );
     }
 
@@ -715,6 +730,102 @@
       servicesBand.classList.add("is-scrolly-static");
       servicesBand.classList.add("is-rail-active");
     }
+  }
+
+  /* Dolny akt — delikatne scrollytelling + reakcja kart na kursor */
+  var processStory = document.querySelector("[data-process-story]");
+  var processCards = Array.prototype.slice.call(document.querySelectorAll("[data-process-card]"));
+  var processNumber = document.querySelector("[data-process-number]");
+  var processTitle = document.querySelector("[data-process-title]");
+  var processRaf = null;
+
+  function processEnhancedMotionAllowed() {
+    return !reduceMotion && window.matchMedia("(min-width: " + PROCESS_ENHANCED_MIN_WIDTH + "px)").matches;
+  }
+
+  function setActiveProcessCard(card) {
+    if (!card || card.classList.contains("is-active")) return;
+    processCards.forEach(function (item) {
+      item.classList.toggle("is-active", item === card);
+    });
+    if (processNumber) processNumber.textContent = card.getAttribute("data-step") || "";
+    if (processTitle) {
+      var h = card.querySelector("h3");
+      processTitle.textContent = h ? h.textContent : "";
+    }
+  }
+
+  function updateProcessProgress() {
+    processRaf = null;
+    if (!processStory) return;
+    var rect = processStory.getBoundingClientRect();
+    var range = Math.max(1, rect.height - window.innerHeight * 0.28);
+    var progress = (window.innerHeight * 0.42 - rect.top) / range;
+    progress = Math.min(1, Math.max(0, progress));
+    processStory.style.setProperty("--process-progress", progress.toFixed(3));
+  }
+
+  function requestProcessProgress() {
+    if (!processStory || processRaf != null) return;
+    processRaf = requestAnimationFrame(updateProcessProgress);
+  }
+
+  if (processStory && processCards.length) {
+    if (processEnhancedMotionAllowed() && "IntersectionObserver" in window) {
+      var processIo = new IntersectionObserver(
+        function (entries) {
+          var activeEntry = null;
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            if (!activeEntry || entry.intersectionRatio > activeEntry.intersectionRatio) {
+              activeEntry = entry;
+            }
+          });
+          if (activeEntry) setActiveProcessCard(activeEntry.target);
+        },
+        { rootMargin: "-38% 0px -42% 0px", threshold: [0.2, 0.45, 0.7] }
+      );
+      processCards.forEach(function (card) {
+        processIo.observe(card);
+      });
+      window.addEventListener("scroll", requestProcessProgress, { passive: true });
+      window.addEventListener("resize", requestProcessProgress, { passive: true });
+      updateProcessProgress();
+    } else {
+      processStory.style.setProperty("--process-progress", "1");
+    }
+  }
+
+  var depthCards = Array.prototype.slice.call(document.querySelectorAll("[data-depth-card]"));
+  var depthFinePointer = window.matchMedia("(min-width: 960px) and (pointer: fine)").matches;
+  if (depthCards.length && !reduceMotion && depthFinePointer) {
+    depthCards.forEach(function (card) {
+      card.addEventListener(
+        "pointermove",
+        function (e) {
+          var rect = card.getBoundingClientRect();
+          var x = ((e.clientX - rect.left) / rect.width) * 100;
+          var y = ((e.clientY - rect.top) / rect.height) * 100;
+          var dx = ((x - 50) / 50) * 4;
+          var dy = ((y - 50) / 50) * 4;
+          card.style.setProperty("--mx", x.toFixed(1) + "%");
+          card.style.setProperty("--my", y.toFixed(1) + "%");
+          card.style.setProperty("--dx", dx.toFixed(2) + "px");
+          card.style.setProperty("--dy", dy.toFixed(2) + "px");
+        },
+        { passive: true }
+      );
+      card.addEventListener(
+        "pointerleave",
+        function () {
+          card.style.removeProperty("--dx");
+          card.style.removeProperty("--dy");
+          card.style.setProperty("--mx", "50%");
+          card.style.setProperty("--my", "0%");
+        },
+        { passive: true }
+      );
+    });
   }
 
   var yearEl = document.getElementById("y");
