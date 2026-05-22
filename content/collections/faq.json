@@ -1,0 +1,26 @@
+{
+  "heading": "Ostatnie wątpliwości",
+  "lead": "Krótko, konkretnie, bez sprzedażowej mgły. To ma pomóc Ci ocenić, czy warto napisać.",
+  "items": [
+    {
+      "question": "Ile kosztuje strona internetowa?",
+      "answer": "Orientacyjnie: landing page od 2 900 zł netto, strona firmowa od 4 500 zł netto, redesign od 3 500 zł netto, przygotowanie SEO od 900 zł netto. Dokładna kwota zależy od zakresu."
+    },
+    {
+      "question": "Ile trwa wykonanie strony?",
+      "answer": "Landing page zwykle 1-3 tygodnie, strona firmowa i redesign 2-5 tygodni - licząc od momentu, gdy mamy materiały i ustalony zakres."
+    },
+    {
+      "question": "Czy mogę później edytować treści?",
+      "answer": "Tak. Ustalamy na start, jak chcesz zmieniać teksty i zdjęcia - prosty panel, pliki na hostingu albo pomoc przy drobnych zmianach po publikacji."
+    },
+    {
+      "question": "Czy strona będzie działać na telefonie?",
+      "answer": "Tak. Projektujemy pod telefon od pierwszego szkicu i testujemy na typowych ekranach przed startem."
+    },
+    {
+      "question": "Czy pomagacie z domeną i hostingiem?",
+      "answer": "Tak - domena, DNS, SSL i podstawowa konfiguracja hostingu pod publikację, żeby start był przewidywalny."
+    }
+  ]
+}

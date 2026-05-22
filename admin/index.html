@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#030508" />
+    <meta
+      name="description"
+      content="Cyber Plus CMS - panel edycji treści strony, usług, realizacji, FAQ, opinii i danych kontaktowych."
+    />
+    <title>Cyber Plus CMS</title>
+    <link rel="icon" href="/assets/logo-square.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/logo-square.png" />
+    <link rel="stylesheet" href="/admin/preview.css" />
+  </head>
+  <body>
+    <div class="cms-loading" aria-hidden="true">
+      <img src="/assets/logo-wide.png" alt="" />
+      <p>Ładowanie panelu Cyber Plus CMS...</p>
+    </div>
+    <script>
+      window.addEventListener("load", function () {
+        window.setTimeout(function () {
+          var loader = document.querySelector(".cms-loading");
+          if (loader) loader.remove();
+        }, 1200);
+      });
+    </script>
+    <script src="https://unpkg.com/decap-cms@3.12.2/dist/decap-cms.js"></script>
+    <script src="/admin/preview.js"></script>
+  </body>
+</html>

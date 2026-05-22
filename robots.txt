@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /decap-auth
+Disallow: /decap-callback
 
 Sitemap: https://cyber-plus.pl/sitemap.xml

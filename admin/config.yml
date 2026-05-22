@@ -1,0 +1,200 @@
+backend:
+  name: github
+  repo: AdamBrti/cyber_plus
+  branch: main
+  base_url: https://cyber-plus.pl
+  auth_endpoint: decap-auth
+  commit_messages:
+    create: "CMS: dodaj {{collection}} - {{slug}}"
+    update: "CMS: aktualizuj {{collection}} - {{slug}}"
+    delete: "CMS: usuń {{collection}} - {{slug}}"
+    uploadMedia: "CMS: dodaj media - {{path}}"
+    deleteMedia: "CMS: usuń media - {{path}}"
+
+local_backend: true
+publish_mode: simple
+site_url: https://cyber-plus.pl
+display_url: https://cyber-plus.pl
+locale: pl
+media_folder: public/uploads
+public_folder: /uploads
+
+logo:
+  src: /assets/logo-wide.png
+  show_in_header: true
+
+collections:
+  - name: settings
+    label: "Ustawienia globalne"
+    description: "Dane wspólne dla całej strony: marka, kontakt, SEO, social links i schema."
+    files:
+      - name: site
+        label: "Strona i marka"
+        file: content/settings/site.json
+        format: json
+        fields:
+          - { label: "Nazwa marki", name: brand_name, widget: string, required: true, hint: "Pełna nazwa widoczna w panelu i danych strukturalnych." }
+          - { label: "Pełna nazwa firmy", name: legal_name, widget: string, required: false, hint: "Nazwa prawna do stopki i schema.org." }
+          - { label: "Domena produkcyjna", name: site_url, widget: string, required: true, hint: "Pełny adres z https://, bez slashy na końcu." }
+          - { label: "Domyślny język", name: locale, widget: string, default: "pl_PL", required: true }
+          - { label: "Logo", name: logo, widget: image, required: true, hint: "Najlepiej poziomy znak marki." }
+          - { label: "Favicon", name: favicon, widget: image, required: true }
+          - label: "Linki social"
+            name: social_links
+            widget: list
+            required: false
+            summary: "{{fields.label}}"
+            fields:
+              - { label: "Nazwa kanału", name: label, widget: string, required: true }
+              - { label: "URL", name: url, widget: string, required: true }
+      - name: contact
+        label: "Dane kontaktowe"
+        file: content/settings/contact.json
+        format: json
+        fields:
+          - { label: "E-mail", name: email, widget: string, required: true }
+          - { label: "Telefon", name: phone_display, widget: string, required: false, hint: "Format dla klienta, np. +48 000 000 000." }
+          - { label: "Telefon w linku", name: phone_href, widget: string, required: false, hint: "Format bez spacji, np. +48000000000." }
+          - { label: "WhatsApp URL", name: whatsapp_url, widget: string, required: false }
+          - { label: "Adres", name: address, widget: text, required: false }
+          - { label: "NIP", name: tax_id, widget: string, required: false }
+          - { label: "REGON", name: registry_id, widget: string, required: false }
+          - { label: "Tekst pod formularzem", name: contact_note, widget: text, required: false }
+      - name: seo
+        label: "SEO domyślne"
+        file: content/settings/seo.json
+        format: json
+        fields:
+          - { label: "Domyślny meta title", name: default_title, widget: string, required: true, pattern: ['^.{10,60}$', "Najlepiej 10-60 znaków."] }
+          - { label: "Domyślny meta description", name: default_description, widget: text, required: true, pattern: ['^.{50,160}$', "Najlepiej 50-160 znaków."] }
+          - { label: "Domyślny obraz Open Graph", name: og_image, widget: image, required: true }
+          - { label: "Typ schema.org", name: schema_type, widget: select, options: ["LocalBusiness", "ProfessionalService", "Organization"], default: "ProfessionalService" }
+          - { label: "Główne miasta / obszar", name: service_area, widget: list, required: false, field: { label: "Miasto lub region", name: item, widget: string } }
+
+  - name: pages
+    label: "Strony"
+    files:
+      - name: home
+        label: "Strona główna"
+        file: content/pages/home.json
+        format: json
+        preview_path: /
+        fields:
+          - label: "Hero"
+            name: hero
+            widget: object
+            fields:
+              - { label: "Nadtytuł", name: kicker, widget: string, required: false, hint: "Krótka etykieta nad H1." }
+              - { label: "Nagłówek H1", name: headline, widget: string, required: true, hint: "Najważniejsze zdanie na stronie." }
+              - { label: "Lead pod nagłówkiem", name: subheadline, widget: text, required: true }
+              - { label: "Obraz/tło hero", name: image, widget: image, required: false }
+              - { label: "Alt obrazu hero", name: image_alt, widget: string, required: false, hint: "Wymagany, jeśli obraz nie jest dekoracyjny." }
+              - label: "Przyciski CTA"
+                name: ctas
+                widget: list
+                min: 1
+                max: 2
+                fields:
+                  - { label: "Etykieta CTA", name: label, widget: string, required: true }
+                  - { label: "URL CTA", name: url, widget: string, required: true }
+          - label: "SEO strony głównej"
+            name: seo
+            widget: object
+            fields:
+              - { label: "Meta title", name: title, widget: string, required: true, pattern: ['^.{10,60}$', "Najlepiej 10-60 znaków."] }
+              - { label: "Meta description", name: description, widget: text, required: true, pattern: ['^.{50,160}$', "Najlepiej 50-160 znaków."] }
+              - { label: "Obraz Open Graph", name: og_image, widget: image, required: true }
+          - label: "Sekcja lokalna SEO"
+            name: local_seo
+            widget: object
+            fields:
+              - { label: "Nagłówek", name: heading, widget: string, required: false }
+              - { label: "Tekst", name: body, widget: text, required: false }
+
+  - name: services
+    label: "Kolekcje · Usługi"
+    files:
+      - name: services
+        label: "Lista usług"
+        file: content/collections/services.json
+        format: json
+        preview_path: /#uslugi
+        fields:
+          - { label: "Nagłówek sekcji", name: heading, widget: string, required: true }
+          - { label: "Lead sekcji", name: lead, widget: text, required: false }
+          - label: "Usługi"
+            name: items
+            widget: list
+            min: 1
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Nazwa usługi", name: title, widget: string, required: true }
+              - { label: "Krótki opis", name: description, widget: text, required: true }
+              - { label: "Cena / zakres", name: meta, widget: string, required: false }
+              - { label: "Etykieta CTA", name: cta_label, widget: string, required: false }
+              - { label: "URL CTA", name: cta_url, widget: string, required: false }
+
+  - name: case_studies
+    label: "Kolekcje · Realizacje"
+    files:
+      - name: case_studies
+        label: "Realizacje / case studies"
+        file: content/collections/case-studies.json
+        format: json
+        preview_path: /#realizacje
+        fields:
+          - { label: "Nagłówek sekcji", name: heading, widget: string, required: true }
+          - { label: "Lead sekcji", name: lead, widget: text, required: false }
+          - label: "Realizacje"
+            name: items
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Nazwa projektu", name: name, widget: string, required: true }
+              - { label: "Branża / lokalizacja", name: meta, widget: string, required: false }
+              - { label: "Krótki opis", name: summary, widget: text, required: true }
+              - { label: "Problem", name: problem, widget: text, required: false }
+              - { label: "Zmiana", name: change, widget: text, required: false }
+              - { label: "Efekt", name: result, widget: text, required: false }
+              - { label: "URL strony", name: url, widget: string, required: false }
+              - { label: "Obraz", name: image, widget: image, required: false }
+              - { label: "Alt obrazu", name: image_alt, widget: string, required: false }
+
+  - name: faq
+    label: "Kolekcje · FAQ"
+    files:
+      - name: faq
+        label: "Pytania i odpowiedzi"
+        file: content/collections/faq.json
+        format: json
+        preview_path: /#faq
+        fields:
+          - { label: "Nagłówek sekcji", name: heading, widget: string, required: true }
+          - { label: "Lead sekcji", name: lead, widget: text, required: false }
+          - label: "Pytania"
+            name: items
+            widget: list
+            min: 1
+            summary: "{{fields.question}}"
+            fields:
+              - { label: "Pytanie", name: question, widget: string, required: true }
+              - { label: "Odpowiedź", name: answer, widget: text, required: true }
+
+  - name: testimonials
+    label: "Kolekcje · Opinie"
+    files:
+      - name: testimonials
+        label: "Opinie klientów"
+        file: content/collections/testimonials.json
+        format: json
+        preview_path: /#zaufanie
+        fields:
+          - { label: "Nagłówek sekcji", name: heading, widget: string, required: false }
+          - label: "Opinie"
+            name: items
+            widget: list
+            summary: "{{fields.author}}"
+            fields:
+              - { label: "Treść opinii", name: quote, widget: text, required: true }
+              - { label: "Autor", name: author, widget: string, required: true }
+              - { label: "Dopisek", name: detail, widget: string, required: false }

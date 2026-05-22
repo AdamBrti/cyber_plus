@@ -1,0 +1,34 @@
+{
+  "heading": "Cztery sposoby współpracy",
+  "lead": "Dobieramy zakres do celu strony: wizytówka, landing, redesign albo lokalna widoczność.",
+  "items": [
+    {
+      "title": "Strony firmowe",
+      "description": "Strona firmowa, która porządkuje ofertę, podnosi odbiór marki i prowadzi do kontaktu bez nadmiaru.",
+      "meta": "od 4 500 zł netto · zwykle 2-5 tygodni",
+      "cta_label": "Sprawdźmy najlepszy zakres",
+      "cta_url": "#kontakt"
+    },
+    {
+      "title": "Landing page",
+      "description": "Jedna oferta, jeden cel: szybkie zrozumienie wartości i prosty kontakt.",
+      "meta": "od 2 900 zł netto · 1-3 tygodnie",
+      "cta_label": "Sprawdźmy, czy landing wystarczy",
+      "cta_url": "#kontakt"
+    },
+    {
+      "title": "Redesign istniejącej strony",
+      "description": "Dojrzalszy układ, krótsza treść i bardziej pewny pierwszy ekran.",
+      "meta": "od 3 500 zł netto · 2-5 tygodni",
+      "cta_label": "Podeślij obecną stronę",
+      "cta_url": "#kontakt"
+    },
+    {
+      "title": "Widoczność w Twoim mieście",
+      "description": "Łatwiej być znajdowanym tam, gdzie szukają Cię klienci: bez upychania fraz i obietnic na wyrost.",
+      "meta": "od 900 zł netto",
+      "cta_label": "Zobacz strony lokalne",
+      "cta_url": "#lokalnie"
+    }
+  ]
+}
