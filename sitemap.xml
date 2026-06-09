@@ -3,7 +3,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://cyber-plus.pl/</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -20,22 +20,64 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://cyber-plus.pl/portfolio.html</loc>
-    <lastmod>2026-05-15</lastmod>
+    <loc>https://cyber-plus.pl/oferta.html</loc>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.82</priority>
+  </url>
+  <url>
+    <loc>https://cyber-plus.pl/portfolio.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cyber-plus.pl/proces.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://cyber-plus.pl/technologia.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.76</priority>
   </url>
   <url>
     <loc>https://cyber-plus.pl/strony-internetowe-szczecin.html</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
     <loc>https://cyber-plus.pl/strony-internetowe-rzeszow.html</loc>
-    <lastmod>2026-05-15</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://cyber-plus.pl/strony-dla-trenerow-personalnych.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
+  </url>
+  <url>
+    <loc>https://cyber-plus.pl/strony-dla-salonow-beauty.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
+  </url>
+  <url>
+    <loc>https://cyber-plus.pl/strony-dla-fotografow.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
+  </url>
+  <url>
+    <loc>https://cyber-plus.pl/strony-dla-lokalnych-uslug-premium.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.72</priority>
   </url>
   <url>
     <loc>https://cyber-plus.pl/polityka-prywatnosci.html</loc>

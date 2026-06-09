@@ -7,6 +7,7 @@
     seo: "/content/settings/seo.json",
     home: "/content/pages/home.json",
     services: "/content/collections/services.json",
+    technology: "/content/collections/technology.json",
     cases: "/content/collections/case-studies.json",
     faq: "/content/collections/faq.json",
     testimonials: "/content/collections/testimonials.json",
@@ -102,6 +103,55 @@
     });
   }
 
+  function replaceList(root, selector, items) {
+    var list = root.querySelector(selector);
+    if (!list || !Array.isArray(items) || !items.length) return;
+    list.innerHTML = "";
+    items.forEach(function (item) {
+      var value = typeof item === "string" ? item : item && (item.item || item.label || item.value);
+      if (!value) return;
+      var li = document.createElement("li");
+      li.textContent = value;
+      list.appendChild(li);
+    });
+  }
+
+  function updateTechnology(technology) {
+    if (!technology) return;
+    var section = document.getElementById("technika");
+    if (!section) return;
+    var heavy = technology.heavy || {};
+    var light = technology.light || {};
+    var note = technology.note || {};
+    var metrics = Array.isArray(technology.metrics) ? technology.metrics : [];
+
+    text("#technika .section-label", technology.label);
+    text("#tech-heading", technology.heading);
+    text("#technika .section-lead", technology.lead);
+
+    textIn(section, ".compare-panel--heavy .compare-panel__label", heavy.label);
+    textIn(section, ".compare-panel--heavy h3", heavy.title);
+    replaceList(section, ".compare-panel--heavy ul", heavy.points);
+
+    textIn(section, ".compare-panel--light .compare-panel__label", light.label);
+    textIn(section, ".compare-panel--light h3", light.title);
+    replaceList(section, ".compare-panel--light ul", light.points);
+
+    textIn(section, ".compare-note summary", note.summary);
+    textIn(section, ".compare-note p", note.body);
+
+    Array.prototype.forEach.call(section.querySelectorAll(".compare-metrics > div"), function (node, index) {
+      var metric = metrics[index];
+      if (!metric) {
+        node.hidden = true;
+        return;
+      }
+      node.hidden = false;
+      textIn(node, "strong", metric.value);
+      textIn(node, "span", metric.label);
+    });
+  }
+
   function textIn(root, selector, value) {
     var node = root.querySelector(selector);
     if (node && value) node.textContent = value;
@@ -182,6 +232,7 @@
       updateSeo(content);
       updateHero(content.home);
       updateServices(content.services);
+      updateTechnology(content.technology);
       updateCases(content.cases);
       updateFaq(content.faq);
       updateContact(content.contact);

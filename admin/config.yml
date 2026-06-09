@@ -134,6 +134,56 @@ collections:
               - { label: "Etykieta CTA", name: cta_label, widget: string, required: false }
               - { label: "URL CTA", name: cta_url, widget: string, required: false }
 
+  - name: technology
+    label: "Sekcja · Technologia"
+    files:
+      - name: technology
+        label: "Technologia / CMS vs custom code"
+        file: content/collections/technology.json
+        format: json
+        preview_path: /#technika
+        fields:
+          - { label: "Etykieta sekcji", name: label, widget: string, required: false }
+          - { label: "Nagłówek sekcji", name: heading, widget: string, required: true }
+          - { label: "Lead sekcji", name: lead, widget: text, required: true }
+          - label: "Panel: cięższy wariant"
+            name: heavy
+            widget: object
+            fields:
+              - { label: "Etykieta panelu", name: label, widget: string, required: false }
+              - { label: "Nagłówek panelu", name: title, widget: string, required: true }
+              - label: "Punkty"
+                name: points
+                widget: list
+                min: 1
+                field: { label: "Punkt", name: item, widget: string }
+          - label: "Panel: nasz kierunek"
+            name: light
+            widget: object
+            fields:
+              - { label: "Etykieta panelu", name: label, widget: string, required: false }
+              - { label: "Nagłówek panelu", name: title, widget: string, required: true }
+              - label: "Punkty"
+                name: points
+                widget: list
+                min: 1
+                field: { label: "Punkt", name: item, widget: string }
+          - label: "Rozwijana notatka"
+            name: note
+            widget: object
+            fields:
+              - { label: "Tekst summary", name: summary, widget: string, required: true }
+              - { label: "Treść po rozwinięciu", name: body, widget: text, required: true }
+          - label: "Metryki / korzyści"
+            name: metrics
+            widget: list
+            min: 1
+            max: 4
+            summary: "{{fields.value}}"
+            fields:
+              - { label: "Wyróżnik", name: value, widget: string, required: true }
+              - { label: "Opis", name: label, widget: string, required: true }
+
   - name: case_studies
     label: "Kolekcje · Realizacje"
     files:

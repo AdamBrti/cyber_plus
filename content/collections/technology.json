@@ -1,0 +1,47 @@
+{
+  "label": "Po wdrożeniu",
+  "heading": "Strona ma działać szybko i nie robić problemów po starcie",
+  "lead": "Różne rozwiązania mają sens w różnych sytuacjach. Dla wielu małych firm usługowych prosta, szybka strona oznacza mniej kosztów, mniej ryzyka i mniej rzeczy do pilnowania.",
+  "heavy": {
+    "label": "cięższy wariant",
+    "title": "Panel i dodatki, z których firma później nie korzysta",
+    "points": [
+      "więcej rzeczy do aktualizowania,",
+      "większe ryzyko problemów po zmianach,",
+      "wolniejsze działanie na telefonie,",
+      "więcej obsługi po publikacji."
+    ]
+  },
+  "light": {
+    "label": "nasz kierunek",
+    "title": "Prosta, szybka strona bez zbędnego zaplecza",
+    "points": [
+      "szybkie otwieranie i mniej przypadkowych dodatków,",
+      "bezpieczne połączenie i prostsza publikacja,",
+      "wygoda na telefonie od pierwszego projektu,",
+      "niższe koszty utrzymania strony w dłuższym czasie."
+    ]
+  },
+  "note": {
+    "summary": "Kiedy panel edycji nadal ma sens?",
+    "body": "Jeśli planujesz często samodzielnie dodawać wpisy, wiele podstron lub rozbudowany panel edycji, taki system może być dobrym wyborem. My po prostu nie dokładamy go tam, gdzie prostsza strona zrobi lepszą robotę."
+  },
+  "metrics": [
+    {
+      "value": "Mniej",
+      "label": "rzeczy do aktualizowania"
+    },
+    {
+      "value": "Niżej",
+      "label": "koszty utrzymania po starcie"
+    },
+    {
+      "value": "Szybciej",
+      "label": "na telefonie i słabszym internecie"
+    },
+    {
+      "value": "Prościej",
+      "label": "z domeną, SSL i publikacją"
+    }
+  ]
+}

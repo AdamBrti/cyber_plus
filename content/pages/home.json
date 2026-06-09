@@ -1,28 +1,28 @@
 {
   "hero": {
     "kicker": "Cyber Plus",
-    "headline": "Pierwsze wrażenie dzieje się na ekranie",
-    "subheadline": "Projektujemy szybkie strony mobile-first dla marek usługowych, które chcą wyglądać wiarygodnie od pierwszego wejścia. Wyważony design, custom code i prosta droga do kontaktu.",
+    "headline": "Strony internetowe dla firm usługowych",
+    "subheadline": "Szybkie, estetyczne i wygodne na telefonie. Strony firmowe, landing page i redesign dla marek, które chcą wyglądać wiarygodnie od pierwszego ekranu.",
     "image": "",
     "image_alt": "",
     "ctas": [
       {
-        "label": "Porozmawiajmy o pierwszym wrażeniu",
+        "label": "Porozmawiajmy o stronie",
         "url": "#kontakt"
       },
       {
-        "label": "Zobacz realne wdrożenia",
-        "url": "#realizacje"
+        "label": "Zobacz realizacje",
+        "url": "portfolio.html"
       }
     ]
   },
   "seo": {
-    "title": "Cyber Plus - projektowanie stron internetowych",
-    "description": "Projektujemy strony internetowe dla firm usługowych: mobile-first, custom code, lokalne SEO. Szczecin, Rzeszów i cała Polska zdalnie.",
+    "title": "Cyber Plus - strony internetowe dla firm usługowych | Szczecin i zdalnie",
+    "description": "Projektujemy szybkie i wygodne strony internetowe dla firm usługowych. Strony firmowe, landing page i redesign bez technicznego bałaganu. Szczecin, Rzeszów i cała Polska zdalnie.",
     "og_image": "/assets/og-social-default.png"
   },
   "local_seo": {
-    "heading": "Strony internetowe Szczecin, Rzeszów i zdalnie",
-    "body": "Pracujemy z firmami usługowymi lokalnie i zdalnie, dbając o pierwsze wrażenie, szybkość strony i jasną drogę do kontaktu."
+    "heading": "Strony internetowe Szczecin, Rzeszów i cała Polska zdalnie",
+    "body": "Tworzymy strony firmowe, landing page i redesign dla firm usługowych lokalnie i zdalnie, z naciskiem na czytelną ofertę, telefon i prosty kontakt."
   }
 }

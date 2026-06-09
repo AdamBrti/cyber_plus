@@ -1,13 +1,24 @@
 {
-  "heading": "Realizacje, które możesz sprawdzić sam",
-  "lead": "Prawdziwe strony, nie dekoracyjne makiety. Każdy projekt pokazuje decyzję: co uprościć, co wyciszyć i jak sprawić, żeby marka szybciej wyglądała wiarygodnie.",
+  "heading": "Cztery projekty, które najczytelniej pokazują sposób pracy",
+  "lead": "Na homepage zostawiamy tylko najmocniejszy skrót. Pełniejsze opisy, kontekst branży i decyzje projektowe są na stronie realizacji.",
   "items": [
+    {
+      "name": "Sztangisław",
+      "meta": "Trener personalny · Szczecin",
+      "summary": "Personal brand trenera z mocnym pierwszym ekranem, autorytetem sportowym i prostą drogą do konsultacji.",
+      "problem": "Trener z dużym dorobkiem potrzebował strony, która od razu pokazuje człowieka, osiągnięcia i zakres współpracy bez generycznego klimatu fitness.",
+      "change": "Ułożyliśmy komunikację wokół twarzy, sukcesów, specjalizacji i prostego wyboru: konsultacja albo materiały online.",
+      "result": "Strona wygląda pewnie, osobowo i szybko prowadzi do kontaktu.",
+      "url": "https://www.sztangislaw.pl/",
+      "image": "",
+      "image_alt": ""
+    },
     {
       "name": "Podwiatr",
       "meta": "Fotografia · Szczecin",
       "summary": "Portfolio fotograficzne bez ciężkiego zaplecza: lżej, czytelniej i wygodniej na telefonie.",
-      "problem": "Fotografia potrzebuje przestrzeni. Poprzednia strona działała, ale była cięższa w utrzymaniu.",
-      "change": "Zbudowaliśmy lekką stronę statyczną, uporządkowaliśmy prezentację zdjęć i zadbaliśmy o mobilny odbiór.",
+      "problem": "Fotografia potrzebuje przestrzeni. Poprzednia strona była cięższa w utrzymaniu i coraz mniej pasowała do minimalistycznego charakteru portfolio.",
+      "change": "Zbudowaliśmy lekką stronę statyczną, uporządkowaliśmy prezentację zdjęć i zadbaliśmy o mobilny odbiór bez rozpraszaczy.",
       "result": "Portfolio wygląda dojrzalej, szybciej się otwiera i jest prostsze w utrzymaniu.",
       "url": "https://podwiatr.net.pl/",
       "image": "",
@@ -29,7 +40,7 @@
       "meta": "Usługi beauty · Polska",
       "summary": "Delikatna strona beauty dla nowej marki: lekki klimat, czytelna oferta i krótka droga do rezerwacji.",
       "problem": "Nowa marka beauty potrzebowała strony, która od pierwszego wejścia wygląda czysto, estetycznie i wiarygodnie.",
-      "change": "Postawiliśmy na lekki rytm, ciepłą estetykę i mobile-first.",
+      "change": "Postawiliśmy na lekki rytm, ciepłą estetykę i wygodny odbiór na telefonie.",
       "result": "Strona buduje zaufanie bez krzyczenia. Klientka widzi klimat miejsca, rozumie usługę i ma prosty następny krok.",
       "url": "https://slodkotu.pl/",
       "image": "",
