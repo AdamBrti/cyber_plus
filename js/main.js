@@ -371,7 +371,7 @@
   var SERVICES_SCROLL_MIN_W = 1536;
   var SERVICES_SCROLL_MIN_H = 860;
   var SERVICES_ATMO_LERP = 0.052;
-  var SERVICES_PROG_LERP = 0.11;
+  var SERVICES_PROG_LERP = 0.16;
   var SERVICES_SETTLE_EPS = 0.0015;
   var SERVICES_FOCUS_SETTLE_EPS = 0.08;
   var servicesProgSmoothed = 0;
@@ -391,6 +391,33 @@
   var servicesFocusCur = { x: SERVICES_FOCUS_DEFAULT.x, y: SERVICES_FOCUS_DEFAULT.y };
   var servicesFocusTarget = { x: SERVICES_FOCUS_DEFAULT.x, y: SERVICES_FOCUS_DEFAULT.y };
   var servicesPointerFocus = false;
+  var servicesVarCache = Object.create(null);
+  var servicesLastDom = "";
+  var servicesPhaseState = {
+    hero: false,
+    panels: false,
+    cardsLocked: false,
+    statement: false,
+    cta: false,
+    atmoFocus: false,
+  };
+
+  function servicesSetVar(key, value) {
+    var next = String(value);
+    if (servicesVarCache[key] === next) return;
+    servicesVarCache[key] = next;
+    servicesBand.style.setProperty(key, next);
+  }
+
+  function servicesSetVarNum(key, num, decimals) {
+    servicesSetVar(key, num.toFixed(decimals == null ? 3 : decimals));
+  }
+
+  function servicesTogglePhaseClass(className, stateKey, on) {
+    if (servicesPhaseState[stateKey] === on) return;
+    servicesPhaseState[stateKey] = on;
+    servicesBand.classList.toggle(className, on);
+  }
 
   function svcClamp(min, max, v) {
     return Math.min(max, Math.max(min, v));
@@ -473,10 +500,10 @@
 
   function servicesApplyScrollVars(p) {
     if (!servicesBand) return;
-    servicesBand.style.setProperty("--svc-p", String(p));
+    servicesSetVarNum("--svc-p", p);
 
     /* 1 · Intro */
-    servicesBand.style.setProperty("--svc-intro", String(1 - svcSmooth5(0.05, 0.21, p)));
+    servicesSetVarNum("--svc-intro", 1 - svcSmooth5(0.05, 0.21, p));
 
     /* 2 · Karta 01 — fade-in, jedno zejście layoutu (bez skoków max/hard-cut) */
     var heroIn = svcSmooth5(0.05, 0.3, p);
@@ -486,10 +513,10 @@
     var heroLift = svcSmooth5(0.46, 0.6, p) * (1 - heroIn) * 0.06;
     heroVis = Math.min(1, heroVis + heroLift);
     var heroFocus = 1 - svcSmooth5(0.33, 0.52, p) * 0.32 * (1 - cardsLock * 0.85);
-    servicesBand.style.setProperty("--svc-hero", String(heroVis));
-    servicesBand.style.setProperty("--svc-hero-layout", String(heroLayout));
-    servicesBand.style.setProperty("--svc-hero-focus", String(heroFocus));
-    servicesBand.style.setProperty("--svc-cards-lock", String(cardsLock));
+    servicesSetVarNum("--svc-hero", heroVis);
+    servicesSetVarNum("--svc-hero-layout", heroLayout);
+    servicesSetVarNum("--svc-hero-focus", heroFocus);
+    servicesSetVarNum("--svc-cards-lock", cardsLock);
 
     /* 3 · Panele — sekwencja z nakładaniem, potem plateau */
     var panelsEnv = svcSmooth5(0.24, 0.4, p);
@@ -501,45 +528,50 @@
     s2 = s2 + (1 - s2) * panelsFloor * 0.35;
     s3 = s3 + (1 - s3) * panelsFloor * 0.35;
     panelsEnv = panelsEnv + (1 - panelsEnv) * panelsFloor * 0.25;
-    servicesBand.style.setProperty("--svc-panels", String(Math.min(1, panelsEnv)));
-    servicesBand.style.setProperty("--svc-s1", String(Math.min(1, s1)));
-    servicesBand.style.setProperty("--svc-s2", String(Math.min(1, s2)));
-    servicesBand.style.setProperty("--svc-s3", String(Math.min(1, s3)));
+    servicesSetVarNum("--svc-panels", Math.min(1, panelsEnv));
+    servicesSetVarNum("--svc-s1", Math.min(1, s1));
+    servicesSetVarNum("--svc-s2", Math.min(1, s2));
+    servicesSetVarNum("--svc-s3", Math.min(1, s3));
 
     /* 4 · Statement — crossfade z plateau */
     var stmtVis = svcCrossfade(0.57, 0.73, 0.77, 0.93, p);
-    servicesBand.style.setProperty("--svc-statement", String(stmtVis));
+    servicesSetVarNum("--svc-statement", stmtVis);
 
     /* 5 · CTA — zachodzi na koniec statement */
     var ctaVis = svcSmooth5(0.75, 0.94, p);
-    servicesBand.style.setProperty("--svc-cta", String(ctaVis));
+    servicesSetVarNum("--svc-cta", ctaVis);
 
-    var cardsDim = Math.min(0.38, stmtVis * 0.22 + ctaVis * 0.16);
-    servicesBand.style.setProperty("--svc-cards-dim", String(cardsDim));
+    var cardsDim = Math.min(0.28, stmtVis * 0.14 + ctaVis * 0.1);
+    servicesSetVarNum("--svc-cards-dim", cardsDim);
 
-    servicesBand.style.setProperty("--svc-bg-y", (p * -20).toFixed(2) + "px");
-    servicesBand.style.setProperty("--svc-head-y", (p * -6.2).toFixed(2) + "vh");
+    servicesSetVar("--svc-bg-y", (p * -20).toFixed(1) + "px");
+    servicesSetVar("--svc-head-y", (p * -6.2).toFixed(2) + "vh");
 
-    servicesBand.classList.toggle(
+    servicesTogglePhaseClass(
       "is-svc-phase-hero",
+      "hero",
       (p >= 0.04 && p < 0.42) || (heroVis > 0.45 && panelsEnv < 0.28 && stmtVis < 0.06)
     );
-    servicesBand.classList.toggle(
+    servicesTogglePhaseClass(
       "is-svc-phase-panels",
+      "panels",
       panelsEnv > 0.08 && cardsLock < 0.92 && stmtVis < 0.1
     );
-    servicesBand.classList.toggle("is-svc-cards-locked", cardsLock > 0.58);
-    servicesBand.classList.toggle("is-svc-phase-statement", stmtVis > 0.06);
-    servicesBand.classList.toggle("is-svc-phase-cta", ctaVis > 0.1 && stmtVis < 0.06);
+    servicesTogglePhaseClass("is-svc-cards-locked", "cardsLocked", cardsLock > 0.58);
+    servicesTogglePhaseClass("is-svc-phase-statement", "statement", stmtVis > 0.06);
+    servicesTogglePhaseClass("is-svc-phase-cta", "cta", ctaVis > 0.1 && stmtVis < 0.06);
 
     var dom = servicesDomFromProgress(p, panelsEnv, stmtVis, ctaVis, cardsLock);
-    servicesBand.setAttribute("data-svc-dom", dom);
+    if (dom !== servicesLastDom) {
+      servicesLastDom = dom;
+      servicesBand.setAttribute("data-svc-dom", dom);
+    }
 
     if (!servicesPointerFocus) {
       var f = servicesFocusAt(p);
       servicesFocusTarget.x = f.x;
       servicesFocusTarget.y = f.y;
-      servicesBand.classList.toggle("is-atmo-focus", p > 0.06 && p < 0.95);
+      servicesTogglePhaseClass("is-atmo-focus", "atmoFocus", p > 0.06 && p < 0.95);
     }
   }
 
@@ -548,7 +580,7 @@
     if (!servicesScrollyActive || !servicesBand) return;
 
     var pRaw = servicesScrollProgress();
-    if (Math.abs(pRaw - servicesProgSmoothed) > 0.22) {
+    if (Math.abs(pRaw - servicesProgSmoothed) > 0.14) {
       servicesProgSmoothed = pRaw;
     } else {
       servicesProgSmoothed += (pRaw - servicesProgSmoothed) * SERVICES_PROG_LERP;
@@ -559,14 +591,13 @@
     servicesFocusCur.y += (servicesFocusTarget.y - servicesFocusCur.y) * SERVICES_ATMO_LERP;
     var focusDelta =
       Math.abs(servicesFocusTarget.x - servicesFocusCur.x) + Math.abs(servicesFocusTarget.y - servicesFocusCur.y);
-    servicesBand.style.setProperty("--focus-x", servicesFocusCur.x.toFixed(2) + "%");
-    servicesBand.style.setProperty("--focus-y", servicesFocusCur.y.toFixed(2) + "%");
+    servicesSetVar("--focus-x", servicesFocusCur.x.toFixed(1) + "%");
+    servicesSetVar("--focus-y", servicesFocusCur.y.toFixed(1) + "%");
 
     if (servicesRail) {
-      var p = servicesProgSmoothed;
-      var drift = (p - 0.5) * 8;
-      servicesRail.style.opacity = String(0.22 + svcSmooth5(0, 0.5, p) * 0.2);
-      servicesRail.style.transform = "translate3d(0, calc(-50% + " + drift.toFixed(2) + "px), 0)";
+      var railDrift = (servicesProgSmoothed - 0.5) * 8;
+      servicesSetVarNum("--svc-rail-opacity", 0.22 + svcSmooth5(0, 0.5, servicesProgSmoothed) * 0.2, 2);
+      servicesSetVar("--svc-rail-y", railDrift.toFixed(1) + "px");
     }
 
     if (
@@ -633,6 +664,14 @@
 
     function servicesResetVars() {
       servicesProgSmoothed = 0;
+      servicesLastDom = "";
+      servicesVarCache = Object.create(null);
+      servicesPhaseState.hero = false;
+      servicesPhaseState.panels = false;
+      servicesPhaseState.cardsLocked = false;
+      servicesPhaseState.statement = false;
+      servicesPhaseState.cta = false;
+      servicesPhaseState.atmoFocus = false;
       servicesBand.removeAttribute("data-svc-dom");
       servicesBand.classList.remove(
         "is-atmo-focus",
@@ -663,13 +702,15 @@
         "--svc-cards-dim",
         "--focus-x",
         "--focus-y",
+        "--svc-rail-opacity",
+        "--svc-rail-y",
       ].forEach(function (key) {
         servicesBand.style.removeProperty(key);
       });
-      if (servicesRail) {
-        servicesRail.style.opacity = "";
-        servicesRail.style.transform = "";
-      }
+      delete servicesVarCache["--focus-x"];
+      delete servicesVarCache["--focus-y"];
+      delete servicesVarCache["--svc-rail-opacity"];
+      delete servicesVarCache["--svc-rail-y"];
     }
 
     function servicesStartScrolly() {

@@ -7,6 +7,7 @@
     seo: "/content/settings/seo.json",
     home: "/content/pages/home.json",
     services: "/content/collections/services.json",
+    technology: "/content/collections/technology.json",
     cases: "/content/collections/case-studies.json",
     faq: "/content/collections/faq.json",
     testimonials: "/content/collections/testimonials.json",
@@ -102,6 +103,55 @@
     });
   }
 
+  function replaceList(root, selector, items) {
+    var list = root.querySelector(selector);
+    if (!list || !Array.isArray(items) || !items.length) return;
+    list.innerHTML = "";
+    items.forEach(function (item) {
+      var value = typeof item === "string" ? item : item && (item.item || item.label || item.value);
+      if (!value) return;
+      var li = document.createElement("li");
+      li.textContent = value;
+      list.appendChild(li);
+    });
+  }
+
+  function updateTechnology(technology) {
+    if (!technology) return;
+    var section = document.getElementById("technika");
+    if (!section) return;
+    var heavy = technology.heavy || {};
+    var light = technology.light || {};
+    var note = technology.note || {};
+    var metrics = Array.isArray(technology.metrics) ? technology.metrics : [];
+
+    text("#technika .section-label", technology.label);
+    text("#tech-heading", technology.heading);
+    text("#technika .section-lead", technology.lead);
+
+    textIn(section, ".compare-panel--heavy .compare-panel__label", heavy.label);
+    textIn(section, ".compare-panel--heavy h3", heavy.title);
+    replaceList(section, ".compare-panel--heavy ul", heavy.points);
+
+    textIn(section, ".compare-panel--light .compare-panel__label", light.label);
+    textIn(section, ".compare-panel--light h3", light.title);
+    replaceList(section, ".compare-panel--light ul", light.points);
+
+    textIn(section, ".compare-note summary", note.summary);
+    textIn(section, ".compare-note p", note.body);
+
+    Array.prototype.forEach.call(section.querySelectorAll(".compare-metrics > div"), function (node, index) {
+      var metric = metrics[index];
+      if (!metric) {
+        node.hidden = true;
+        return;
+      }
+      node.hidden = false;
+      textIn(node, "strong", metric.value);
+      textIn(node, "span", metric.label);
+    });
+  }
+
   function textIn(root, selector, value) {
     var node = root.querySelector(selector);
     if (node && value) node.textContent = value;
@@ -156,6 +206,79 @@
     });
   }
 
+  function updateTestimonials(testimonials) {
+    var items = testimonials && Array.isArray(testimonials.items) ? testimonials.items : [];
+    var featured = items[0];
+    if (!featured) return;
+
+    Array.prototype.forEach.call(document.querySelectorAll(".sub-quote"), function (quote) {
+      textIn(quote, "blockquote", featured.quote);
+      textIn(quote, ".sub-quote__name", featured.author);
+      textIn(quote, ".sub-quote__role", featured.detail);
+      attrIn(quote, ".sub-quote__avatar", "src", "assets/avatar-review.svg");
+    });
+  }
+
+  function initLocalQuoteCarousel(testimonials) {
+    var items = testimonials && Array.isArray(testimonials.items) ? testimonials.items : [];
+    var root = document.querySelector(".page-sub--local [data-quote-carousel]");
+    if (!root || items.length < 2) return;
+
+    var quoteNode = root.querySelector("blockquote");
+    var nameNode = root.querySelector(".sub-quote__name");
+    var roleNode = root.querySelector(".sub-quote__role");
+    var prevBtn = root.querySelector("[data-quote-prev]");
+    var nextBtn = root.querySelector("[data-quote-next]");
+    var dotsNode = root.querySelector(".sub-quote__dots");
+    var index = 0;
+    var dotButtons = [];
+
+    if (!quoteNode || !nameNode || !roleNode || !prevBtn || !nextBtn || !dotsNode) return;
+
+    function render() {
+      var item = items[index];
+      if (!item) return;
+      quoteNode.textContent = item.quote || "";
+      nameNode.textContent = item.author || "";
+      roleNode.textContent = item.detail || "";
+
+      dotButtons.forEach(function (button, buttonIndex) {
+        var active = buttonIndex === index;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+    }
+
+    function goTo(nextIndex) {
+      index = (nextIndex + items.length) % items.length;
+      render();
+    }
+
+    dotsNode.innerHTML = "";
+    items.forEach(function (_, itemIndex) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "sub-quote__dot";
+      button.setAttribute("aria-label", "Pokaż opinię " + (itemIndex + 1));
+      button.setAttribute("aria-pressed", itemIndex === 0 ? "true" : "false");
+      button.addEventListener("click", function () {
+        goTo(itemIndex);
+      });
+      dotsNode.appendChild(button);
+      dotButtons.push(button);
+    });
+
+    prevBtn.addEventListener("click", function () {
+      goTo(index - 1);
+    });
+
+    nextBtn.addEventListener("click", function () {
+      goTo(index + 1);
+    });
+
+    render();
+  }
+
   function updateContact(contact) {
     if (!contact) return;
     var mailHref = contact.email ? "mailto:" + contact.email : "";
@@ -182,8 +305,11 @@
       updateSeo(content);
       updateHero(content.home);
       updateServices(content.services);
+      updateTechnology(content.technology);
       updateCases(content.cases);
       updateFaq(content.faq);
+      updateTestimonials(content.testimonials);
+      initLocalQuoteCarousel(content.testimonials);
       updateContact(content.contact);
     });
   }

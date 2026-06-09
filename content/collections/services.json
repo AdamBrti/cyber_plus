@@ -1,6 +1,6 @@
 {
-  "heading": "Cztery sposoby współpracy",
-  "lead": "Dobieramy zakres do celu strony: wizytówka, landing, redesign albo lokalna widoczność.",
+  "heading": "Strona firmowa, landing page i redesign",
+  "lead": "Dobieramy zakres do celu strony: strona firmowa, landing page, redesign albo lokalna widoczność jako rozszerzenie.",
   "items": [
     {
       "title": "Strony firmowe",
@@ -25,10 +25,10 @@
     },
     {
       "title": "Widoczność w Twoim mieście",
-      "description": "Łatwiej być znajdowanym tam, gdzie szukają Cię klienci: bez upychania fraz i obietnic na wyrost.",
-      "meta": "od 900 zł netto",
+      "description": "Łatwiej być znajdowanym tam, gdzie klienci naprawdę szukają usługi: bez upychania fraz i obietnic na wyrost.",
+      "meta": "dodatek albo osobny etap",
       "cta_label": "Zobacz strony lokalne",
-      "cta_url": "#lokalnie"
+      "cta_url": "strony-internetowe-szczecin.html"
     }
   ]
 }

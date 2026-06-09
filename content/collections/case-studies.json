@@ -1,39 +1,50 @@
 {
-  "heading": "Realizacje, które możesz sprawdzić sam",
-  "lead": "Prawdziwe strony, nie dekoracyjne makiety. Każdy projekt pokazuje decyzję: co uprościć, co wyciszyć i jak sprawić, żeby marka szybciej wyglądała wiarygodnie.",
+  "heading": "Cztery projekty, które najczytelniej pokazują sposób pracy",
+  "lead": "Na homepage zostawiamy tylko najmocniejszy skrót. Pełniejsze opisy, kontekst branży i decyzje projektowe są na stronie realizacji.",
   "items": [
     {
-      "image_alt": "",
+      "name": "Sztangisław",
+      "meta": "Trener personalny · Szczecin",
+      "summary": "Personal brand trenera z mocnym pierwszym ekranem, autorytetem sportowym i prostą drogą do konsultacji.",
+      "problem": "Trener z dużym dorobkiem potrzebował strony, która od razu pokazuje człowieka, osiągnięcia i zakres współpracy bez generycznego klimatu fitness.",
+      "change": "Ułożyliśmy komunikację wokół twarzy, sukcesów, specjalizacji i prostego wyboru: konsultacja albo materiały online.",
+      "result": "Strona wygląda pewnie, osobowo i szybko prowadzi do kontaktu.",
+      "url": "https://www.sztangislaw.pl/",
+      "image": "",
+      "image_alt": ""
+    },
+    {
+      "name": "Podwiatr",
       "meta": "Fotografia · Szczecin",
       "summary": "Portfolio fotograficzne bez ciężkiego zaplecza: lżej, czytelniej i wygodniej na telefonie.",
-      "name": "podwiatr",
-      "url": "https://podwiatr.net.pl/",
-      "change": "Zbudowaliśmy lekką stronę statyczną, uporządkowaliśmy prezentację zdjęć i zadbaliśmy o mobilny odbiór.",
-      "image": "",
+      "problem": "Fotografia potrzebuje przestrzeni. Poprzednia strona była cięższa w utrzymaniu i coraz mniej pasowała do minimalistycznego charakteru portfolio.",
+      "change": "Zbudowaliśmy lekką stronę statyczną, uporządkowaliśmy prezentację zdjęć i zadbaliśmy o mobilny odbiór bez rozpraszaczy.",
       "result": "Portfolio wygląda dojrzalej, szybciej się otwiera i jest prostsze w utrzymaniu.",
-      "problem": "Fotografia potrzebuje przestrzeni. Poprzednia strona działała, ale była cięższa w utrzymaniu."
+      "url": "https://podwiatr.net.pl/",
+      "image": "",
+      "image_alt": ""
     },
     {
-      "image_alt": "",
+      "name": "Without Gravity",
       "meta": "Studio treningowe · Szczecin",
       "summary": "Strona dla studia treningowego z energią miejsca, ale bez chaosu w pierwszym kontakcie.",
-      "name": "Without Gravity",
-      "url": "https://without-gravity.szczecin.pl/",
+      "problem": "Nowe studio musiało od razu pokazać charakter: profesjonalnie, dynamicznie, ale nadal jasno.",
       "change": "Ułożyliśmy stronę wokół najważniejszych pytań klienta: co to za trening, dla kogo, ile kosztuje i jak zacząć.",
-      "image": "",
       "result": "Marka wygląda pewniej, mobile prowadzi do działania, a strona nie każe szukać podstawowych informacji.",
-      "problem": "Nowe studio musiało od razu pokazać charakter: profesjonalnie, dynamicznie, ale nadal jasno."
+      "url": "https://without-gravity.szczecin.pl/",
+      "image": "",
+      "image_alt": ""
     },
     {
-      "image_alt": "",
+      "name": "SłodkoTu",
       "meta": "Usługi beauty · Polska",
       "summary": "Delikatna strona beauty dla nowej marki: lekki klimat, czytelna oferta i krótka droga do rezerwacji.",
-      "name": "SłodkoTu",
-      "url": "https://slodkotu.pl/",
-      "change": "Postawiliśmy na lekki rytm, ciepłą estetykę i mobile-first.",
-      "image": "",
+      "problem": "Nowa marka beauty potrzebowała strony, która od pierwszego wejścia wygląda czysto, estetycznie i wiarygodnie.",
+      "change": "Postawiliśmy na lekki rytm, ciepłą estetykę i wygodny odbiór na telefonie.",
       "result": "Strona buduje zaufanie bez krzyczenia. Klientka widzi klimat miejsca, rozumie usługę i ma prosty następny krok.",
-      "problem": "Nowa marka beauty potrzebowała strony, która od pierwszego wejścia wygląda czysto, estetycznie i wiarygodnie."
+      "url": "https://slodkotu.pl/",
+      "image": "",
+      "image_alt": ""
     }
   ]
 }
