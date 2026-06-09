@@ -57,7 +57,22 @@
             "legalName": "Cyber Plus Adam Bartkowski",
             "url": "https://cyber-plus.pl/",
             "email": "kontakt.cyberplus@outlook.com",
-            "telephone": "+48-794-119-276"
+            "telephone": "+48-794-119-276",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "ul. Santocka 19 lok. 143",
+              "postalCode": "71-113",
+              "addressLocality": "Szczecin",
+              "addressRegion": "zachodniopomorskie",
+              "addressCountry": "PL"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "telephone": "+48-794-119-276",
+              "email": "kontakt.cyberplus@outlook.com",
+              "availableLanguage": ["pl", "en", "de"]
+            }
           },
           {
             "@type": "WebPage",
@@ -65,6 +80,9 @@
             "url": "https://cyber-plus.pl/proces.html",
             "name": "Proces współpracy Cyber Plus",
             "description": "Jak wygląda współpraca od briefu do publikacji strony internetowej.",
+            "isPartOf": { "@id": "https://cyber-plus.pl/#website" },
+            "about": { "@id": "https://cyber-plus.pl/#organization" },
+            "primaryImageOfPage": "https://cyber-plus.pl/assets/og-social-default.png",
             "inLanguage": "pl-PL"
           },
           {
@@ -72,6 +90,36 @@
             "itemListElement": [
               { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://cyber-plus.pl/" },
               { "@type": "ListItem", "position": 2, "name": "Proces", "item": "https://cyber-plus.pl/proces.html" }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://cyber-plus.pl/proces.html#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Co trzeba przygotować przed startem projektu strony?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Na start wystarczy krótki opis firmy, link do obecnej strony lub social mediów, podstawowe materiały i informacja, jaki kontakt ma być najważniejszy. Gotowy, rozbudowany brief nie jest konieczny."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Czy współpraca może odbyć się całkowicie zdalnie?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Tak. Współpraca może odbywać się całkowicie zdalnie i zwykle wygląda podobnie niezależnie od miasta: diagnoza, zakres, treść, projekt, wdrożenie i poprawki po starcie."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Czy po wdrożeniu są jeszcze poprawki?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Tak. Po publikacji sprawdzamy pierwsze wejścia i korygujemy drobiazgi, żeby strona działała stabilnie, a formularz, linki i kontakt były dopięte przed regularnym ruchem."
+                }
+              }
             ]
           }
         ]
@@ -151,8 +199,8 @@
     </div>
 
     <main id="main" class="page-sub-main">
-      <section class="band band--dawn band--sub-hero reveal" aria-labelledby="proces-h1">
-        <div class="wrap wrap--wide sub-hero">
+      <section class="band band--dawn band--sub-hero band--sub-hero-process reveal" aria-labelledby="proces-h1">
+        <div class="wrap wrap--wide sub-hero sub-hero--fullbleed-process">
           <div class="sub-hero__grid">
             <div class="sub-hero__copy">
               <nav class="page-breadcrumbs" aria-label="Okruszki">
@@ -170,14 +218,14 @@
                 <a class="btn btn-ghost" href="oferta.html">Zobacz ofertę</a>
               </div>
             </div>
-            <div class="sub-hero__visual" aria-hidden="true">
+            <div class="sub-hero__visual sub-hero__visual--process" aria-hidden="true">
               <div class="sub-hero__glow"></div>
-              <div class="sub-hero__mock">
+              <div class="sub-hero__process-frame">
                 <img
-                  class="sub-hero__mock-img"
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80"
-                  width="1200"
-                  height="750"
+                  class="sub-hero__process-img"
+                  src="assets/local/proces-hero.png"
+                  width="1680"
+                  height="940"
                   alt=""
                   loading="eager"
                   decoding="async"
@@ -304,17 +352,44 @@
         </div>
       </section>
 
+      <section class="band band--silver reveal" aria-labelledby="proces-faq">
+        <div class="wrap wrap--wide">
+          <div class="section-head section-head--center">
+            <p class="section-label">Przed startem</p>
+            <h2 id="proces-faq">Najczęstsze pytania o przebieg współpracy</h2>
+            <p class="section-lead section-lead--tight">Krótki blok odpowiedzi, który pomaga szybciej ocenić, jak wygląda projekt od strony organizacyjnej.</p>
+          </div>
+          <div class="page-card-grid page-card-grid--three">
+            <article class="page-card">
+              <span class="page-card__meta">Materiały</span>
+              <h3>Co trzeba przygotować przed startem?</h3>
+              <p>Na początek wystarczy opis firmy, link do obecnej strony albo social mediów, kilka materiałów i wskazanie, jaki kontakt ma być najważniejszy. Rozbudowany brief nie jest potrzebny.</p>
+            </article>
+            <article class="page-card">
+              <span class="page-card__meta">Forma współpracy</span>
+              <h3>Czy cały projekt może odbyć się zdalnie?</h3>
+              <p>Tak. Zdalny proces działa tak samo jak lokalny: diagnoza, ustalenie zakresu, treść, projekt, wdrożenie i publikacja. Dzięki temu możemy pracować sprawnie niezależnie od miasta.</p>
+            </article>
+            <article class="page-card">
+              <span class="page-card__meta">Po wdrożeniu</span>
+              <h3>Czy po publikacji są jeszcze poprawki?</h3>
+              <p>Tak. Po starcie sprawdzamy pierwsze wejścia i korygujemy drobne rzeczy, zanim strona zacznie pracować na pełnych obrotach. To moment na dopięcie szczegółów, nie na chaos techniczny.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="band band--void band--sub-quote reveal" aria-labelledby="proces-quote">
         <div class="wrap wrap--wide">
           <div class="sub-quote">
             <span class="sub-quote__mark" aria-hidden="true">„</span>
             <blockquote id="proces-quote">
-              Wiedziałem dokładnie, co się dzieje na każdym etapie. Bez niespodzianek w budżecie i bez tłumaczenia, czemu coś jeszcze potrwa tydzień.
+              Jako trener poszukiwałem kogoś, kto wykona dla mnie stronę wizytówkową. Ostatecznie zdecydowałem się na współpracę z Adamem, która przerosła moje oczekiwania. Od strony technicznej i wizualnej to pełen profesjonalizm - wszystko jest intuicyjne, przejrzyste i dopracowane w najmniejszych detalach. Strona odzwierciedla emocje związane ze sportem poprzez animacje i efekty zaprojektowane przez Adama. Dodatkowy plus i szósta gwiazdka za szybkie wykonanie. 6/5.
             </blockquote>
             <div class="sub-quote__author">
               <img
                 class="sub-quote__avatar"
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face"
+                src="assets/avatar-review.svg"
                 width="48"
                 height="48"
                 alt=""
@@ -322,8 +397,9 @@
                 decoding="async"
               />
               <div class="sub-quote__meta">
-                <span class="sub-quote__name">Właściciel studia usługowego</span>
-                <span class="sub-quote__role">Proces wdrożenia strony · demo cytat</span>
+                <span class="sub-quote__name">Stanisław Januszewski</span>
+                <span class="sub-quote__role">Trener personalny · opinia Google</span>
+                <a class="sub-quote__link" href="https://www.google.com/search?num=10&sca_esv=b0e7c006bdd513b1&rlz=1C1FKPE_enAT1130AT1130&hl=pl-PL&tbm=lcl&sxsrf=ANbL-n4lFgclJEfP_0fJDugdgJgMfBDEsA:1781035318562&q=Cyberplus+Adam+Bartkowski+Opinie&spell=1&sa=X&ved=2ahUKEwip9vrL-fqUAxViRPEDHZIwJmEQBSgAegQIChAB&biw=1600&bih=898&dpr=1.5#lkt=LocalPoiReviews&rlfi=hd:;si:5789033188009569615,l,CiBDeWJlcnBsdXMgQWRhbSBCYXJ0a293c2tpIE9waW5pZUjwg4aY1rSAgAhaMBAAEAEQAhADGAAYARgCIiBjeWJlcnBsdXMgYWRhbSBiYXJ0a293c2tpIG9waW5pZZIBEHdlYnNpdGVfZGVzaWduZXKaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMnQwTkZWdVRqQlRNMnQwVFZkT1lVMUdTbkZYV0ZJeVdWVm9OVmRJWXhBQvoBBQiQAxA2;mv:[[53.41883797731903,14.55710079390717],[53.418478022680965,14.556496806092833]]" target="_blank" rel="noopener noreferrer">Zobacz opinie w Google</a>
               </div>
             </div>
           </div>

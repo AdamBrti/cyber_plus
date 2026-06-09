@@ -63,7 +63,15 @@
               "streetAddress": "ul. Santocka 19 lok. 143",
               "postalCode": "71-113",
               "addressLocality": "Szczecin",
+              "addressRegion": "zachodniopomorskie",
               "addressCountry": "PL"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "telephone": "+48-794-119-276",
+              "email": "kontakt.cyberplus@outlook.com",
+              "availableLanguage": ["pl", "en", "de"]
             }
           },
           {
@@ -72,6 +80,9 @@
             "url": "https://cyber-plus.pl/oferta.html",
             "name": "Oferta Cyber Plus",
             "description": "Strony firmowe, landing page, redesign strony i lokalna widoczność dla firm usługowych.",
+            "isPartOf": { "@id": "https://cyber-plus.pl/#website" },
+            "about": { "@id": "https://cyber-plus.pl/#organization" },
+            "primaryImageOfPage": "https://cyber-plus.pl/assets/og-social-default.png",
             "inLanguage": "pl-PL"
           },
           {
@@ -93,10 +104,56 @@
           },
           {
             "@type": "Service",
+            "@id": "https://cyber-plus.pl/oferta.html#service",
+            "url": "https://cyber-plus.pl/oferta.html",
             "name": "Projektowanie stron internetowych dla firm usługowych",
             "provider": { "@id": "https://cyber-plus.pl/#organization" },
-            "areaServed": ["Szczecin", "Rzeszów", "Polska"],
-            "serviceType": ["Strona firmowa", "Landing page", "Redesign strony", "Widoczność lokalna"]
+            "areaServed": [
+              { "@type": "City", "name": "Szczecin" },
+              { "@type": "City", "name": "Rzeszów" },
+              { "@type": "Country", "name": "Polska" }
+            ],
+            "serviceType": ["Strona firmowa", "Landing page", "Redesign strony", "Widoczność lokalna"],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Oferta Cyber Plus",
+              "itemListElement": [
+                { "@type": "OfferCatalog", "name": "Strona firmowa" },
+                { "@type": "OfferCatalog", "name": "Landing page" },
+                { "@type": "OfferCatalog", "name": "Redesign strony" },
+                { "@type": "OfferCatalog", "name": "Widoczność lokalna" }
+              ]
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://cyber-plus.pl/oferta.html#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Jaki wariant strony wybrać na początek?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Jeśli firma chce szybko pokazać jedną usługę albo sprawdzić kampanię, zwykle wystarczy landing page. Jeśli potrzebujesz pełniejszej prezentacji marki i kilku podstron, lepsza będzie strona firmowa. Gdy problemem jest przestarzały odbiór lub chaos, często wystarczy redesign."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Ile kosztuje strona internetowa w Cyber Plus?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Landing page zaczyna się od 2 900 zł netto, redesign od 3 500 zł netto, a strona firmowa od 4 500 zł netto. Dokładną wycenę dopasowujemy do zakresu, treści i liczby sekcji."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Czy oferta obejmuje też podstawy lokalnego SEO?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Tak. Już na etapie struktury i wdrożenia porządkujemy podstawy pod lokalną widoczność: nagłówki, opisy, lokalny kontekst, kontakt, indeksację i techniczny porządek strony."
+                }
+              }
+            ]
           }
         ]
       }
@@ -175,8 +232,22 @@
     </div>
 
     <main id="main" class="page-sub-main">
-      <section class="band band--dawn band--sub-hero reveal" aria-labelledby="oferta-h1">
-        <div class="wrap wrap--wide sub-hero">
+      <section class="band band--dawn band--sub-hero band--sub-hero-offer reveal" aria-labelledby="oferta-h1">
+        <div class="sub-hero__visual sub-hero__visual--offer" aria-hidden="true">
+          <div class="sub-hero__glow"></div>
+          <div class="sub-hero__offer-frame">
+            <img
+              class="sub-hero__offer-img"
+              src="assets/local/proces-hero.png"
+              width="1680"
+              height="940"
+              alt=""
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        </div>
+        <div class="wrap wrap--wide sub-hero sub-hero--fullbleed-offer">
           <div class="sub-hero__grid">
             <div class="sub-hero__copy">
               <nav class="page-breadcrumbs" aria-label="Okruszki">
@@ -195,20 +266,6 @@
               <div class="sub-hero__actions">
                 <a class="btn btn-primary" href="/#kontakt">Dobierzmy zakres</a>
                 <a class="btn btn-ghost" href="portfolio.html">Zobacz realizacje</a>
-              </div>
-            </div>
-            <div class="sub-hero__visual" aria-hidden="true">
-              <div class="sub-hero__glow"></div>
-              <div class="sub-hero__mock">
-                <img
-                  class="sub-hero__mock-img"
-                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80"
-                  width="1200"
-                  height="750"
-                  alt=""
-                  loading="eager"
-                  decoding="async"
-                />
               </div>
             </div>
           </div>
@@ -260,41 +317,130 @@
         </div>
       </section>
 
-      <section class="band band--silver reveal" aria-labelledby="oferta-lista">
+      <section class="band band--silver band--offer-choice reveal" aria-labelledby="oferta-lista">
         <div class="wrap wrap--wide">
           <div class="sub-section-head">
             <div>
-              <p class="section-label">Zakresy</p>
-              <h2 id="oferta-lista">Co możesz zamówić</h2>
+              <p class="section-label">Warianty</p>
+              <h2 id="oferta-lista">Wybierz stronę pod konkretny cel</h2>
+              <p class="section-lead section-lead--tight">
+                Nie każda firma potrzebuje rozbudowanej strony. Czasem wystarczy mocny landing, czasem pełna strona firmowa,
+                a czasem poprawienie tego, co już działa, ale nie sprzedaje.
+              </p>
             </div>
             <a class="sub-section-head__link" href="proces.html">Jak wygląda współpraca →</a>
           </div>
-          <div class="sub-pricing__grid">
-            <article class="page-card sub-pricing-card">
-              <span class="sub-pricing-card__price">od 4 500 zł netto</span>
-              <h3>Strona firmowa</h3>
-              <p>Dla firm usługowych, które chcą czytelnie pokazać ofertę, zbudować zaufanie i skrócić drogę do kontaktu.</p>
-              <a class="sub-pricing-card__link" href="proces.html">Zobacz proces</a>
+          <div class="offer-grid">
+            <article class="offer-card offer-card--featured">
+              <span class="offer-card__badge offer-card__badge--featured">Najczęściej wybierane</span>
+              <span class="offer-card__icon" aria-hidden="true">01</span>
+              <h3 class="offer-card__title">Strona firmowa</h3>
+              <p class="offer-card__description">Dla firm usługowych, które chcą wyglądać profesjonalnie i zamieniać odwiedzających w klientów.</p>
+              <ul class="offer-card__list" role="list">
+                <li>pełna prezentacja oferty</li>
+                <li>sekcje zaufania i realizacje</li>
+                <li>kontakt, CTA i lokalne SEO</li>
+              </ul>
+              <div class="offer-card__meta">
+                <div>
+                  <span class="offer-card__meta-label">Cena od</span>
+                  <strong class="offer-card__price">4 500 zł</strong>
+                </div>
+                <div>
+                  <span class="offer-card__meta-label">Czas</span>
+                  <strong class="offer-card__time">2-5 tyg.</strong>
+                </div>
+              </div>
+              <div class="offer-card__actions">
+                <a class="btn btn-primary" href="/#kontakt">Sprawdź stronę firmową</a>
+                <a class="offer-card__link" href="proces.html">Sprawdź proces</a>
+              </div>
             </article>
-            <article class="page-card sub-pricing-card sub-pricing-card--featured">
-              <span class="sub-pricing-card__price">od 2 900 zł netto</span>
-              <h3>Landing page</h3>
-              <p>Jedna oferta, jedna kampania albo jeden kierunek ruchu. Najkrótsza droga od wejścia do wiadomości.</p>
-              <a class="sub-pricing-card__link" href="strony-dla-trenerow-personalnych.html">Przykład zastosowania</a>
+            <article class="offer-card">
+              <span class="offer-card__badge">Dobry start</span>
+              <span class="offer-card__icon" aria-hidden="true">02</span>
+              <h3 class="offer-card__title">Landing page</h3>
+              <p class="offer-card__description">Jedna konkretna podstrona zaprojektowana pod ofertę, kampanię albo pozyskiwanie zapytań.</p>
+              <ul class="offer-card__list" role="list">
+                <li>jeden jasny cel</li>
+                <li>szybkie wdrożenie</li>
+                <li>idealny pod reklamę</li>
+              </ul>
+              <div class="offer-card__meta">
+                <div>
+                  <span class="offer-card__meta-label">Cena od</span>
+                  <strong class="offer-card__price">2 900 zł</strong>
+                </div>
+                <div>
+                  <span class="offer-card__meta-label">Czas</span>
+                  <strong class="offer-card__time">1-3 tyg.</strong>
+                </div>
+              </div>
+              <div class="offer-card__actions">
+                <a class="btn btn-ghost" href="/#kontakt">Zobacz landing</a>
+                <a class="offer-card__link" href="strony-dla-trenerow-personalnych.html">Zobacz szczegóły</a>
+              </div>
             </article>
-            <article class="page-card sub-pricing-card">
-              <span class="sub-pricing-card__price">od 3 500 zł netto</span>
-              <h3>Redesign strony</h3>
-              <p>Gdy usługa jest dobra, ale obecna strona wygląda słabiej niż firma w rzeczywistości.</p>
-              <a class="sub-pricing-card__link" href="portfolio.html">Realizacje po zmianach</a>
+            <article class="offer-card">
+              <span class="offer-card__badge">Szybka poprawa</span>
+              <span class="offer-card__icon" aria-hidden="true">03</span>
+              <h3 class="offer-card__title">Redesign strony</h3>
+              <p class="offer-card__description">Dla firm, które mają już stronę, ale czują, że wygląda przestarzale albo nie przekonuje klientów.</p>
+              <ul class="offer-card__list" role="list">
+                <li>poprawa wyglądu i UX</li>
+                <li>lepsza wersja mobilna</li>
+                <li>czytelniejsza oferta</li>
+              </ul>
+              <div class="offer-card__meta">
+                <div>
+                  <span class="offer-card__meta-label">Cena od</span>
+                  <strong class="offer-card__price">3 500 zł</strong>
+                </div>
+                <div>
+                  <span class="offer-card__meta-label">Czas</span>
+                  <strong class="offer-card__time">1-4 tyg.</strong>
+                </div>
+              </div>
+              <div class="offer-card__actions">
+                <a class="btn btn-ghost" href="/#kontakt">Zobacz redesign</a>
+                <a class="offer-card__link" href="portfolio.html">Zobacz szczegóły</a>
+              </div>
             </article>
-            <article class="page-card sub-pricing-card">
-              <span class="sub-pricing-card__price">dodatek lub etap</span>
-              <h3>Widoczność lokalna</h3>
-              <p>Struktura, opisy i osobne podstrony dla miast lub branż — tam, gdzie ma to sens.</p>
-              <a class="sub-pricing-card__link" href="strony-internetowe-szczecin.html">Landing lokalny</a>
+            <article class="offer-card">
+              <span class="offer-card__badge">Dodatkowy efekt</span>
+              <span class="offer-card__icon" aria-hidden="true">04</span>
+              <h3 class="offer-card__title">Widoczność lokalna</h3>
+              <p class="offer-card__description">Dla firm, które chcą być łatwiej znajdowane przez klientów w swojej miejscowości lub regionie.</p>
+              <ul class="offer-card__list" role="list">
+                <li>sekcje pod lokalne frazy</li>
+                <li>lepsza struktura treści</li>
+                <li>podstawy SEO lokalnego</li>
+              </ul>
+              <div class="offer-card__meta">
+                <div>
+                  <span class="offer-card__meta-label">Cena</span>
+                  <strong class="offer-card__price">wycena indywidualna</strong>
+                </div>
+                <div>
+                  <span class="offer-card__meta-label">Czas</span>
+                  <strong class="offer-card__time">po analizie</strong>
+                </div>
+              </div>
+              <div class="offer-card__actions">
+                <a class="btn btn-ghost" href="/#kontakt">Sprawdź widoczność</a>
+                <a class="offer-card__link" href="strony-internetowe-szczecin.html">Zobacz szczegóły</a>
+              </div>
             </article>
           </div>
+          <aside class="offer-help" aria-label="Pomoc w wyborze wariantu">
+            <div>
+              <p class="offer-help__eyebrow">Nie wiesz, który wariant wybrać?</p>
+              <p class="offer-help__text">
+                Opisz krótko swoją firmę i cel strony - podpowiem, czy wystarczy landing, czy lepiej zbudować pełną stronę firmową.
+              </p>
+            </div>
+            <a class="btn btn-ghost" href="/#kontakt">Dobierzmy wariant</a>
+          </aside>
         </div>
       </section>
 
@@ -326,17 +472,44 @@
         </div>
       </section>
 
+      <section class="band band--silver reveal" aria-labelledby="oferta-faq">
+        <div class="wrap wrap--wide">
+          <div class="section-head section-head--center">
+            <p class="section-label">Krótko i konkretnie</p>
+            <h2 id="oferta-faq">Najczęstsze pytania o wybór wariantu strony</h2>
+            <p class="section-lead section-lead--tight">Te odpowiedzi pomagają szybciej dopasować zakres jeszcze przed pierwszą rozmową.</p>
+          </div>
+          <div class="page-card-grid page-card-grid--three">
+            <article class="page-card">
+              <span class="page-card__meta">Jaki wariant wybrać</span>
+              <h3>Landing, strona firmowa czy redesign?</h3>
+              <p>Landing page sprawdza się przy jednej usłudze lub kampanii. Strona firmowa daje szerszą prezentację marki. Redesign ma sens wtedy, gdy treść istnieje, ale odbiór i struktura nie pracują na sprzedaż.</p>
+            </article>
+            <article class="page-card">
+              <span class="page-card__meta">Budżet</span>
+              <h3>Ile kosztuje strona internetowa?</h3>
+              <p>Landing page zaczyna się od 2 900 zł netto, redesign od 3 500 zł netto, a strona firmowa od 4 500 zł netto. Ostateczna wycena zależy od zakresu, treści, liczby sekcji i materiałów wejściowych.</p>
+            </article>
+            <article class="page-card">
+              <span class="page-card__meta">Widoczność</span>
+              <h3>Czy w ofercie są podstawy SEO lokalnego?</h3>
+              <p>Tak. Porządkujemy nagłówki, lokalny kontekst, strukturę treści, kontakt, meta dane i techniczne podstawy, żeby strona od startu była lepiej gotowa pod wyszukiwanie lokalne i odpowiedzi AI.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="band band--void band--sub-quote reveal" aria-labelledby="oferta-quote">
         <div class="wrap wrap--wide">
           <div class="sub-quote">
             <span class="sub-quote__mark" aria-hidden="true">„</span>
             <blockquote id="oferta-quote">
-              Nie musiałem sam wybierać między landingiem a pełną stroną. Dostałem konkretną propozycję, ile to potrwa i od czego warto zacząć.
+              Jako trener poszukiwałem kogoś, kto wykona dla mnie stronę wizytówkową. Ostatecznie zdecydowałem się na współpracę z Adamem, która przerosła moje oczekiwania. Od strony technicznej i wizualnej to pełen profesjonalizm - wszystko jest intuicyjne, przejrzyste i dopracowane w najmniejszych detalach. Strona odzwierciedla emocje związane ze sportem poprzez animacje i efekty zaprojektowane przez Adama. Dodatkowy plus i szósta gwiazdka za szybkie wykonanie. 6/5.
             </blockquote>
             <div class="sub-quote__author">
               <img
                 class="sub-quote__avatar"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&crop=face"
+                src="assets/avatar-review.svg"
                 width="48"
                 height="48"
                 alt=""
@@ -344,8 +517,9 @@
                 decoding="async"
               />
               <div class="sub-quote__meta">
-                <span class="sub-quote__name">Właścicielka firmy usługowej</span>
-                <span class="sub-quote__role">Dobór zakresu przed startem · demo cytat</span>
+                <span class="sub-quote__name">Stanisław Januszewski</span>
+                <span class="sub-quote__role">Trener personalny · opinia Google</span>
+                <a class="sub-quote__link" href="https://www.google.com/search?num=10&sca_esv=b0e7c006bdd513b1&rlz=1C1FKPE_enAT1130AT1130&hl=pl-PL&tbm=lcl&sxsrf=ANbL-n4lFgclJEfP_0fJDugdgJgMfBDEsA:1781035318562&q=Cyberplus+Adam+Bartkowski+Opinie&spell=1&sa=X&ved=2ahUKEwip9vrL-fqUAxViRPEDHZIwJmEQBSgAegQIChAB&biw=1600&bih=898&dpr=1.5#lkt=LocalPoiReviews&rlfi=hd:;si:5789033188009569615,l,CiBDeWJlcnBsdXMgQWRhbSBCYXJ0a293c2tpIE9waW5pZUjwg4aY1rSAgAhaMBAAEAEQAhADGAAYARgCIiBjeWJlcnBsdXMgYWRhbSBiYXJ0a293c2tpIG9waW5pZZIBEHdlYnNpdGVfZGVzaWduZXKaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMnQwTkZWdVRqQlRNMnQwVFZkT1lVMUdTbkZYV0ZJeVdWVm9OVmRJWXhBQvoBBQiQAxA2;mv:[[53.41883797731903,14.55710079390717],[53.418478022680965,14.556496806092833]]" target="_blank" rel="noopener noreferrer">Zobacz opinie w Google</a>
               </div>
             </div>
           </div>

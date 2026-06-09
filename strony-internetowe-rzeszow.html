@@ -57,7 +57,23 @@
             "legalName": "Cyber Plus Adam Bartkowski",
             "url": "https://cyber-plus.pl/",
             "email": "kontakt.cyberplus@outlook.com",
-            "telephone": "+48-794-119-276"
+            "telephone": "+48-794-119-276",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "ul. Santocka 19 lok. 143",
+              "postalCode": "71-113",
+              "addressLocality": "Szczecin",
+              "addressRegion": "zachodniopomorskie",
+              "addressCountry": "PL"
+            },
+            "areaServed": { "@type": "City", "name": "Rzeszów" },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "telephone": "+48-794-119-276",
+              "email": "kontakt.cyberplus@outlook.com",
+              "availableLanguage": ["pl", "en", "de"]
+            }
           },
           {
             "@type": "WebPage",
@@ -65,6 +81,9 @@
             "url": "https://cyber-plus.pl/strony-internetowe-rzeszow.html",
             "name": "Strony internetowe Rzeszów",
             "description": "Projektowanie stron internetowych dla firm z Rzeszowa.",
+            "isPartOf": { "@id": "https://cyber-plus.pl/#website" },
+            "about": { "@id": "https://cyber-plus.pl/#organization" },
+            "primaryImageOfPage": "https://cyber-plus.pl/assets/og-social-default.png",
             "inLanguage": "pl-PL"
           },
           {
@@ -76,10 +95,42 @@
           },
           {
             "@type": "Service",
+            "@id": "https://cyber-plus.pl/strony-internetowe-rzeszow.html#service",
+            "url": "https://cyber-plus.pl/strony-internetowe-rzeszow.html",
             "name": "Strony internetowe Rzeszów",
             "provider": { "@id": "https://cyber-plus.pl/#organization" },
             "areaServed": { "@type": "City", "name": "Rzeszów" },
             "serviceType": ["Strona firmowa", "Landing page", "Redesign strony", "SEO lokalne"]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://cyber-plus.pl/strony-internetowe-rzeszow.html#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Dla jakich firm z Rzeszowa taka strona ma największy sens?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Najczęściej dla lokalnych usług, marek osobistych i małych firm B2B, które chcą wyglądać dojrzale, pokazać ofertę bez chaosu i ułatwić szybki kontakt z klientem."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Czy strona pod Rzeszów musi być przeładowana lokalnymi frazami?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Nie. Lokalna fraza ma sens wtedy, gdy pomaga klientowi trafić na właściwą usługę. Ważniejsze od sztucznego powtarzania miasta są czytelna oferta, lokalny kontekst i techniczny porządek strony."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Czy projekt może być realizowany zdalnie także dla firmy z Rzeszowa?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Tak. Proces może być prowadzony całkowicie zdalnie: od diagnozy i ustalenia zakresu, przez treść i projekt, aż po wdrożenie i poprawki po starcie."
+                }
+              }
+            ]
           }
         ]
       }
@@ -255,16 +306,44 @@
         </div>
       </section>
 
+      <section class="band band--silver reveal" aria-labelledby="rzeszow-faq">
+        <div class="wrap wrap--wide">
+          <div class="section-head section-head--center">
+            <p class="section-label">Lokalne pytania</p>
+            <h2 id="rzeszow-faq">Najczęstsze pytania o strony internetowe w Rzeszowie</h2>
+            <p class="section-lead section-lead--tight">Ten blok pomaga odpowiedzieć na lokalne intencje wyszukiwania bez sztucznego upychania fraz.</p>
+          </div>
+          <div class="page-card-grid page-card-grid--three">
+            <article class="page-card">
+              <span class="page-card__meta">Dla kogo</span>
+              <h3>Które firmy z Rzeszowa najczęściej potrzebują takiej strony?</h3>
+              <p>Najczęściej lokalne usługi, marki osobiste i małe firmy B2B, które chcą wyglądać profesjonalnie, szybciej wyjaśniać ofertę i skrócić drogę do pierwszego kontaktu.</p>
+            </article>
+            <article class="page-card">
+              <span class="page-card__meta">Frazy lokalne</span>
+              <h3>Czy trzeba mocno powtarzać „Rzeszów” na stronie?</h3>
+              <p>Nie. Najlepiej działa naturalny lokalny kontekst, czytelna oferta i techniczny porządek. Samo powtarzanie miasta bez wartości dla użytkownika nie daje dobrego efektu.</p>
+            </article>
+            <article class="page-card">
+              <span class="page-card__meta">Współpraca</span>
+              <h3>Czy projekt dla firmy z Rzeszowa może być zdalny?</h3>
+              <p>Tak. Projekt może przebiegać całkowicie zdalnie, od ustalenia celu i struktury po wdrożenie i poprawki po starcie. Najważniejsza jest dobra diagnoza i sensowny zakres.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="band band--void band--sub-quote reveal" aria-labelledby="rzeszow-quote">
         <div class="wrap wrap--wide">
           <div class="sub-quote">
             <span class="sub-quote__mark" aria-hidden="true">„</span>
-            <blockquote id="rzeszow-quote">Dostaliśmy stronę dopasowaną do tego, jak klienci faktycznie nas szukają w Rzeszowie — bez sztucznego wciskania miasta w każde zdanie.</blockquote>
+            <blockquote id="rzeszow-quote">Strona internetowa została przygotowana bardzo profesjonalnie i dobrze odwzorowuje wszystko to, co chciałem mieć na stronie oraz jak ją sobie wyobrażałem. Efekt końcowy dobrze oddaje charakter marki, a sama inwestycja bardzo szybko się zwróciła.</blockquote>
             <div class="sub-quote__author">
-              <img class="sub-quote__avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face" width="48" height="48" alt="" loading="lazy" decoding="async" />
+              <img class="sub-quote__avatar" src="assets/avatar-review.svg" width="48" height="48" alt="" loading="lazy" decoding="async" />
               <div class="sub-quote__meta">
-                <span class="sub-quote__name">Firma usługowa z Rzeszowa</span>
-                <span class="sub-quote__role">Widoczność lokalna · demo cytat</span>
+                <span class="sub-quote__name">Daniel Harłukiewicz</span>
+                <span class="sub-quote__role">Opinia Google · właściciel marki usługowej</span>
+                <a class="sub-quote__link" href="https://www.google.com/search?num=10&sca_esv=b0e7c006bdd513b1&rlz=1C1FKPE_enAT1130AT1130&hl=pl-PL&tbm=lcl&sxsrf=ANbL-n4lFgclJEfP_0fJDugdgJgMfBDEsA:1781035318562&q=Cyberplus+Adam+Bartkowski+Opinie&spell=1&sa=X&ved=2ahUKEwip9vrL-fqUAxViRPEDHZIwJmEQBSgAegQIChAB&biw=1600&bih=898&dpr=1.5#lkt=LocalPoiReviews&rlfi=hd:;si:5789033188009569615,l,CiBDeWJlcnBsdXMgQWRhbSBCYXJ0a293c2tpIE9waW5pZUjwg4aY1rSAgAhaMBAAEAEQAhADGAAYARgCIiBjeWJlcnBsdXMgYWRhbSBiYXJ0a293c2tpIG9waW5pZZIBEHdlYnNpdGVfZGVzaWduZXKaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMnQwTkZWdVRqQlRNMnQwVFZkT1lVMUdTbkZYV0ZJeVdWVm9OVmRJWXhBQvoBBQiQAxA2;mv:[[53.41883797731903,14.55710079390717],[53.418478022680965,14.556496806092833]]" target="_blank" rel="noopener noreferrer">Zobacz opinie w Google</a>
               </div>
             </div>
           </div>

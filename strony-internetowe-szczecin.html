@@ -63,7 +63,16 @@
               "streetAddress": "ul. Santocka 19 lok. 143",
               "postalCode": "71-113",
               "addressLocality": "Szczecin",
+              "addressRegion": "zachodniopomorskie",
               "addressCountry": "PL"
+            },
+            "areaServed": { "@type": "City", "name": "Szczecin" },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "sales",
+              "telephone": "+48-794-119-276",
+              "email": "kontakt.cyberplus@outlook.com",
+              "availableLanguage": ["pl", "en", "de"]
             }
           },
           {
@@ -72,6 +81,9 @@
             "url": "https://cyber-plus.pl/strony-internetowe-szczecin.html",
             "name": "Strony internetowe Szczecin",
             "description": "Projektowanie stron internetowych dla firm ze Szczecina.",
+            "isPartOf": { "@id": "https://cyber-plus.pl/#website" },
+            "about": { "@id": "https://cyber-plus.pl/#organization" },
+            "primaryImageOfPage": "https://cyber-plus.pl/assets/og-social-default.png",
             "inLanguage": "pl-PL"
           },
           {
@@ -83,10 +95,42 @@
           },
           {
             "@type": "Service",
+            "@id": "https://cyber-plus.pl/strony-internetowe-szczecin.html#service",
+            "url": "https://cyber-plus.pl/strony-internetowe-szczecin.html",
             "name": "Strony internetowe Szczecin",
             "provider": { "@id": "https://cyber-plus.pl/#organization" },
             "areaServed": { "@type": "City", "name": "Szczecin" },
             "serviceType": ["Strona firmowa", "Landing page", "Redesign strony", "SEO lokalne"]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://cyber-plus.pl/strony-internetowe-szczecin.html#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Czy współpraca przy stronie w Szczecinie musi odbywać się lokalnie?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Nie musi. Możemy spotkać się lokalnie w Szczecinie, ale sam proces może też przebiec zdalnie. Najważniejsze jest ustalenie celu strony, zakresu i materiałów, a nie forma kontaktu."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Dla jakich firm ze Szczecina najczęściej tworzymy strony?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Najczęściej pracujemy z lokalnymi usługami, markami osobistymi, studiami treningowymi, beauty, fotografami oraz małymi firmami B2B, które chcą czytelnej oferty i mocniejszego pierwszego wrażenia."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Czy taka strona pomaga też w lokalnej widoczności w Google?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Tak. Porządkujemy lokalny kontekst, strukturę treści, dane kontaktowe i podstawy techniczne, żeby strona była lepiej dopasowana do zapytań typu strony internetowe Szczecin i podobnych fraz lokalnych."
+                }
+              }
+            ]
           }
         ]
       }
@@ -148,8 +192,8 @@
     </div>
 
     <main id="main" class="page-sub-main">
-      <section class="band band--dawn band--sub-hero reveal" aria-labelledby="szczecin-h1">
-        <div class="wrap wrap--wide sub-hero">
+      <section class="band band--dawn band--sub-hero band--sub-hero-local reveal" aria-labelledby="szczecin-h1">
+        <div class="wrap wrap--wide sub-hero sub-hero--fullbleed">
           <div class="sub-hero__grid">
             <div class="sub-hero__copy">
               <nav class="page-breadcrumbs" aria-label="Okruszki">
@@ -165,17 +209,29 @@
                 <a class="btn btn-ghost" href="portfolio.html">Zobacz realizacje</a>
               </div>
             </div>
-            <div class="sub-hero__visual" aria-hidden="true">
+            <div class="sub-hero__visual sub-hero__visual--szczecin" aria-hidden="true">
               <div class="sub-hero__glow"></div>
-              <div class="sub-hero__mock">
-                <img class="sub-hero__mock-img" src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=1200&q=80" width="1200" height="750" alt="" loading="eager" decoding="async" />
+              <div class="sub-hero__city-frame">
+                <img
+                  class="sub-hero__city-img"
+                  src="assets/local/szczecin-hero.png"
+                  width="1680"
+                  height="940"
+                  alt=""
+                  loading="eager"
+                  decoding="async"
+                />
+                <div class="sub-hero__city-badge">
+                  <span>Szczecin</span>
+                  <strong>Lokalny kontekst, premium odbiór</strong>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="band band--silver band--sub-stats reveal" aria-label="Kluczowe parametry">
+      <section class="band band--silver band--sub-stats band--sub-stats-local reveal" aria-label="Kluczowe parametry">
         <div class="wrap wrap--wide">
           <div class="sub-stats">
             <div class="sub-stats__grid">
@@ -219,29 +275,57 @@
           </div>
         </div>
       </section>
-<section class="band band--silver reveal" aria-labelledby="szczecin-firmy">
+      <section class="band band--silver band--local-overview reveal" aria-labelledby="szczecin-firmy">
         <div class="wrap wrap--wide page-card-grid page-card-grid--three">
-          <article class="page-card">
+          <article class="page-card page-card--local-overview">
             <span class="page-card__meta">Dla jakich firm</span>
             <h2 id="szczecin-firmy">Najczęściej pracujemy z lokalnymi usługami</h2>
             <p>Studia treningowe, beauty, fotografowie, gabinety, małe firmy B2B i lokalne marki premium to najczęstsze kierunki tego typu strony.</p>
+            <span class="page-card__ornament" aria-hidden="true">
+              <svg viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 58V32h14v26"></path>
+                <path d="M28 58V18h16v40"></path>
+                <path d="M46 58V26h14v32"></path>
+                <path d="M8 58h56"></path>
+                <path d="M20 18h8"></path>
+                <path d="M50 18h10"></path>
+              </svg>
+            </span>
           </article>
-          <article class="page-card">
+          <article class="page-card page-card--local-overview">
             <span class="page-card__meta">Co zwykle poprawiamy</span>
             <h3>Ofertę, pierwszy ekran i mobile</h3>
             <p>Najczęstszy problem to rozproszona komunikacja: za dużo ogólników, za mało konkretu i brak czytelnej ścieżki do wiadomości.</p>
+            <span class="page-card__ornament" aria-hidden="true">
+              <svg viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="12" y="14" width="48" height="44" rx="8"></rect>
+                <path d="M20 26h24"></path>
+                <path d="M20 36h14"></path>
+                <path d="M20 46h20"></path>
+                <circle cx="50" cy="46" r="6"></circle>
+                <path d="m54 50 6 6"></path>
+              </svg>
+            </span>
           </article>
-          <article class="page-card">
+          <article class="page-card page-card--local-overview">
             <span class="page-card__meta">Zakres</span>
             <h3>Strona firmowa, landing albo redesign</h3>
             <p>Dobieramy wariant do celu, nie odwrotnie. Nie każda firma potrzebuje dużego serwisu od pierwszego dnia.</p>
+            <span class="page-card__ornament" aria-hidden="true">
+              <svg viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="12" y="16" width="48" height="40" rx="8"></rect>
+                <path d="M20 26h32"></path>
+                <path d="M20 34h18"></path>
+                <path d="m38 44 6 6 12-14"></path>
+              </svg>
+            </span>
           </article>
         </div>
       </section>
 
-      <section class="band band--atelier reveal" aria-labelledby="szczecin-powiazania">
+      <section class="band band--atelier band--local-routes reveal" aria-labelledby="szczecin-powiazania">
         <div class="wrap wrap--wide page-split-grid">
-          <article class="page-note">
+          <article class="page-note page-note--local-route">
             <p class="section-label">Powiązane strony</p>
             <h2 id="szczecin-powiazania">Dalej możesz przejść do bardziej konkretnej ścieżki</h2>
             <ul class="page-note-list">
@@ -249,8 +333,14 @@
               <li><a class="page-text-link" href="portfolio.html">Realizacje</a> — jeśli potrzebujesz zobaczyć działające przykłady.</li>
               <li><a class="page-text-link" href="strony-dla-trenerow-personalnych.html">Trenerzy</a> i <a class="page-text-link" href="strony-dla-salonow-beauty.html">beauty</a> — jeśli zależy Ci na branżowym dopasowaniu.</li>
             </ul>
+            <span class="page-route-orb" aria-hidden="true">
+              <svg viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M18 36h28"></path>
+                <path d="m38 24 12 12-12 12"></path>
+              </svg>
+            </span>
           </article>
-          <article class="page-highlight">
+          <article class="page-highlight page-highlight--local-route">
             <p class="section-label">Proces</p>
             <h2>Spotkanie lokalnie albo zdalnie — dalej proces wygląda podobnie</h2>
             <p>Najpierw diagnoza problemu strony, potem zakres, treść, projekt i wdrożenie. Szczecin to kontekst lokalny, ale sama współpraca pozostaje prosta i przewidywalna.</p>
@@ -258,27 +348,64 @@
               <a href="proces.html">Zobacz proces współpracy</a>
               <a href="/#kontakt">Napisz do nas</a>
             </div>
+            <span class="page-highlight__group" aria-hidden="true">
+              <svg viewBox="0 0 92 72" fill="none" stroke="currentColor" stroke-width="1.6">
+                <circle cx="28" cy="24" r="12"></circle>
+                <circle cx="60" cy="18" r="10"></circle>
+                <circle cx="66" cy="50" r="14"></circle>
+                <path d="M14 58c0-9 7-16 16-16s16 7 16 16"></path>
+                <path d="M50 58c0-8 6-14 14-14s14 6 14 14"></path>
+              </svg>
+            </span>
           </article>
         </div>
       </section>
 
-      <section class="band band--void band--sub-quote reveal" aria-labelledby="szczecin-quote">
+      <section class="band band--silver reveal" aria-labelledby="szczecin-faq">
+        <div class="wrap wrap--wide">
+          <div class="section-head section-head--center">
+            <p class="section-label">Lokalne Q&A</p>
+            <h2 id="szczecin-faq">Najczęstsze pytania o strony internetowe w Szczecinie</h2>
+            <p class="section-lead section-lead--tight">Ten blok odpowiada na pytania, które najczęściej padają przed startem lokalnego projektu.</p>
+          </div>
+          <div class="page-card-grid page-card-grid--three">
+            <article class="page-card">
+              <span class="page-card__meta">Forma współpracy</span>
+              <h3>Czy trzeba spotkać się lokalnie w Szczecinie?</h3>
+              <p>Nie zawsze. Spotkanie lokalne jest możliwe, ale cały proces może też przebiec zdalnie. Liczy się szybkie ustalenie celu strony, zakresu i materiałów, a nie sam format rozmowy.</p>
+            </article>
+            <article class="page-card">
+              <span class="page-card__meta">Typ firm</span>
+              <h3>Dla jakich firm ze Szczecina tworzymy strony?</h3>
+              <p>Najczęściej dla lokalnych usług, marek osobistych, beauty, fotografów, trenerów i małych firm B2B, które chcą czytelnej oferty, lepszego pierwszego ekranu i prostego kontaktu.</p>
+            </article>
+            <article class="page-card">
+              <span class="page-card__meta">Widoczność</span>
+              <h3>Czy strona pomaga też w lokalnym SEO?</h3>
+              <p>Tak. Porządkujemy lokalny kontekst, nagłówki, kontakt i techniczne podstawy, żeby strona lepiej odpowiadała na zapytania lokalne oraz była bardziej zrozumiała dla Google i systemów AI.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band band--void band--sub-quote band--sub-quote-local reveal" aria-labelledby="szczecin-quote">
         <div class="wrap wrap--wide">
           <div class="sub-quote">
             <span class="sub-quote__mark" aria-hidden="true">„</span>
             <blockquote id="szczecin-quote">Wreszcie strona, która brzmi jak nasza firma ze Szczecina, a nie jak anonimowy szablon z całej Polski.</blockquote>
             <div class="sub-quote__author">
-              <img class="sub-quote__avatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face" width="48" height="48" alt="" loading="lazy" decoding="async" />
+              <img class="sub-quote__avatar" src="assets/avatar-review.svg" width="48" height="48" alt="" loading="lazy" decoding="async" />
               <div class="sub-quote__meta">
-                <span class="sub-quote__name">Firma usługowa ze Szczecina</span>
-                <span class="sub-quote__role">Strona lokalna · demo cytat</span>
+                <span class="sub-quote__name">Stanisław Januszewski</span>
+                <span class="sub-quote__role">Szczecin · opinia Google</span>
+                <a class="sub-quote__link" href="https://www.google.com/search?num=10&sca_esv=b0e7c006bdd513b1&rlz=1C1FKPE_enAT1130AT1130&hl=pl-PL&tbm=lcl&sxsrf=ANbL-n4lFgclJEfP_0fJDugdgJgMfBDEsA:1781035318562&q=Cyberplus+Adam+Bartkowski+Opinie&spell=1&sa=X&ved=2ahUKEwip9vrL-fqUAxViRPEDHZIwJmEQBSgAegQIChAB&biw=1600&bih=898&dpr=1.5#lkt=LocalPoiReviews&rlfi=hd:;si:5789033188009569615,l,CiBDeWJlcnBsdXMgQWRhbSBCYXJ0a293c2tpIE9waW5pZUjwg4aY1rSAgAhaMBAAEAEQAhADGAAYARgCIiBjeWJlcnBsdXMgYWRhbSBiYXJ0a293c2tpIG9waW5pZZIBEHdlYnNpdGVfZGVzaWduZXKaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMnQwTkZWdVRqQlRNMnQwVFZkT1lVMUdTbkZYV0ZJeVdWVm9OVmRJWXhBQvoBBQiQAxA2;mv:[[53.41883797731903,14.55710079390717],[53.418478022680965,14.556496806092833]]" target="_blank" rel="noopener noreferrer">Zobacz opinie w Google</a>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="band band--finale page-sub-ctafoot reveal" aria-labelledby="szczecin-cta-h">
+      <section class="band band--finale page-sub-ctafoot page-sub-ctafoot--local reveal" aria-labelledby="szczecin-cta-h">
         <div class="wrap">
           <p class="section-label">Kontakt</p>
           <h2 id="szczecin-cta-h">Jeśli szukasz strony internetowej dla firmy ze Szczecina, napisz</h2>

@@ -206,6 +206,79 @@
     });
   }
 
+  function updateTestimonials(testimonials) {
+    var items = testimonials && Array.isArray(testimonials.items) ? testimonials.items : [];
+    var featured = items[0];
+    if (!featured) return;
+
+    Array.prototype.forEach.call(document.querySelectorAll(".sub-quote"), function (quote) {
+      textIn(quote, "blockquote", featured.quote);
+      textIn(quote, ".sub-quote__name", featured.author);
+      textIn(quote, ".sub-quote__role", featured.detail);
+      attrIn(quote, ".sub-quote__avatar", "src", "assets/avatar-review.svg");
+    });
+  }
+
+  function initLocalQuoteCarousel(testimonials) {
+    var items = testimonials && Array.isArray(testimonials.items) ? testimonials.items : [];
+    var root = document.querySelector(".page-sub--local [data-quote-carousel]");
+    if (!root || items.length < 2) return;
+
+    var quoteNode = root.querySelector("blockquote");
+    var nameNode = root.querySelector(".sub-quote__name");
+    var roleNode = root.querySelector(".sub-quote__role");
+    var prevBtn = root.querySelector("[data-quote-prev]");
+    var nextBtn = root.querySelector("[data-quote-next]");
+    var dotsNode = root.querySelector(".sub-quote__dots");
+    var index = 0;
+    var dotButtons = [];
+
+    if (!quoteNode || !nameNode || !roleNode || !prevBtn || !nextBtn || !dotsNode) return;
+
+    function render() {
+      var item = items[index];
+      if (!item) return;
+      quoteNode.textContent = item.quote || "";
+      nameNode.textContent = item.author || "";
+      roleNode.textContent = item.detail || "";
+
+      dotButtons.forEach(function (button, buttonIndex) {
+        var active = buttonIndex === index;
+        button.classList.toggle("is-active", active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+    }
+
+    function goTo(nextIndex) {
+      index = (nextIndex + items.length) % items.length;
+      render();
+    }
+
+    dotsNode.innerHTML = "";
+    items.forEach(function (_, itemIndex) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "sub-quote__dot";
+      button.setAttribute("aria-label", "Pokaż opinię " + (itemIndex + 1));
+      button.setAttribute("aria-pressed", itemIndex === 0 ? "true" : "false");
+      button.addEventListener("click", function () {
+        goTo(itemIndex);
+      });
+      dotsNode.appendChild(button);
+      dotButtons.push(button);
+    });
+
+    prevBtn.addEventListener("click", function () {
+      goTo(index - 1);
+    });
+
+    nextBtn.addEventListener("click", function () {
+      goTo(index + 1);
+    });
+
+    render();
+  }
+
   function updateContact(contact) {
     if (!contact) return;
     var mailHref = contact.email ? "mailto:" + contact.email : "";
@@ -235,6 +308,8 @@
       updateTechnology(content.technology);
       updateCases(content.cases);
       updateFaq(content.faq);
+      updateTestimonials(content.testimonials);
+      initLocalQuoteCarousel(content.testimonials);
       updateContact(content.contact);
     });
   }

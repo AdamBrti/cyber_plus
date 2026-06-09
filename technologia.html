@@ -57,7 +57,22 @@
             "legalName": "Cyber Plus Adam Bartkowski",
             "url": "https://cyber-plus.pl/",
             "email": "kontakt.cyberplus@outlook.com",
-            "telephone": "+48-794-119-276"
+            "telephone": "+48-794-119-276",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "ul. Santocka 19 lok. 143",
+              "postalCode": "71-113",
+              "addressLocality": "Szczecin",
+              "addressRegion": "zachodniopomorskie",
+              "addressCountry": "PL"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer support",
+              "telephone": "+48-794-119-276",
+              "email": "kontakt.cyberplus@outlook.com",
+              "availableLanguage": ["pl", "en", "de"]
+            }
           },
           {
             "@type": "WebPage",
@@ -65,6 +80,9 @@
             "url": "https://cyber-plus.pl/technologia.html",
             "name": "Strona bez technicznego bałaganu",
             "description": "Porównanie prostej w utrzymaniu strony i rozbudowanego systemu edycji.",
+            "isPartOf": { "@id": "https://cyber-plus.pl/#website" },
+            "about": { "@id": "https://cyber-plus.pl/#organization" },
+            "primaryImageOfPage": "https://cyber-plus.pl/assets/og-social-default.png",
             "inLanguage": "pl-PL"
           },
           {
@@ -76,9 +94,41 @@
           },
           {
             "@type": "Service",
+            "@id": "https://cyber-plus.pl/technologia.html#service",
+            "url": "https://cyber-plus.pl/technologia.html",
             "name": "Projektowanie szybkich stron internetowych dla firm usługowych",
             "provider": { "@id": "https://cyber-plus.pl/#organization" },
             "serviceType": ["Szybka strona internetowa", "Wygoda na telefonie", "Proste utrzymanie", "Widoczność w Google"]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://cyber-plus.pl/technologia.html#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Czy każda strona firmowa musi być na WordPressie?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Nie. Dla wielu małych firm usługowych lepsza jest prosta, szybka strona bez rozbudowanego zaplecza, jeśli właściciel nie planuje częstych publikacji i samodzielnego zarządzania dużą liczbą podstron."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Co najbardziej wpływa na wygodę strony po starcie?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Największą różnicę robi mała liczba dodatków, poprawnie ustawiona domena i SSL, dobra responsywność oraz techniczny porządek już na etapie wdrożenia. To ogranicza ryzyko awarii i upraszcza utrzymanie."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Kiedy panel edycji nadal ma sens?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Panel edycji ma sens wtedy, gdy planujesz częste samodzielne publikacje, wpisy blogowe, większą liczbę podstron albo rozbudowane zarządzanie treścią. W innym przypadku może tylko podnosić koszt i złożoność."
+                }
+              }
+            ]
           }
         ]
       }
@@ -157,10 +207,24 @@
     </div>
 
     <main id="main" class="page-sub-main">
-      <section class="band band--dawn band--sub-hero reveal" aria-labelledby="technologia-h1">
-        <div class="wrap wrap--wide sub-hero">
-          <div class="sub-hero__grid">
-            <div class="sub-hero__copy">
+      <section class="band band--dawn band--sub-hero band--sub-hero-tech reveal" aria-labelledby="technologia-h1">
+        <div class="postlaunch-hero__visual" aria-hidden="true">
+          <div class="postlaunch-hero__glow"></div>
+          <div class="postlaunch-hero__frame">
+            <img
+              class="postlaunch-hero__image"
+              src="assets/local/technologia-hero.png"
+              width="1680"
+              height="940"
+              alt=""
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        </div>
+        <div class="wrap wrap--wide sub-hero postlaunch-hero postlaunch-hero--fullbleed">
+          <div class="sub-hero__grid postlaunch-hero__inner">
+            <div class="sub-hero__copy postlaunch-hero__content">
               <nav class="page-breadcrumbs" aria-label="Okruszki">
                 <a href="index.html">Cyber Plus</a>
                 <span>/</span>
@@ -175,20 +239,6 @@
               <div class="sub-hero__actions">
                 <a class="btn btn-primary" href="/#kontakt">Sprawdźmy Twój przypadek</a>
                 <a class="btn btn-ghost" href="oferta.html">Zobacz ofertę</a>
-              </div>
-            </div>
-            <div class="sub-hero__visual" aria-hidden="true">
-              <div class="sub-hero__glow"></div>
-              <div class="sub-hero__mock">
-                <img
-                  class="sub-hero__mock-img"
-                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80"
-                  width="1200"
-                  height="750"
-                  alt=""
-                  loading="eager"
-                  decoding="async"
-                />
               </div>
             </div>
           </div>
@@ -231,7 +281,7 @@
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                 </span>
                 <div>
-                  <strong class="sub-stats__value">Niżej</strong>
+                  <strong class="sub-stats__value">Ekonomicznie</strong>
                   <span class="sub-stats__label">Koszty utrzymania po starcie</span>
                 </div>
               </div>
@@ -284,7 +334,7 @@
             <div><strong>Mniej</strong><span>rzeczy do aktualizowania</span></div>
             <div><strong>Szybciej</strong><span>na telefonie i słabszym internecie</span></div>
             <div><strong>Prościej</strong><span>z domeną, SSL i publikacją</span></div>
-            <div><strong>Niżej</strong><span>koszty utrzymania po starcie</span></div>
+            <div><strong>Ekonomicznie</strong><span>koszty utrzymania po starcie</span></div>
           </div>
         </div>
       </section>
@@ -316,17 +366,44 @@
         </div>
       </section>
 
+      <section class="band band--silver reveal" aria-labelledby="technologia-faq">
+        <div class="wrap wrap--wide">
+          <div class="section-head section-head--center">
+            <p class="section-label">FAQ techniczne</p>
+            <h2 id="technologia-faq">Najczęstsze pytania o szybkość, utrzymanie i zaplecze strony</h2>
+            <p class="section-lead section-lead--tight">To blok pod osoby, które chcą zrozumieć różnicę między prostą, lekką stroną a cięższym systemem.</p>
+          </div>
+          <div class="page-card-grid page-card-grid--three">
+            <article class="page-card">
+              <span class="page-card__meta">System</span>
+              <h3>Czy każda strona firmowa musi być na WordPressie?</h3>
+              <p>Nie. Jeśli firma nie planuje częstych publikacji i rozbudowanej edycji treści, lżejsza strona bez ciężkiego panelu bywa szybsza, prostsza i bezpieczniejsza w utrzymaniu.</p>
+            </article>
+            <article class="page-card">
+              <span class="page-card__meta">Po starcie</span>
+              <h3>Co najbardziej wpływa na wygodę utrzymania?</h3>
+              <p>Mała liczba dodatków, poprawne ustawienie domeny i SSL, dobra responsywność i techniczny porządek już we wdrożeniu. To właśnie te elementy ograniczają późniejsze problemy.</p>
+            </article>
+            <article class="page-card">
+              <span class="page-card__meta">Panel edycji</span>
+              <h3>Kiedy rozbudowany panel ma sens?</h3>
+              <p>Gdy planujesz częste samodzielne publikacje, wpisy blogowe, dużo podstron albo większą niezależność redakcyjną. W innym przypadku bywa zbędnym kosztem i zwiększa złożoność.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="band band--void band--sub-quote reveal" aria-labelledby="technologia-quote">
         <div class="wrap wrap--wide">
           <div class="sub-quote">
             <span class="sub-quote__mark" aria-hidden="true">„</span>
             <blockquote id="technologia-quote">
-              Wreszcie strona, która po prostu działa. Nie muszę co miesiąc gasić problemów ani aktualizować rzeczy, z których i tak nie korzystam.
+              Jako trener poszukiwałem kogoś, kto wykona dla mnie stronę wizytówkową. Ostatecznie zdecydowałem się na współpracę z Adamem, która przerosła moje oczekiwania. Od strony technicznej i wizualnej to pełen profesjonalizm - wszystko jest intuicyjne, przejrzyste i dopracowane w najmniejszych detalach. Strona odzwierciedla emocje związane ze sportem poprzez animacje i efekty zaprojektowane przez Adama. Dodatkowy plus i szósta gwiazdka za szybkie wykonanie. 6/5.
             </blockquote>
             <div class="sub-quote__author">
               <img
                 class="sub-quote__avatar"
-                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&h=120&fit=crop&crop=face"
+                src="assets/avatar-review.svg"
                 width="48"
                 height="48"
                 alt=""
@@ -334,8 +411,9 @@
                 decoding="async"
               />
               <div class="sub-quote__meta">
-                <span class="sub-quote__name">Właścicielka małej firmy usługowej</span>
-                <span class="sub-quote__role">Strona bez technicznego bałaganu · demo cytat</span>
+                <span class="sub-quote__name">Stanisław Januszewski</span>
+                <span class="sub-quote__role">Trener personalny · opinia Google</span>
+                <a class="sub-quote__link" href="https://www.google.com/search?num=10&sca_esv=b0e7c006bdd513b1&rlz=1C1FKPE_enAT1130AT1130&hl=pl-PL&tbm=lcl&sxsrf=ANbL-n4lFgclJEfP_0fJDugdgJgMfBDEsA:1781035318562&q=Cyberplus+Adam+Bartkowski+Opinie&spell=1&sa=X&ved=2ahUKEwip9vrL-fqUAxViRPEDHZIwJmEQBSgAegQIChAB&biw=1600&bih=898&dpr=1.5#lkt=LocalPoiReviews&rlfi=hd:;si:5789033188009569615,l,CiBDeWJlcnBsdXMgQWRhbSBCYXJ0a293c2tpIE9waW5pZUjwg4aY1rSAgAhaMBAAEAEQAhADGAAYARgCIiBjeWJlcnBsdXMgYWRhbSBiYXJ0a293c2tpIG9waW5pZZIBEHdlYnNpdGVfZGVzaWduZXKaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMnQwTkZWdVRqQlRNMnQwVFZkT1lVMUdTbkZYV0ZJeVdWVm9OVmRJWXhBQvoBBQiQAxA2;mv:[[53.41883797731903,14.55710079390717],[53.418478022680965,14.556496806092833]]" target="_blank" rel="noopener noreferrer">Zobacz opinie w Google</a>
               </div>
             </div>
           </div>
