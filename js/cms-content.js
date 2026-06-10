@@ -159,21 +159,47 @@
 
   function updateCases(cases) {
     var items = cases && Array.isArray(cases.items) ? cases.items : [];
+    var itemsById = {};
     text("#portfolio-heading", cases && cases.heading);
     text("#realizacje .section-lead", cases && cases.lead);
 
+    items.forEach(function (item) {
+      if (!item || !item.id) return;
+      itemsById[item.id] = item;
+    });
+
     Array.prototype.forEach.call(document.querySelectorAll(".showcase-case"), function (card, index) {
-      var item = items[index];
+      var caseId = card.getAttribute("data-case-id");
+      var item = (caseId && itemsById[caseId]) || items[index];
       if (!item) return;
+      var cleanUrl = item.url ? item.url.replace(/^https?:\/\//, "").replace(/\/$/, "") : "";
+      var laptopImg = card.querySelector(".device-laptop__screen img");
+      var phoneImg = card.querySelector(".device-phone__screen img");
+      var primaryAlt = item.image_alt || ("Podgląd strony " + item.name);
+      var mobileAlt = item.image_alt || ("Podgląd mobilny strony " + item.name);
+
       textIn(card, ".showcase-title", item.name);
       textIn(card, ".showcase-eyebrow", item.meta);
       textIn(card, ".showcase-mobile-summary", item.summary);
       setStory(card, 0, "Problem", item.problem);
       setStory(card, 1, "Zmiana", item.change);
       textIn(card, ".showcase-effect", item.result ? "Efekt: " + item.result : "");
-      textIn(card, ".showcase-domain", item.url ? item.url.replace(/^https?:\/\//, "").replace(/\/$/, "") : "");
+      textIn(card, ".showcase-domain", cleanUrl);
+      textIn(card, ".device-url", cleanUrl);
       attrIn(card, ".showcase-actions a", "href", item.url);
       attrIn(card, ".showcase-hit", "href", item.url);
+      attrIn(card, ".showcase-hit", "aria-label", cleanUrl ? cleanUrl + " - otwórz stronę w nowej karcie" : "");
+
+      if (laptopImg && item.url) {
+        laptopImg.setAttribute("src", "https://s0.wp.com/mshots/v1/" + encodeURIComponent(item.url) + "?w=1600");
+        laptopImg.setAttribute("alt", primaryAlt);
+      }
+
+      if (phoneImg && item.url) {
+        phoneImg.setAttribute("src", "https://s0.wp.com/mshots/v1/" + encodeURIComponent(item.url) + "?w=390&vpw=390&vph=844");
+        phoneImg.setAttribute("srcset", "https://s0.wp.com/mshots/v1/" + encodeURIComponent(item.url) + "?w=780&vpw=390&vph=844 2x");
+        phoneImg.setAttribute("alt", mobileAlt);
+      }
     });
   }
 

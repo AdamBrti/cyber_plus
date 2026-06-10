@@ -200,6 +200,7 @@ collections:
             widget: list
             summary: "{{fields.name}}"
             fields:
+              - { label: "Id techniczne (nie zmieniaj)", name: id, widget: string, required: false, hint: "Stały identyfikator używany do poprawnego mapowania realizacji na stronie głównej." }
               - { label: "Nazwa projektu", name: name, widget: string, required: true }
               - { label: "Branża / lokalizacja", name: meta, widget: string, required: false }
               - { label: "Krótki opis", name: summary, widget: text, required: true }
