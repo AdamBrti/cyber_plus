@@ -11,6 +11,8 @@
       "change": "Zbudowaliśmy lekką stronę statyczną, uporządkowaliśmy prezentację zdjęć i zadbaliśmy o mobilny odbiór bez rozpraszaczy.",
       "result": "Portfolio wygląda dojrzalej, szybciej się otwiera i jest prostsze w utrzymaniu.",
       "url": "https://podwiatr.net.pl/",
+      "desktop_image": "/assets/showcase-screenshots/podwiatr-desktop.jpg",
+      "mobile_image": "/assets/showcase-screenshots/podwiatr-mobile.jpg",
       "image": "",
       "image_alt": ""
     },
@@ -23,6 +25,8 @@
       "change": "Ułożyliśmy stronę wokół najważniejszych pytań klienta: co to za trening, dla kogo, ile kosztuje i jak zacząć.",
       "result": "Marka wygląda pewniej, mobile prowadzi do działania, a strona nie każe szukać podstawowych informacji.",
       "url": "https://without-gravity.szczecin.pl/",
+      "desktop_image": "/assets/showcase-screenshots/without-gravity-desktop.jpg",
+      "mobile_image": "/assets/showcase-screenshots/without-gravity-mobile.jpg",
       "image": "",
       "image_alt": ""
     },
@@ -35,6 +39,8 @@
       "change": "Ułożyliśmy komunikację wokół twarzy, sukcesów, specjalizacji i prostego wyboru: konsultacja albo materiały online.",
       "result": "Strona wygląda pewnie, osobowo i szybko prowadzi do kontaktu.",
       "url": "https://www.sztangislaw.pl/",
+      "desktop_image": "/assets/showcase-screenshots/sztangislaw-desktop.jpg",
+      "mobile_image": "/assets/showcase-screenshots/sztangislaw-mobile.jpg",
       "image": "",
       "image_alt": ""
     },

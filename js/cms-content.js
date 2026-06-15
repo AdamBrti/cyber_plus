@@ -175,6 +175,8 @@
       var cleanUrl = item.url ? item.url.replace(/^https?:\/\//, "").replace(/\/$/, "") : "";
       var laptopImg = card.querySelector(".device-laptop__screen img");
       var phoneImg = card.querySelector(".device-phone__screen img");
+      var desktopImage = item.desktop_image || item.image || "";
+      var mobileImage = item.mobile_image || "";
       var primaryAlt = item.image_alt || ("Podgląd strony " + item.name);
       var mobileAlt = item.image_alt || ("Podgląd mobilny strony " + item.name);
 
@@ -191,13 +193,17 @@
       attrIn(card, ".showcase-hit", "aria-label", cleanUrl ? cleanUrl + " - otwórz stronę w nowej karcie" : "");
 
       if (laptopImg && item.url) {
-        laptopImg.setAttribute("src", "https://s0.wp.com/mshots/v1/" + encodeURIComponent(item.url) + "?w=1600");
+        laptopImg.setAttribute("src", desktopImage || ("https://s0.wp.com/mshots/v1/" + encodeURIComponent(item.url) + "?w=1600"));
         laptopImg.setAttribute("alt", primaryAlt);
       }
 
       if (phoneImg && item.url) {
-        phoneImg.setAttribute("src", "https://s0.wp.com/mshots/v1/" + encodeURIComponent(item.url) + "?w=390&vpw=390&vph=844");
-        phoneImg.setAttribute("srcset", "https://s0.wp.com/mshots/v1/" + encodeURIComponent(item.url) + "?w=780&vpw=390&vph=844 2x");
+        phoneImg.setAttribute("src", mobileImage || ("https://s0.wp.com/mshots/v1/" + encodeURIComponent(item.url) + "?w=390&vpw=390&vph=844"));
+        if (mobileImage) {
+          phoneImg.removeAttribute("srcset");
+        } else {
+          phoneImg.setAttribute("srcset", "https://s0.wp.com/mshots/v1/" + encodeURIComponent(item.url) + "?w=780&vpw=390&vph=844 2x");
+        }
         phoneImg.setAttribute("alt", mobileAlt);
       }
     });
