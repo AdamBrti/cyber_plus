@@ -38,9 +38,8 @@
   var introLoader = document.getElementById("intro-loader");
   var introLoaderDone = false;
   var introLoaderStartedAt = Date.now();
-  var INTRO_LOADER_MIN_MS = reduceMotion ? 0 : 2000;
-  var INTRO_LOADER_FADE_MS = reduceMotion ? 0 : 1250;
-  var INTRO_LOADER_MAX_MS = 2400;
+  var INTRO_LOADER_MIN_MS = reduceMotion ? 0 : 1650;
+  var INTRO_LOADER_FADE_MS = reduceMotion ? 0 : 850;
   function hideIntroLoader() {
     if (!introLoader || introLoaderDone) return;
     introLoaderDone = true;
@@ -48,7 +47,7 @@
     var wait = Math.max(0, INTRO_LOADER_MIN_MS - elapsed);
     window.setTimeout(function () {
       introLoader.classList.add("is-hidden");
-      document.body.classList.remove("intro-loading");
+      document.body.classList.remove("intro-active");
       window.setTimeout(function () {
         if (introLoader.parentNode) introLoader.parentNode.removeChild(introLoader);
       }, INTRO_LOADER_FADE_MS);
@@ -56,14 +55,9 @@
   }
 
   if (introLoader) {
-    if (document.readyState === "complete") {
+    window.requestAnimationFrame(function () {
       hideIntroLoader();
-    } else {
-      window.addEventListener("load", function () {
-        hideIntroLoader();
-      });
-      window.setTimeout(hideIntroLoader, INTRO_LOADER_MAX_MS);
-    }
+    });
   }
 
   document.querySelectorAll(".hero-device__screen img, .device-laptop__screen img, .device-phone__screen img").forEach(function (img) {

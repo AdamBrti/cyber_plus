@@ -129,7 +129,7 @@ body {
   }
 }
 
-body.intro-loading {
+body.intro-active {
   overflow: hidden;
 }
 
@@ -140,14 +140,16 @@ body.intro-loading {
   display: grid;
   place-items: center;
   padding: clamp(1.5rem, 6vw, 3rem);
-  background: #05080d;
+  background:
+    radial-gradient(circle at 50% 30%, rgba(126, 180, 255, 0.16), transparent 36%),
+    linear-gradient(180deg, #05080d 0%, #060a11 55%, #05080d 100%);
   color: var(--text);
   pointer-events: auto;
   opacity: 1;
   visibility: visible;
   transition:
-    opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .intro-loader.is-hidden {
@@ -157,17 +159,38 @@ body.intro-loading {
 }
 
 .intro-loader__inner {
-  width: min(34rem, 100%);
+  position: relative;
+  width: min(40rem, 100%);
   text-align: center;
+  padding: clamp(1.8rem, 3vw, 2.8rem) clamp(1.2rem, 3vw, 2.4rem);
+  border: 1px solid rgba(126, 180, 255, 0.16);
+  border-radius: 1.8rem;
+  background:
+    linear-gradient(180deg, rgba(12, 17, 26, 0.86), rgba(8, 12, 18, 0.82)),
+    rgba(8, 12, 18, 0.7);
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px);
   transform: translateY(0);
   transition:
-    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: intro-loader-float 5.5s ease-in-out infinite;
 }
 
 .intro-loader.is-hidden .intro-loader__inner {
   opacity: 0;
-  transform: translateY(-0.65rem);
+  transform: translateY(-0.75rem) scale(0.985);
+}
+
+.intro-loader__inner::before {
+  content: "";
+  position: absolute;
+  inset: auto 16% -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(126, 180, 255, 0.42), transparent);
+  pointer-events: none;
 }
 
 .intro-loader__kicker {
@@ -193,44 +216,52 @@ body.intro-loading {
   display: none;
 }
 
-.intro-loader__bar {
-  display: block;
-  width: min(13rem, 52vw);
-  height: 1px;
-  margin: 1.65rem auto 0;
-  overflow: hidden;
-  background: rgba(126, 180, 255, 0.16);
-  transition:
-    width 1.05s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+.intro-loader__subline {
+  width: min(30rem, 100%);
+  margin: 1rem auto 0;
+  font-size: clamp(0.98rem, 2vw, 1.12rem);
+  line-height: 1.65;
+  color: rgba(230, 236, 248, 0.72);
 }
 
-.intro-loader.is-hidden .intro-loader__bar {
-  width: min(6rem, 28vw);
-  opacity: 0;
+.intro-loader__chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
 }
 
-.intro-loader__bar::after {
-  content: "";
-  display: block;
-  width: 42%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(126, 180, 255, 0.9), transparent);
-  animation: intro-loader-line 1.15s var(--ease-soft) infinite;
+.intro-loader__chips span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.2rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(126, 180, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(126, 180, 255, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(214, 231, 255, 0.82);
 }
 
-@keyframes intro-loader-line {
-  from {
-    transform: translateX(-110%);
+@keyframes intro-loader-float {
+  0%,
+  100% {
+    transform: translateY(0);
   }
-  to {
-    transform: translateX(260%);
+
+  50% {
+    transform: translateY(-0.2rem);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .intro-loader,
-  .intro-loader__bar::after {
+  .intro-loader__inner {
     transition: none;
     animation: none;
   }
@@ -243,6 +274,8 @@ body.intro-loading {
 
   .intro-loader__inner {
     width: min(21rem, 100%);
+    padding: 1.45rem 1rem 1.35rem;
+    border-radius: 1.35rem;
   }
 
   .intro-loader__kicker {
@@ -265,9 +298,22 @@ body.intro-loading {
     display: inline;
   }
 
-  .intro-loader__bar {
-    width: min(10rem, 46vw);
-    margin-top: 1.35rem;
+  .intro-loader__subline {
+    margin-top: 0.9rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .intro-loader__chips {
+    gap: 0.5rem;
+    margin-top: 1.15rem;
+  }
+
+  .intro-loader__chips span {
+    min-height: 2rem;
+    padding: 0.4rem 0.72rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.14em;
   }
 }
 
