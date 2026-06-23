@@ -778,12 +778,6 @@ body.page-sub {
   --case-accent-text: #ffd1af;
 }
 
-.page-card--case-auto-pro-melka {
-  --case-accent: rgba(255, 203, 121, 0.34);
-  --case-accent-soft: rgba(255, 203, 121, 0.2);
-  --case-accent-text: #ffd38b;
-}
-
 .page-card--case-bs-makeup {
   --case-accent: rgba(219, 171, 194, 0.34);
   --case-accent-soft: rgba(219, 171, 194, 0.2);
@@ -1532,6 +1526,31 @@ body.page-sub {
   width: 28%;
   transform: rotate(4deg);
   z-index: 2;
+}
+
+.page-sub--portfolio .sub-hero__device-stack {
+  width: min(100%, 36rem);
+  aspect-ratio: 1.24;
+}
+
+.page-sub--portfolio .sub-hero__device-stack .hero-device--laptop {
+  inset: 12% 0 auto 2%;
+  width: 82%;
+  border-radius: 16px 16px 22px 22px;
+}
+
+.page-sub--portfolio .sub-hero__device-stack .hero-device__screen--wide {
+  aspect-ratio: 1440 / 900;
+}
+
+.page-sub--portfolio .sub-hero__device-stack .hero-device__screen--wide img {
+  object-position: top center;
+}
+
+.page-sub--portfolio .sub-hero__device-stack .hero-device--phone {
+  right: 4%;
+  bottom: 8%;
+  width: 26%;
 }
 
 .sub-hero__glow {
@@ -3394,5 +3413,307 @@ body.page-sub {
 
   .page-card--case:hover {
     transform: none;
+  }
+}
+
+/* Unified subpage hero: real project proof instead of generic tech renders */
+.page-sub-main > .band--sub-hero.sub-hero-proof-band {
+  position: relative;
+  overflow: clip;
+  isolation: isolate;
+  padding-top: clamp(3rem, 7vw, 5.25rem);
+  padding-bottom: clamp(3.25rem, 7vw, 5.5rem);
+  background:
+    linear-gradient(90deg, rgba(3, 9, 19, 0.96), rgba(5, 16, 31, 0.9) 48%, rgba(6, 18, 34, 0.96)),
+    #040d18;
+}
+
+.page-sub-main > .band--sub-hero.sub-hero-proof-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(112, 177, 255, 0.09) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(112, 177, 255, 0.075) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.78) 42%, rgba(0, 0, 0, 0.42));
+  pointer-events: none;
+}
+
+.page-sub-main > .band--sub-hero.sub-hero-proof-band::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 0;
+  height: 34%;
+  background: linear-gradient(180deg, transparent, rgba(69, 145, 255, 0.13));
+  pointer-events: none;
+}
+
+.page-sub-main .sub-hero-proof-band .wrap,
+.page-sub-main .sub-hero-proof-band .sub-hero {
+  position: relative;
+  z-index: 1;
+}
+
+.page-sub-main .sub-hero-proof-band .sub-hero__grid,
+.page-sub-main .sub-hero-proof-band .postlaunch-hero__inner {
+  grid-template-columns: minmax(0, 0.88fr) minmax(21rem, 1.12fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  min-height: clamp(30rem, 50vw, 39rem);
+}
+
+.page-sub-main .sub-hero-proof-band .sub-hero__copy,
+.page-sub-main .sub-hero-proof-band .postlaunch-hero__content {
+  order: 1;
+  max-width: 40rem;
+  padding: 0;
+}
+
+.page-sub-main .sub-hero-proof-band .sub-hero__visual--proof {
+  order: 2;
+  position: relative;
+  min-height: clamp(22rem, 38vw, 31rem);
+}
+
+.page-sub-main .sub-hero-proof-band .sub-hero__visual--offer,
+.page-sub-main .sub-hero-proof-band .sub-hero__visual--process,
+.page-sub-main .sub-hero-proof-band .postlaunch-hero__visual {
+  display: none;
+}
+
+.page-sub-main .sub-hero-proof-band .page-breadcrumbs,
+.page-sub-main .sub-hero-proof-band .page-breadcrumbs a,
+.page-sub-main .sub-hero-proof-band .section-label {
+  color: rgba(211, 229, 255, 0.78);
+}
+
+.page-sub-main .sub-hero-proof-band .page-breadcrumbs a:hover {
+  color: #ffffff;
+}
+
+.page-sub-main .sub-hero-proof-band .sub-hero__copy h1,
+.page-sub-main .sub-hero-proof-band .postlaunch-hero__content h1 {
+  max-width: 13ch;
+  color: #f7fbff;
+  text-shadow: 0 16px 38px rgba(0, 0, 0, 0.32);
+}
+
+.page-sub-main .sub-hero-proof-band .sub-hero__copy .section-lead,
+.page-sub-main .sub-hero-proof-band .postlaunch-hero__content .section-lead,
+.page-sub-main .sub-hero-proof-band .page-hero-support {
+  color: rgba(225, 236, 255, 0.86);
+}
+
+.page-sub-main .sub-hero-proof-band .sub-hero__actions .btn-ghost {
+  color: #f7fbff;
+  border-color: rgba(210, 230, 255, 0.3);
+  background: rgba(9, 21, 39, 0.34);
+}
+
+.page-sub-main .sub-hero-proof-band .sub-hero__actions .btn-ghost:hover {
+  border-color: rgba(228, 240, 255, 0.48);
+  background: rgba(12, 29, 52, 0.46);
+}
+
+.sub-proof-stage {
+  position: relative;
+  min-height: inherit;
+  perspective: 1200px;
+}
+
+.sub-proof-stage::before {
+  content: "";
+  position: absolute;
+  inset: 8% 6% 2% 1%;
+  border: 1px solid rgba(126, 184, 255, 0.16);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(12, 30, 54, 0.78), rgba(6, 15, 28, 0.7)),
+    rgba(7, 17, 31, 0.72);
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.28);
+}
+
+.sub-proof-stage__screen {
+  position: absolute;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid rgba(172, 211, 255, 0.2);
+  background: #07111f;
+  box-shadow: 0 28px 68px rgba(0, 0, 0, 0.34);
+}
+
+.sub-proof-stage__screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.sub-proof-stage__screen--main {
+  inset: 12% 7% auto 2%;
+  aspect-ratio: 16 / 10;
+  border-radius: 22px;
+  transform: rotate(-2deg);
+}
+
+.sub-proof-stage__screen--main img {
+  height: calc(100% - 2.35rem);
+}
+
+.sub-proof-stage--offer .sub-proof-stage__screen--main {
+  aspect-ratio: 1600 / 798;
+}
+
+.sub-proof-stage__chrome {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.8rem;
+  height: 2.35rem;
+  padding: 0 1rem;
+  color: rgba(207, 224, 248, 0.62);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+}
+
+.sub-proof-stage__dots,
+.sub-proof-stage__dots::before,
+.sub-proof-stage__dots::after {
+  display: block;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: rgba(211, 226, 246, 0.5);
+}
+
+.sub-proof-stage__dots {
+  position: relative;
+}
+
+.sub-proof-stage__dots::before,
+.sub-proof-stage__dots::after {
+  content: "";
+  position: absolute;
+  top: 0;
+}
+
+.sub-proof-stage__dots::before {
+  left: 0.62rem;
+}
+
+.sub-proof-stage__dots::after {
+  left: 1.24rem;
+}
+
+.sub-proof-stage__screen--phone {
+  right: 0;
+  bottom: 6%;
+  width: min(31%, 10.5rem);
+  aspect-ratio: 9 / 18.5;
+  border-radius: 28px;
+  transform: rotate(4deg);
+  z-index: 3;
+}
+
+.sub-proof-stage__panel {
+  position: absolute;
+  z-index: 4;
+  width: min(17rem, 42%);
+  padding: 0.85rem 0.9rem;
+  border: 1px solid rgba(158, 205, 255, 0.2);
+  border-radius: 18px;
+  background: rgba(7, 17, 32, 0.78);
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(16px);
+}
+
+.sub-proof-stage__panel--top {
+  top: 0;
+  right: 7%;
+}
+
+.sub-proof-stage__panel--bottom {
+  left: 0;
+  bottom: 0;
+}
+
+.sub-proof-stage__panel span {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #81c2ff;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+}
+
+.sub-proof-stage__panel strong,
+.sub-proof-stage__panel small {
+  display: block;
+}
+
+.sub-proof-stage__panel strong {
+  color: #f7fbff;
+  font-size: 1rem;
+}
+
+.sub-proof-stage__panel small {
+  margin-top: 0.22rem;
+  color: rgba(214, 229, 250, 0.72);
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .page-sub-main .sub-hero-proof-band .sub-hero__grid,
+  .page-sub-main .sub-hero-proof-band .postlaunch-hero__inner {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .page-sub-main .sub-hero-proof-band .sub-hero__copy h1,
+  .page-sub-main .sub-hero-proof-band .postlaunch-hero__content h1 {
+    max-width: none;
+  }
+
+  .page-sub-main .sub-hero-proof-band .sub-hero__visual--proof {
+    min-height: clamp(17rem, 68vw, 25rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .page-sub-main > .band--sub-hero.sub-hero-proof-band {
+    padding-top: 2.35rem;
+    padding-bottom: 3.4rem;
+  }
+
+  .sub-proof-stage__screen--main {
+    inset: 10% 3% auto 0;
+  }
+
+  .sub-proof-stage__screen--phone {
+    width: 28%;
+    right: 2%;
+    bottom: 5%;
+    border-radius: 20px;
+  }
+
+  .sub-proof-stage__panel {
+    width: min(14rem, 58%);
+    padding: 0.72rem 0.78rem;
+  }
+
+  .sub-proof-stage__panel--top {
+    right: 3%;
+  }
+
+  .sub-proof-stage__panel--bottom {
+    left: 0;
+  }
+
+  .sub-proof-stage__panel small {
+    display: none;
   }
 }

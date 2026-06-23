@@ -80,7 +80,7 @@
   --header-logo-wide-h: clamp(2.35rem, 3.5vw, 2.95rem);
   --header-logo-slot-max: min(36vw, 11.75rem);
   --header-logo-slot-max-lg: min(32vw, 13.25rem);
-  --logo-square-pad-scale: 1.06;
+  --logo-square-pad-scale: 1.22;
 }
 
 *,

@@ -1,20 +1,28 @@
 import fs from "node:fs/promises";
+import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
+const nodeModulesRoot = "C:/Users/AdamBartkowski/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules";
+const directPlaywrightCorePath = path.join(nodeModulesRoot, "playwright-core");
+const pnpmRoot = path.join(nodeModulesRoot, ".pnpm");
+const pnpmPlaywrightCorePath = existsSync(pnpmRoot)
+  ? readdirSync(pnpmRoot)
+      .filter((name) => /^playwright-core@\d+\.\d+\.\d+$/.test(name))
+      .sort()
+      .pop()
+  : null;
 const { chromium } = require(
-  "C:/Users/AdamBartkowski/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/.pnpm/playwright-core@1.60.0/node_modules/playwright-core"
+  pnpmPlaywrightCorePath
+    ? path.join(pnpmRoot, pnpmPlaywrightCorePath, "node_modules", "playwright-core")
+    : directPlaywrightCorePath,
 );
 
 const outputDir = "D:/Moej stronki/cyber_plus/assets/portfolio";
+const localChromium = "C:/Users/AdamBartkowski/AppData/Local/ms-playwright/chromium_headless_shell-1223/chrome-headless-shell-win64/chrome-headless-shell.exe";
 
 const shots = [
-  {
-    id: "auto-pro-melka",
-    url: "http://127.0.0.1:8127/",
-    output: "auto-pro-melka-shot.jpg",
-  },
   {
     id: "bs-makeup",
     url: "http://127.0.0.1:8128/",
@@ -127,7 +135,10 @@ async function captureShot(browser, item) {
 
 async function main() {
   await fs.mkdir(outputDir, { recursive: true });
-  const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({
+  headless: true,
+  executablePath: existsSync(localChromium) ? localChromium : undefined,
+});
 
   try {
     for (const item of shots) {
